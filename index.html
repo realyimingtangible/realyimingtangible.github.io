@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yiming Tang - Research in AI Interpretability</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #fff;
+            padding: 40px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .profile-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #555;
+        }
+
+        .header-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .contact-info {
+            margin-top: 15px;
+            font-size: 1.1em;
+        }
+
+        .contact-info a {
+            color: #555;
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        section {
+            background-color: #fff;
+            padding: 35px 40px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            border-bottom: 3px solid #555;
+            padding-bottom: 10px;
+        }
+
+        .research-interest {
+            font-size: 1.05em;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .research-interest a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .research-interest a:hover {
+            text-decoration: underline;
+        }
+
+        .publications-list {
+            list-style: none;
+        }
+
+        .publications-list li {
+            margin-bottom: 20px;
+            padding-left: 30px;
+            position: relative;
+            line-height: 1.7;
+        }
+
+        .publications-list li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #555;
+            font-size: 1.2em;
+        }
+
+        .publication-title {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 1.05em;
+        }
+
+        .publication-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .publication-content {
+            flex: 1;
+        }
+
+        .paper-link {
+            display: inline-block;
+            padding: 6px 16px;
+            background-color: #555;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .paper-link:hover {
+            background-color: #333;
+        }
+
+        .publication-diagram {
+            width: 100%;
+            max-width: 700px;
+            margin: 15px 0;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .selected-publication {
+            margin-bottom: 35px;
+        }
+
+        .education-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .education-item:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #555;
+            font-size: 1.2em;
+        }
+
+        .education-icon {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
+        .education-content {
+            flex: 1;
+        }
+
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .photo-gallery img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .photo-gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .profile-photo {
+                width: 150px;
+                height: 150px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            section {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="Yiming_tang.jpeg" alt="Yiming Tang" class="profile-photo">
+            <div class="header-content">
+                <h1>Yiming Tang</h1>
+                <div class="contact-info">
+                    <p><strong>Email:</strong> <a href="mailto:yiming@nus.edu.sg">yiming at nus dot edu dot sg</a></p>
+                    <p><strong>Google Scholar:</strong> <a href="https://scholar.google.co.uk/citations?hl=en&user=0WYAYQ8AAAAJ" target="_blank">View Profile</a></p>
+                    <p><strong>Location:</strong> MD1, 12 Science Drive 2, Singapore</p>
+                </div>
+            </div>
+        </header>
+
+        <section id="about">
+            <h2>About Me</h2>
+            <p class="research-interest">
+                Hi! I'm Yiming, a second-year PhD student in National University of Singapore, very fortunate to be advised by Prof. <a href="https://www.cogai4sci.com/" target="_blank">Dianbo Liu</a>. I have broad research interests in generative models, vision-language models, mechanistic interpretability, and AI for medicine. My research aims to develop algorithms and theories toward a better understanding of intelligence by identifying human-interpretable concepts encoded in both machine learning models and the human brain. During my undergraduate studies, I was lucky to work with Prof. <a href="http://faculty.bicmr.pku.edu.cn/~dongbin/" target="_blank">Bin Dong</a> and Prof. <a href="https://pku-hmi-lab.github.io/HMI-Web/leader.html" target="_blank">Shanghang Zhang</a>.
+            </p>
+        </section>
+
+        <section id="research">
+            <h2>Research Interests</h2>
+            <p class="research-interest">
+                My research interests focus on:
+            </p>
+            <ul class="publications-list">
+                <li><span class="publication-title">Mechanistic Interpretability:</span> Understanding the internal representation space of machine learning models by identifying specific concepts encoded within them.</li>
+                <li><span class="publication-title">Neuroscience:</span> Understanding internal representations in the human brain through EEG and fMRI signals, identifying meaningful patterns in neural activity.</li>
+                <li><span class="publication-title">Medical AI Transparency:</span> Developing interpretable diagnostic systems that enhance clinical trust and improve healthcare outcomes.</li>
+            </ul>
+        </section>
+
+        <section id="education">
+            <h2>Education</h2>
+
+            <div class="education-item">
+                <img src="NUS.png" alt="NUS Logo" class="education-icon">
+                <div class="education-content">
+                    <span class="publication-title">National University of Singapore</span>
+                    <p style="margin-top: 5px; color: #555; font-size: 0.95em;">Doctor of Philosophy, College of Design and Engineering</p>
+                </div>
+            </div>
+
+            <div class="education-item">
+                <img src="Peking_University.png" alt="Peking University Logo" class="education-icon">
+                <div class="education-content">
+                    <span class="publication-title">Peking University</span>
+                    <p style="margin-top: 5px; color: #555; font-size: 0.95em;">Bachelor of Science, School of Mathematical Sciences</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="selected_publications">
+            <h2>Selected Publications</h2>
+
+            <div class="selected-publication">
+                <div class="publication-item">
+                    <div class="publication-content">
+                        <span class="publication-title">Human-like Content Analysis for Generative AI with Language-Grounded Sparse Encoders</span>
+                        <p style="margin-top: 8px; color: #555; font-size: 0.95em; line-height: 1.6;">We develop LanSE and decompose natural and medical images into interpretable visual patterns grounded in natural language.</p>
+                    </div>
+                    <a href="https://arxiv.org/pdf/2508.18236" target="_blank" class="paper-link">Paper</a>
+                </div>
+                <img src="LanSE.png" alt="LanSE Diagram" class="publication-diagram">
+            </div>
+
+            <div class="selected-publication">
+                <div class="publication-item">
+                    <div class="publication-content">
+                        <span class="publication-title">LLM as Dataset Analyst: Subpopulation Structure Discovery with Large Language Model</span>
+                        <p style="margin-top: 8px; color: #555; font-size: 0.95em; line-height: 1.6;">We propose to prompt engineering LLMs to inspect datasets and analyse the structures of subpopulations within datasets.</p>
+                    </div>
+                    <a href="https://arxiv.org/pdf/2405.02363" target="_blank" class="paper-link">Paper</a>
+                </div>
+                <img src="llm_as_data_scientist.png" alt="LLM as Dataset Analyst Diagram" class="publication-diagram">
+            </div>
+
+            <div class="selected-publication">
+                <div class="publication-item">
+                    <div class="publication-content">
+                        <span class="publication-title">Prompt Engineering Through the Lens of Optimal Control</span>
+                        <p style="margin-top: 8px; color: #555; font-size: 0.95em; line-height: 1.6;">We develop a theoretical framework to understand various prompt engineering methods through the lens of optimal control.</p>
+                    </div>
+                    <a href="https://arxiv.org/abs/2310.14201" target="_blank" class="paper-link">Paper</a>
+                </div>
+                <img src="prompt_optimal_control.png" alt="Prompt Optimal Control Diagram" class="publication-diagram">
+            </div>
+
+            <div class="selected-publication">
+                <div class="publication-item">
+                    <div class="publication-content">
+                        <span class="publication-title">The Integrated Forward-Forward Algorithm: Integrating Forward-Forward and Shallow Backpropagation with Local Losses</span>
+                        <p style="margin-top: 8px; color: #555; font-size: 0.95em; line-height: 1.6;">We follow Hinton's Forward-Forward algorithm and make it applicable for deeper layers via local losses.</p>
+                    </div>
+                    <a href="https://arxiv.org/pdf/2305.12960" target="_blank" class="paper-link">Paper</a>
+                </div>
+                <img src="IntFF.png" alt="Integrated Forward-Forward Diagram" class="publication-diagram">
+            </div>
+        </section>
+
+        <section id="publications">
+            <h2>All Publications</h2>
+
+            <div class="publication-item">
+                <div class="publication-content">
+                    <span class="publication-title">LLM as Dataset Analyst: Subpopulation Structure Discovery with Large Language Model</span>
+                </div>
+                <a href="https://arxiv.org/pdf/2405.02363" target="_blank" class="paper-link">Paper</a>
+            </div>
+
+            <div class="publication-item">
+                <div class="publication-content">
+                    <span class="publication-title">Prompt Engineering Through the Lens of Optimal Control</span>
+                </div>
+                <a href="https://arxiv.org/abs/2310.14201" target="_blank" class="paper-link">Paper</a>
+            </div>
+
+            <div class="publication-item">
+                <div class="publication-content">
+                    <span class="publication-title">The Integrated Forward-Forward Algorithm: Integrating Forward-Forward and Shallow Backpropagation with Local Losses</span>
+                </div>
+                <a href="https://arxiv.org/pdf/2305.12960" target="_blank" class="paper-link">Paper</a>
+            </div>
+
+            <div class="publication-item">
+                <div class="publication-content">
+                    <span class="publication-title">Demonstration Notebook: Finding the Most Suited In-Context Learning Example from Interactions</span>
+                </div>
+                <a href="https://arxiv.org/pdf/2406.10878" target="_blank" class="paper-link">Paper</a>
+            </div>
+
+            <div class="publication-item">
+                <div class="publication-content">
+                    <span class="publication-title">Discovering Long-Term Effects on Parameter Efficient Fine-tuning</span>
+                </div>
+                <a href="https://openreview.net/pdf?id=n2VZtv8tqL" target="_blank" class="paper-link">Paper</a>
+            </div>
+
+            <div class="publication-item">
+                <div class="publication-content">
+                    <span class="publication-title">CXR-LanIC: Language-Grounded Interpretable Classifier for Chest X-Ray Diagnosis</span>
+                </div>
+                <a href="https://arxiv.org/pdf/2510.21464" target="_blank" class="paper-link">Paper</a>
+            </div>
+
+            <div class="publication-item">
+                <div class="publication-content">
+                    <span class="publication-title">FML-bench: A Benchmark for Automatic ML Research Agents Highlighting the Importance of Exploration Breadth</span>
+                </div>
+                <a href="https://arxiv.org/abs/2510.10472" target="_blank" class="paper-link">Paper</a>
+            </div>
+
+            <div class="publication-item">
+                <div class="publication-content">
+                    <span class="publication-title">Human-like Content Analysis for Generative AI with Language-Grounded Sparse Encoders</span>
+                </div>
+                <a href="https://arxiv.org/pdf/2508.18236" target="_blank" class="paper-link">Paper</a>
+            </div>
+
+            <div class="publication-item">
+                <div class="publication-content">
+                    <span class="publication-title">SAN: Hypothesizing Long-Term Synaptic Development and Neural Engram Mechanism in Scalable Model's Parameter-Efficient Fine-Tuning</span>
+                </div>
+                <a href="https://arxiv.org/abs/2409.06706" target="_blank" class="paper-link">Paper</a>
+            </div>
+        </section>
+
+        <section id="personal">
+            <h2>Personal</h2>
+            <div class="photo-gallery">
+                <img src="life1.jpg" alt="Life Photo 1" onerror="this.style.display='none'">
+                <img src="life2.jpg" alt="Life Photo 2" onerror="this.style.display='none'">
+                <img src="life3.jpg" alt="Life Photo 3" onerror="this.style.display='none'">
+                <img src="life4.jpg" alt="Life Photo 4" onerror="this.style.display='none'">
+                <img src="life5.jpg" alt="Life Photo 5" onerror="this.style.display='none'">
+                <img src="life6.jpg" alt="Life Photo 6" onerror="this.style.display='none'">
+                <img src="life7.jpg" alt="Life Photo 7" onerror="this.style.display='none'">
+                <img src="life8.png" alt="Life Photo 8" onerror="this.style.display='none'">
+                <img src="life9.jpg" alt="Life Photo 9" onerror="this.style.display='none'">
+                <img src="life10.jpg" alt="Life Photo 10" onerror="this.style.display='none'">
+                <img src="life11.jpg" alt="Life Photo 11" onerror="this.style.display='none'">
+                <img src="life12.jpg" alt="Life Photo 12" onerror="this.style.display='none'">
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2025 Yiming Tang. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
