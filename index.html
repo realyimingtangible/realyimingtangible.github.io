@@ -69,6 +69,24 @@
             text-decoration: underline;
         }
 
+        .cv-button {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #555;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .cv-button:hover {
+            background-color: #333;
+            text-decoration: none;
+        }
+
         section {
             background-color: #fff;
             padding: 35px 40px;
@@ -244,6 +262,14 @@
             flex: 1;
         }
 
+        .mentorship-description {
+            margin-top: 8px;
+            color: #666;
+            font-size: 0.9em;
+            line-height: 1.5;
+            font-style: italic;
+        }
+
         footer {
             text-align: center;
             padding: 30px;
@@ -281,6 +307,7 @@
                 <div class="contact-info">
                     <p><strong>Email:</strong> <a href="mailto:yiming@nus.edu.sg">yiming at nus dot edu dot sg</a></p>
                     <p><strong>Google Scholar:</strong> <a href="https://scholar.google.co.uk/citations?hl=en&user=0WYAYQ8AAAAJ" target="_blank">View Profile</a></p>
+                    <p><strong>Curriculum Vitae:</strong> <a href="https://drive.google.com/file/d/1M4I0V-eRsiL8-LWlPvmkYIuJ4cIQLrox/view?usp=sharing" target="_blank">View CV</a></p>
                     <p><strong>WeChat:</strong> YimingTangible</p>
                     <p><strong>Location:</strong> MD1, 12 Science Drive 2, Singapore</p>
                 </div>
@@ -290,7 +317,7 @@
         <section id="about">
             <h2>About Me</h2>
             <p class="research-interest">
-                Hi! I'm Yiming, a second-year PhD student in National University of Singapore, very fortunate to be advised by Prof. <a href="https://www.cogai4sci.com/" target="_blank">Dianbo Liu</a>. I have broad research interests in generative models, vision-language models, mechanistic interpretability, and AI for medicine. My research aims to develop algorithms and theories toward a better understanding of intelligence by identifying human-interpretable concepts encoded in both machine learning models and the human brain. During my undergraduate studies, I was lucky to work with Prof. <a href="http://faculty.bicmr.pku.edu.cn/~dongbin/" target="_blank">Bin Dong</a> and Prof. <a href="https://pku-hmi-lab.github.io/HMI-Web/leader.html" target="_blank">Shanghang Zhang</a>.
+                Hi! I'm Yiming, a second-year PhD student in National University of Singapore, very fortunate to be advised by Prof. <a href="https://www.cogai4sci.com/" target="_blank">Dianbo Liu</a>. I have broad research interests in generative models, vision-language models, mechanistic interpretability, and AI for medicine. My research aims to develop algorithms and theories toward a better understanding of intelligence by identifying human-interpretable concepts encoded in both machine learning models and the human brain. During my undergraduate studies, I was very lucky to collaborate with Prof. <a href="http://faculty.bicmr.pku.edu.cn/~dongbin/" target="_blank">Bin Dong</a>, Prof. <a href="https://pku-hmi-lab.github.io/HMI-Web/leader.html" target="_blank">Shanghang Zhang</a>, and Prof. <a href="https://zsdonghao.github.io/" target="_blank">Hao Dong</a>.
             </p>
         </section>
 
@@ -306,6 +333,13 @@
             </ul>
             <p class="research-interest" style="margin-top: 20px;">
                 Beyond these specific research directions, I'm also broadly interested in vision-language models, AI safety, generalization, and automatic AI agents.
+            </p>
+        </section>
+
+        <section id="collaboration">
+            <h2>Collaboration</h2>
+            <p class="research-interest">
+                I'm actively seeking collaborations in mechanistic interpretability, machine learning theory, computer vision, and AI for medicine. If interested, please feel free to reach out via email or WeChat!
             </p>
         </section>
 
@@ -333,10 +367,46 @@
             <h2>Professional Experience</h2>
 
             <div class="education-item">
-                <img src="NUS.png" alt="NUS Logo" class="education-icon">
+                <a href="https://www.cogai4sci.com/" target="_blank" style="text-decoration: none;">
+                    <img src="cognitive.png" alt="Cognitive AI for Science Lab Logo" class="education-icon">
+                </a>
                 <div class="education-content">
                     <span class="publication-title">Research Associate</span>
-                    <p style="margin-top: 5px; color: #555; font-size: 0.95em;">National University of Singapore, August 2024 - Present</p>
+                    <p style="margin-top: 5px; color: #555; font-size: 0.95em;"><a href="https://www.cogai4sci.com/" target="_blank" style="color: #333; text-decoration: none; font-weight: 500;">Cognitive AI for Science Lab</a>, National University of Singapore</p>
+                    <p style="color: #777; font-size: 0.9em;">August 2024 - Present</p>
+                </div>
+            </div>
+
+            <div class="education-item">
+                <a href="https://bicmr.pku.edu.cn/" target="_blank" style="text-decoration: none;">
+                    <img src="bicmr.jpeg" alt="BICMR Logo" class="education-icon">
+                </a>
+                <div class="education-content">
+                    <span class="publication-title">Research Intern</span>
+                    <p style="margin-top: 5px; color: #555; font-size: 0.95em;"><a href="https://bicmr.pku.edu.cn/" target="_blank" style="color: #333; text-decoration: none; font-weight: 500;">Beijing International Center for Mathematical Research</a>, Peking University</p>
+                    <p style="color: #777; font-size: 0.9em;">2023 - 2024</p>
+                </div>
+            </div>
+
+            <div class="education-item">
+                <a href="https://pku-hmi-lab.github.io/HMI-Web/" target="_blank" style="text-decoration: none;">
+                    <img src="HMI.jpeg" alt="HMI Lab Logo" class="education-icon">
+                </a>
+                <div class="education-content">
+                    <span class="publication-title">Research Intern</span>
+                    <p style="margin-top: 5px; color: #555; font-size: 0.95em;"><a href="https://pku-hmi-lab.github.io/HMI-Web/" target="_blank" style="color: #333; text-decoration: none; font-weight: 500;">Human Machine Intelligence Lab</a>, Peking University</p>
+                    <p style="color: #777; font-size: 0.9em;">2023 - 2024</p>
+                </div>
+            </div>
+
+            <div class="education-item">
+                <a href="https://zsdonghao.github.io/#lab" target="_blank" style="text-decoration: none;">
+                    <img src="hyperplane.png" alt="Hyperplane Lab Logo" class="education-icon">
+                </a>
+                <div class="education-content">
+                    <span class="publication-title">Research Intern</span>
+                    <p style="margin-top: 5px; color: #555; font-size: 0.95em;"><a href="https://zsdonghao.github.io/#lab" target="_blank" style="color: #333; text-decoration: none; font-weight: 500;">Hyperplane Lab</a>, Peking University</p>
+                    <p style="color: #777; font-size: 0.9em;">2022 - 2023</p>
                 </div>
             </div>
         </section>
@@ -348,9 +418,9 @@
                 <div class="publication-item">
                     <div class="publication-content">
                         <span class="publication-title">Human-like Content Analysis for Generative AI with Language-Grounded Sparse Encoders</span>
-                        <p style="margin-top: 8px; color: #555; font-size: 0.95em; line-height: 1.6;">We develop LanSE and decompose natural and medical images into interpretable visual patterns grounded in natural language.</p>
+                        <p style="margin-top: 8px; color: #555; font-size: 0.95em; line-height: 1.6;">We develop LanSE and decompose natural and medical images into interpretable visual patterns grounded in natural language, supporting fine-grained analysis on AI generated contents.</p>
                     </div>
-                    <a href="https://arxiv.org/pdf/2508.18236" target="_blank" class="paper-link">Paper</a>
+                    <a href="https://arxiv.org/abs/2508.18236" target="_blank" class="paper-link">Paper</a>
                 </div>
                 <img src="LanSE.png" alt="LanSE Diagram" class="publication-diagram">
             </div>
@@ -359,7 +429,7 @@
                 <div class="publication-item">
                     <div class="publication-content">
                         <span class="publication-title">How does My Model Fail? Automatic Identification and Interpretation of Physical Plausibility Failure Modes with Matryoshka Transcoders</span>
-                        <p style="margin-top: 8px; color: #555; font-size: 0.95em; line-height: 1.6;">We develop matryoshka transcoders and utilize it to identify physical plausibility failure modes of generative models.</p>
+                        <p style="margin-top: 8px; color: #555; font-size: 0.95em; line-height: 1.6;">We develop matryoshka transcoders and utilize it to identify physical plausibility failure modes of generative models, achieving SOTA performances.</p>
                     </div>
                     <a href="https://arxiv.org/abs/2511.10094" target="_blank" class="paper-link">Paper</a>
                 </div>
@@ -370,9 +440,9 @@
                 <div class="publication-item">
                     <div class="publication-content">
                         <span class="publication-title">LLM as Dataset Analyst: Subpopulation Structure Discovery with Large Language Model</span>
-                        <p style="margin-top: 8px; color: #555; font-size: 0.95em; line-height: 1.6;">We propose to prompt engineering LLMs to inspect datasets and analyse the structures of subpopulations within datasets.</p>
+                        <p style="margin-top: 8px; color: #555; font-size: 0.95em; line-height: 1.6;">We are the first in the literature to prompt engineer LLMs to inspect datasets and analyze their subpopulation structures.</p>
                     </div>
-                    <a href="https://arxiv.org/pdf/2405.02363" target="_blank" class="paper-link">Paper</a>
+                    <a href="https://arxiv.org/abs/2405.02363" target="_blank" class="paper-link">Paper</a>
                 </div>
                 <img src="llm_as_data_scientist.png" alt="LLM as Dataset Analyst Diagram" class="publication-diagram">
             </div>
@@ -381,7 +451,7 @@
                 <div class="publication-item">
                     <div class="publication-content">
                         <span class="publication-title">Prompt Engineering Through the Lens of Optimal Control</span>
-                        <p style="margin-top: 8px; color: #555; font-size: 0.95em; line-height: 1.6;">We develop a theoretical framework to understand various prompt engineering methods through the lens of optimal control.</p>
+                        <p style="margin-top: 8px; color: #555; font-size: 0.95em; line-height: 1.6;">We are one of the first approaches to develop a theoretical framework to understand various prompt engineering methods through the lens of rigorous optimal control theory.</p>
                     </div>
                     <a href="https://arxiv.org/abs/2310.14201" target="_blank" class="paper-link">Paper</a>
                 </div>
@@ -392,9 +462,9 @@
                 <div class="publication-item">
                     <div class="publication-content">
                         <span class="publication-title">The Integrated Forward-Forward Algorithm: Integrating Forward-Forward and Shallow Backpropagation with Local Losses</span>
-                        <p style="margin-top: 8px; color: #555; font-size: 0.95em; line-height: 1.6;">We follow Hinton's Forward-Forward algorithm and make it applicable for deeper layers via local losses.</p>
+                        <p style="margin-top: 8px; color: #555; font-size: 0.95em; line-height: 1.6;">We follow Hinton's Forward-Forward algorithm and make it applicable for deeper layers via the introduction of local losses.</p>
                     </div>
-                    <a href="https://arxiv.org/pdf/2305.12960" target="_blank" class="paper-link">Paper</a>
+                    <a href="https://arxiv.org/abs/2305.12960" target="_blank" class="paper-link">Paper</a>
                 </div>
                 <img src="IntFF.png" alt="Integrated Forward-Forward Diagram" class="publication-diagram">
             </div>
@@ -407,7 +477,7 @@
                 <div class="publication-content">
                     <span class="publication-title">Human-like Content Analysis for Generative AI with Language-Grounded Sparse Encoders</span>
                 </div>
-                <a href="https://arxiv.org/pdf/2508.18236" target="_blank" class="paper-link">Paper</a>
+                <a href="https://arxiv.org/abs/2508.18236" target="_blank" class="paper-link">Paper</a>
             </div>
 
             <div class="publication-item">
@@ -421,7 +491,7 @@
                 <div class="publication-content">
                     <span class="publication-title">LLM as Dataset Analyst: Subpopulation Structure Discovery with Large Language Model</span>
                 </div>
-                <a href="https://arxiv.org/pdf/2405.02363" target="_blank" class="paper-link">Paper</a>
+                <a href="https://arxiv.org/abs/2405.02363" target="_blank" class="paper-link">Paper</a>
             </div>
 
             <div class="publication-item">
@@ -435,28 +505,28 @@
                 <div class="publication-content">
                     <span class="publication-title">The Integrated Forward-Forward Algorithm: Integrating Forward-Forward and Shallow Backpropagation with Local Losses</span>
                 </div>
-                <a href="https://arxiv.org/pdf/2305.12960" target="_blank" class="paper-link">Paper</a>
+                <a href="https://arxiv.org/abs/2305.12960" target="_blank" class="paper-link">Paper</a>
             </div>
 
             <div class="publication-item">
                 <div class="publication-content">
                     <span class="publication-title">Demonstration Notebook: Finding the Most Suited In-Context Learning Example from Interactions</span>
                 </div>
-                <a href="https://arxiv.org/pdf/2406.10878" target="_blank" class="paper-link">Paper</a>
+                <a href="https://arxiv.org/abs/2406.10878" target="_blank" class="paper-link">Paper</a>
             </div>
 
             <div class="publication-item">
                 <div class="publication-content">
                     <span class="publication-title">Discovering Long-Term Effects on Parameter Efficient Fine-tuning</span>
                 </div>
-                <a href="https://openreview.net/pdf?id=n2VZtv8tqL" target="_blank" class="paper-link">Paper</a>
+                <a href="https://openreview.net/forum?id=n2VZtv8tqL" target="_blank" class="paper-link">Paper</a>
             </div>
 
             <div class="publication-item">
                 <div class="publication-content">
                     <span class="publication-title">CXR-LanIC: Language-Grounded Interpretable Classifier for Chest X-Ray Diagnosis</span>
                 </div>
-                <a href="https://arxiv.org/pdf/2510.21464" target="_blank" class="paper-link">Paper</a>
+                <a href="https://arxiv.org/abs/2510.21464" target="_blank" class="paper-link">Paper</a>
             </div>
 
             <div class="publication-item">
@@ -481,7 +551,7 @@
         <section id="mentorship">
             <h2>Mentorship</h2>
             <p class="research-interest" style="margin-bottom: 25px;">
-                I have mentored several students working on research topics about Mechanistic Interpretability, AI for Medicine and Neuroscience. Very lucky to have these interns speeding up the research progress.
+                I have had the privilege of mentoring several students working on research topics in Mechanistic Interpretability, AI for Medicine, and Neuroscience. One of my favorite parts of research is meeting and collaborating with people from diverse backgrounds.
             </p>
 
             <div class="mentorship-item">
@@ -489,6 +559,7 @@
                 <div class="mentorship-content">
                     <span class="publication-title">Harshvardhan Saini</span>
                     <p style="margin-top: 5px; color: #555; font-size: 0.95em;">Indian Institute of Technology, India</p>
+                    <p class="mentorship-description">Together we identify personal related features from LLMs and find personal stirring prompts.</p>
                 </div>
             </div>
 
@@ -497,6 +568,7 @@
                 <div class="mentorship-content">
                     <span class="publication-title">Zheng Lin</span>
                     <p style="margin-top: 5px; color: #555; font-size: 0.95em;">Hong Kong University of Science and Technology, Hong Kong</p>
+                    <p class="mentorship-description">Together we enhance model interpretability for medical diagnostic models by visual pattern identification.</p>
                 </div>
             </div>
 
@@ -505,6 +577,7 @@
                 <div class="mentorship-content">
                     <span class="publication-title">Zhaoqian Yao</span>
                     <p style="margin-top: 5px; color: #555; font-size: 0.95em;">Chinese University of Hong Kong, Hong Kong</p>
+                    <p class="mentorship-description">Together we scale up LanSE for advanced model quality for the community to use.</p>
                 </div>
             </div>
 
@@ -513,28 +586,63 @@
                 <div class="mentorship-content">
                     <span class="publication-title">Qinglin Qi</span>
                     <p style="margin-top: 5px; color: #555; font-size: 0.95em;">Lund University, Sweden</p>
+                    <p class="mentorship-description">Together we identify visual patterns from fMRI data to better understand human visual perception.</p>
                 </div>
             </div>
         </section>
 
         <section id="personal">
             <h2>Personal</h2>
-            <div class="photo-gallery">
-                <img src="life1.jpg" alt="Life Photo 1" onerror="this.style.display='none'">
-                <img src="life2.jpg" alt="Life Photo 2" onerror="this.style.display='none'">
-                <img src="life3.jpg" alt="Life Photo 3" onerror="this.style.display='none'">
-                <img src="life4.jpg" alt="Life Photo 4" onerror="this.style.display='none'">
-                <img src="life5.jpg" alt="Life Photo 5" onerror="this.style.display='none'">
-                <img src="life6.jpg" alt="Life Photo 6" onerror="this.style.display='none'">
-                <img src="life7.jpg" alt="Life Photo 7" onerror="this.style.display='none'">
-                <img src="life8.png" alt="Life Photo 8" onerror="this.style.display='none'">
-                <img src="life9.jpg" alt="Life Photo 9" onerror="this.style.display='none'">
-                <img src="life10.jpg" alt="Life Photo 10" onerror="this.style.display='none'">
-                <img src="life11.jpg" alt="Life Photo 11" onerror="this.style.display='none'">
-                <img src="life12.jpg" alt="Life Photo 12" onerror="this.style.display='none'">
+            <p class="research-interest" style="margin-bottom: 20px;">
+                It is such an honor and a great pleasure to introduce to you here my black cat cyber pet, Desmond. You are cordially invited to pat Desmond by clicking the button below!
+            </p>
+            <div style="text-align: center;">
+                <img id="catImage" src="life8.png" alt="Black Cat Cyber Pet" style="max-width: 400px; width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 20px;">
+                <br>
+                <button id="patButton" onclick="patCat()" 
+                        style="padding: 12px 24px; background-color: #555; color: white; border: none; border-radius: 5px; font-size: 1em; cursor: pointer; font-weight: 500; transition: background-color 0.3s ease;">
+                    Pat My Cat
+                </button>
+                <p id="limitMessage" style="margin-top: 15px; color: #555; font-size: 0.95em; display: none;">
+                    Desmond is Tired! You Have Reached Maximum Patting Times per Visit. Revisit or Subscribe to Desmond Pro for Unlimited Pats (>w<).
+                </p>
             </div>
+            
+            <script>
+                let isHappy = false;
+                let patCount = 0;
+                const maxPats = 10;
+                
+                function patCat() {
+                    if (patCount >= maxPats) {
+                        return;
+                    }
+                    
+                    const catImage = document.getElementById('catImage');
+                    const patButton = document.getElementById('patButton');
+                    const limitMessage = document.getElementById('limitMessage');
+                    
+                    patCount++;
+                    
+                    if (!isHappy) {
+                        catImage.src = 'cat_happy.jpg';
+                        patButton.textContent = 'Stop Patting';
+                        isHappy = true;
+                    } else {
+                        catImage.src = 'life8.png';
+                        patButton.textContent = 'Pat My Cat';
+                        isHappy = false;
+                    }
+                    
+                    if (patCount >= maxPats) {
+                        patButton.disabled = true;
+                        patButton.style.backgroundColor = '#999';
+                        patButton.style.cursor = 'not-allowed';
+                        limitMessage.style.display = 'block';
+                    }
+                }
+            </script>
         </section>
-
         <footer>
             <p>&copy; 2025 Yiming Tang. All rights reserved.</p>
         </footer>
