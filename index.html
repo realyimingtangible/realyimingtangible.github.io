@@ -16,6 +16,67 @@
             line-height: 1.6;
             color: #333;
             background-color: #f8f9fa;
+            padding-top: 70px;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            z-index: 1000;
+            padding: 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .nav-brand {
+            font-weight: 600;
+            font-size: 1.2em;
+            color: #2c3e50;
+            text-decoration: none;
+            padding: 15px 0;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 5px;
+        }
+
+        .nav-links a {
+            color: #555;
+            text-decoration: none;
+            padding: 20px 15px;
+            display: block;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            background-color: #555;
+            color: white;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #555;
+            padding: 10px;
         }
 
         .container {
@@ -278,6 +339,31 @@
         }
 
         @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: #fff;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                gap: 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                padding: 15px 20px;
+                border-bottom: 1px solid #f0f0f0;
+            }
+
             header {
                 flex-direction: column;
                 text-align: center;
@@ -299,6 +385,23 @@
     </style>
 </head>
 <body>
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="nav-brand">Yiming Tang's Homepage</a>
+            <button class="nav-toggle" onclick="toggleNav()">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about">About</a></li>
+                <li><a href="#research">Research</a></li>
+                <li><a href="#selected_publications">Selected Works</a></li>
+                <li><a href="#publications">Publications</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#mentorship">Mentorship</a></li>
+                <li><a href="#personal">Personal</a></li>
+            </ul>
+        </div>
+    </nav>
+
     <div class="container">
         <header>
             <img src="Yiming_tang.jpeg" alt="Yiming Tang" class="profile-photo">
@@ -317,7 +420,7 @@
         <section id="about">
             <h2>About Me</h2>
             <p class="research-interest">
-                Hi! I'm Yiming, a second-year PhD student in National University of Singapore, very fortunate to be advised by Prof. <a href="https://www.cogai4sci.com/" target="_blank">Dianbo Liu</a>. I have broad research interests in generative models, vision-language models, mechanistic interpretability, and AI for medicine. My research aims to develop algorithms and theories toward a better understanding of intelligence by identifying human-interpretable concepts encoded in both machine learning models and the human brain. During my undergraduate studies, I was very lucky to collaborate with Prof. <a href="http://faculty.bicmr.pku.edu.cn/~dongbin/" target="_blank">Bin Dong</a>, Prof. <a href="https://pku-hmi-lab.github.io/HMI-Web/leader.html" target="_blank">Shanghang Zhang</a>, and Prof. <a href="https://zsdonghao.github.io/" target="_blank">Hao Dong</a>.
+                Hi! I'm Yiming, a second-year PhD student in National University of Singapore, very fortunate to be advised by Prof. <a href="https://www.cogai4sci.com/" target="_blank">Dianbo Liu</a>. My research primarily aims to develop algorithms and theories toward a better understanding of intelligence, currently focusing on the identification of human-interpretable concepts encoded in machine learning models and the human brain. During my undergraduate studies, I was very lucky to collaborate with Prof. <a href="http://faculty.bicmr.pku.edu.cn/~dongbin/" target="_blank">Bin Dong</a>, Prof. <a href="https://pku-hmi-lab.github.io/HMI-Web/leader.html" target="_blank">Shanghang Zhang</a>, and Prof. <a href="https://zsdonghao.github.io/" target="_blank">Hao Dong</a>.
             </p>
         </section>
 
@@ -332,83 +435,15 @@
                 <li><span class="publication-title">Medical AI Transparency:</span> Developing interpretable diagnostic systems that enhance clinical trust and improve healthcare outcomes.</li>
             </ul>
             <p class="research-interest" style="margin-top: 20px;">
-                Beyond these specific research directions, I'm also broadly interested in vision-language models, AI safety, generalization, and automatic AI agents.
+                I'm also interested in vision-language models, AI safety (especially for generative models), model generalization (especially conpositional generalization), and automatic AI agents (especially AI scientists).
             </p>
         </section>
 
         <section id="collaboration">
             <h2>Collaboration</h2>
             <p class="research-interest">
-                I'm actively looking for collaboration in mechanistic interpretability, machine learning theory, computer vision, and AI for medicine. Feel free to contact me directly via email or WeChat if interested.
+                I'm actively looking for collaboration in mechanistic interpretability, machine learning theory, and AI for medicine. I can offer research intern positions for undergraduates and master students interested in relevant research topics. Feel free to contact me directly via email or WeChat.
             </p>
-        </section>
-
-        <section id="education">
-            <h2>Education</h2>
-
-            <div class="education-item">
-                <img src="NUS.png" alt="NUS Logo" class="education-icon">
-                <div class="education-content">
-                    <span class="publication-title">National University of Singapore</span>
-                    <p style="margin-top: 5px; color: #555; font-size: 0.95em;">Doctor of Philosophy, College of Design and Engineering</p>
-                </div>
-            </div>
-
-            <div class="education-item">
-                <img src="Peking_University.png" alt="Peking University Logo" class="education-icon">
-                <div class="education-content">
-                    <span class="publication-title">Peking University</span>
-                    <p style="margin-top: 5px; color: #555; font-size: 0.95em;">Bachelor of Science, School of Mathematical Sciences</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="experience">
-            <h2>Professional Experience</h2>
-
-            <div class="education-item">
-                <a href="https://www.cogai4sci.com/" target="_blank" style="text-decoration: none;">
-                    <img src="cognitive.png" alt="Cognitive AI for Science Lab Logo" class="education-icon">
-                </a>
-                <div class="education-content">
-                    <span class="publication-title">Research Associate</span>
-                    <p style="margin-top: 5px; color: #555; font-size: 0.95em;"><a href="https://www.cogai4sci.com/" target="_blank" style="color: #333; text-decoration: none; font-weight: 500;">Cognitive AI for Science Lab</a>, National University of Singapore</p>
-                    <p style="color: #777; font-size: 0.9em;">August 2024 - Present</p>
-                </div>
-            </div>
-
-            <div class="education-item">
-                <a href="https://bicmr.pku.edu.cn/" target="_blank" style="text-decoration: none;">
-                    <img src="bicmr.jpeg" alt="BICMR Logo" class="education-icon">
-                </a>
-                <div class="education-content">
-                    <span class="publication-title">Research Intern</span>
-                    <p style="margin-top: 5px; color: #555; font-size: 0.95em;"><a href="https://bicmr.pku.edu.cn/" target="_blank" style="color: #333; text-decoration: none; font-weight: 500;">Beijing International Center for Mathematical Research</a>, Peking University</p>
-                    <p style="color: #777; font-size: 0.9em;">2023 - 2024</p>
-                </div>
-            </div>
-
-            <div class="education-item">
-                <a href="https://pku-hmi-lab.github.io/HMI-Web/" target="_blank" style="text-decoration: none;">
-                    <img src="HMI.jpeg" alt="HMI Lab Logo" class="education-icon">
-                </a>
-                <div class="education-content">
-                    <span class="publication-title">Research Intern</span>
-                    <p style="margin-top: 5px; color: #555; font-size: 0.95em;"><a href="https://pku-hmi-lab.github.io/HMI-Web/" target="_blank" style="color: #333; text-decoration: none; font-weight: 500;">Human Machine Intelligence Lab</a>, Peking University</p>
-                    <p style="color: #777; font-size: 0.9em;">2023 - 2024</p>
-                </div>
-            </div>
-
-            <div class="education-item">
-                <a href="https://zsdonghao.github.io/#lab" target="_blank" style="text-decoration: none;">
-                    <img src="hyperplane.png" alt="Hyperplane Lab Logo" class="education-icon">
-                </a>
-                <div class="education-content">
-                    <span class="publication-title">Research Intern</span>
-                    <p style="margin-top: 5px; color: #555; font-size: 0.95em;"><a href="https://zsdonghao.github.io/#lab" target="_blank" style="color: #333; text-decoration: none; font-weight: 500;">Hyperplane Lab</a>, Peking University</p>
-                    <p style="color: #777; font-size: 0.9em;">2022 - 2023</p>
-                </div>
-            </div>
         </section>
 
         <section id="selected_publications">
@@ -559,6 +594,91 @@
             </p>
         </section>
 
+
+        <section id="education">
+            <h2>Education</h2>
+
+            <div class="education-item">
+                <img src="NUS.png" alt="NUS Logo" class="education-icon">
+                <div class="education-content">
+                    <span class="publication-title">National University of Singapore</span>
+                    <p style="margin-top: 5px; color: #555; font-size: 0.95em;">Doctor of Philosophy, College of Design and Engineering</p>
+                </div>
+            </div>
+
+            <div class="education-item">
+                <img src="Peking_University.png" alt="Peking University Logo" class="education-icon">
+                <div class="education-content">
+                    <span class="publication-title">Peking University</span>
+                    <p style="margin-top: 5px; color: #555; font-size: 0.95em;">Bachelor of Science, School of Mathematical Sciences</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <h2>Experiences</h2>
+
+            <div class="education-item">
+                <a href="https://www.cogai4sci.com/" target="_blank" style="text-decoration: none;">
+                    <img src="cognitive.png" alt="Cognitive AI for Science Lab Logo" class="education-icon">
+                </a>
+                <div class="education-content">
+                    <span class="publication-title">Research Associate</span>
+                    <p style="margin-top: 5px; color: #555; font-size: 0.95em;"><a href="https://www.cogai4sci.com/" target="_blank" style="color: #333; text-decoration: none; font-weight: 500;">Cognitive AI for Science Lab</a>, National University of Singapore</p>
+                    <p style="color: #777; font-size: 0.9em;">August 2024 - Present</p>
+                    <p style="color: #777; font-size: 0.9em;">Supervisor: Dianbo Liu</p>
+                </div>
+            </div>
+
+            <div class="education-item">
+                <a href="https://bicmr.pku.edu.cn/" target="_blank" style="text-decoration: none;">
+                    <img src="bicmr.jpeg" alt="BICMR Logo" class="education-icon">
+                </a>
+                <div class="education-content">
+                    <span class="publication-title">Research Intern</span>
+                    <p style="margin-top: 5px; color: #555; font-size: 0.95em;"><a href="https://bicmr.pku.edu.cn/" target="_blank" style="color: #333; text-decoration: none; font-weight: 500;">Beijing International Center for Mathematical Research</a>, Peking University</p>
+                    <p style="color: #777; font-size: 0.9em;">2023 - 2024</p>
+                    <p style="color: #777; font-size: 0.9em;">Supervisor: Bin Dong</p>
+                </div>
+            </div>
+
+            <div class="education-item">
+                <a href="https://pku-hmi-lab.github.io/HMI-Web/" target="_blank" style="text-decoration: none;">
+                    <img src="HMI.jpeg" alt="HMI Lab Logo" class="education-icon">
+                </a>
+                <div class="education-content">
+                    <span class="publication-title">Research Intern</span>
+                    <p style="margin-top: 5px; color: #555; font-size: 0.95em;"><a href="https://pku-hmi-lab.github.io/HMI-Web/" target="_blank" style="color: #333; text-decoration: none; font-weight: 500;">Human Machine Intelligence Lab</a>, Peking University</p>
+                    <p style="color: #777; font-size: 0.9em;">2023 - 2024</p>
+                    <p style="color: #777; font-size: 0.9em;">Supervisor: Shanghang Zhang</p>
+                </div>
+            </div>
+
+            <div class="education-item">
+                <a href="https://zsdonghao.github.io/#lab" target="_blank" style="text-decoration: none;">
+                    <img src="hyperplane.png" alt="Hyperplane Lab Logo" class="education-icon">
+                </a>
+                <div class="education-content">
+                    <span class="publication-title">Research Intern</span>
+                    <p style="margin-top: 5px; color: #555; font-size: 0.95em;"><a href="https://zsdonghao.github.io/#lab" target="_blank" style="color: #333; text-decoration: none; font-weight: 500;">Hyperplane Lab</a>, Peking University</p>
+                    <p style="color: #777; font-size: 0.9em;">2021 - 2022</p>
+                    <p style="color: #777; font-size: 0.9em;">Supervisor: Hao Dong</p>
+                </div>
+            </div>
+
+            <div class="education-item">
+                <a href="https://www.aijianzi.com/" target="_blank" style="text-decoration: none;">
+                    <img src="aijianzi.png" alt="Aijianzi Logo" class="education-icon">
+                </a>
+                <div class="education-content">
+                    <span class="publication-title">Teaching Researcher</span>
+                    <p style="margin-top: 5px; color: #555; font-size: 0.95em;"><a href="https://www.aijianzi.com/" target="_blank" style="color: #333; text-decoration: none; font-weight: 500;">Beijing Aijianzi Education Technology Co., Ltd.</a>, Beijing</p>
+                    <p style="color: #777; font-size: 0.9em;">2019 - 2021</p>
+                    <p style="color: #777; font-size: 0.9em;">Supervisor: Xiaojun Hu</p>
+                </div>
+            </div>
+        </section>
+
         <section id="mentorship">
             <h2>Mentorship</h2>
             <p class="research-interest" style="margin-bottom: 25px;">
@@ -613,10 +733,10 @@
                 <br>
                 <button id="patButton" onclick="patCat()" 
                         style="padding: 12px 24px; background-color: #555; color: white; border: none; border-radius: 5px; font-size: 1em; cursor: pointer; font-weight: 500; transition: background-color 0.3s ease;">
-                    Pat My Cat
+                    Pat Desmond
                 </button>
                 <p id="limitMessage" style="margin-top: 15px; color: #555; font-size: 0.95em; display: none;">
-                    Desmond is Tired! You Have Reached Maximum Patting Times per Visit. Revisit or Subscribe to Desmond Pro for Unlimited Pats (>w<).
+                    Desmond is Tired! You Have Reached Maximum Patting Times per Visit. Come Back Later or Subscribe to Desmond Pro for Unlimited Pats (>w<).
                 </p>
             </div>
             
@@ -642,7 +762,7 @@
                         isHappy = true;
                     } else {
                         catImage.src = 'life8.png';
-                        patButton.textContent = 'Pat My Cat';
+                        patButton.textContent = 'Pat Desmond';
                         isHappy = false;
                     }
                     
@@ -653,6 +773,35 @@
                         limitMessage.style.display = 'block';
                     }
                 }
+
+                function toggleNav() {
+                    const navLinks = document.getElementById('navLinks');
+                    navLinks.classList.toggle('active');
+                }
+
+                // Close mobile menu when clicking a link
+                document.querySelectorAll('.nav-links a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        const navLinks = document.getElementById('navLinks');
+                        navLinks.classList.remove('active');
+                    });
+                });
+
+                // Smooth scrolling
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        const target = document.querySelector(this.getAttribute('href'));
+                        if (target) {
+                            const navHeight = document.querySelector('nav').offsetHeight;
+                            const targetPosition = target.offsetTop - navHeight - 10;
+                            window.scrollTo({
+                                top: targetPosition,
+                                behavior: 'smooth'
+                            });
+                        }
+                    });
+                });
             </script>
         </section>
 
