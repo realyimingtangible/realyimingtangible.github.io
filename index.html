@@ -11,6 +11,17 @@
             box-sizing: border-box;
         }
 
+        /* Custom text selection color */
+        ::selection {
+            background-color: #000;
+            color: #fff;
+        }
+
+        ::-moz-selection {
+            background-color: #000;
+            color: #fff;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
@@ -391,8 +402,9 @@
             <button class="nav-toggle" onclick="toggleNav()">☰</button>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#about">About</a></li>
+                <li><a href="#news">News</a></li>
                 <li><a href="#research">Research</a></li>
-                <li><a href="#selected_publications">Selected Works</a></li>
+                <li><a href="#selected_publications">Selected</a></li>
                 <li><a href="#publications">Publications</a></li>
                 <li><a href="#education">Education</a></li>
                 <li><a href="#experience">Experience</a></li>
@@ -424,6 +436,15 @@
             </p>
         </section>
 
+        <section id="news">
+            <h2>News</h2>
+            <ul class="publications-list">
+                <li>[2024.10] One paper accepted in International Conference on Machine Learning (SAN) <span>🎉</span></li>
+                <li>[2024.3] One paper accepted in European Computer Vision Association (LLM Dataset Analyst) <span>🎉</span></li>
+                <li>[2023.10] One paper accepted in Journal of Machine Learning (PE Lens) <span>🎉</span></li>
+            </ul>
+        </section>
+
         <section id="research">
             <h2>Research Interests</h2>
             <p class="research-interest">
@@ -451,12 +472,12 @@
             <div class="selected-publication">
                 <div class="publication-item">
                     <div class="publication-content">
-                        <span class="publication-title">Human-like Content Analysis for Generative AI with Language-Grounded Sparse Encoders</span>
-                        <p style="margin-top: 8px; color: #555; font-size: 0.95em; line-height: 1.6;">We develop LanSE and decompose natural and medical images into interpretable visual patterns grounded in natural language, supporting fine-grained analysis on AI generated contents.</p>
+                        <span class="publication-title">On the Theoretical Foundation of Sparse Dictionary Learning in Mechanistic Interpretability</span>
+                        <p style="margin-top: 8px; color: #555; font-size: 0.95em; line-height: 1.6;">We develop a theoretical framework for sparse dictionary learning in mechanistic interpretability.</p>
                     </div>
-                    <a href="https://arxiv.org/abs/2508.18236" target="_blank" class="paper-link">Paper</a>
+                    <a href="https://www.arxiv.org/abs/2512.05534" target="_blank" class="paper-link">Paper</a>
                 </div>
-                <img src="LanSE.png" alt="LanSE Diagram" class="publication-diagram">
+                <img src="SDL_Theory.png" alt="SDL Theory Diagram" class="publication-diagram">
             </div>
 
             <div class="selected-publication">
@@ -468,6 +489,17 @@
                     <a href="https://arxiv.org/abs/2511.10094" target="_blank" class="paper-link">Paper</a>
                 </div>
                 <img src="matryoshka_transcoders.png" alt="Matryoshka Transcoders Diagram" class="publication-diagram">
+            </div>
+
+            <div class="selected-publication">
+                <div class="publication-item">
+                    <div class="publication-content">
+                        <span class="publication-title">Human-like Content Analysis for Generative AI with Language-Grounded Sparse Encoders</span>
+                        <p style="margin-top: 8px; color: #555; font-size: 0.95em; line-height: 1.6;">We develop LanSE and decompose natural and medical images into interpretable visual patterns grounded in natural language, supporting fine-grained analysis on AI generated contents.</p>
+                    </div>
+                    <a href="https://arxiv.org/abs/2508.18236" target="_blank" class="paper-link">Paper</a>
+                </div>
+                <img src="LanSE.png" alt="LanSE Diagram" class="publication-diagram">
             </div>
 
             <div class="selected-publication">
@@ -520,9 +552,9 @@
 
             <div class="publication-item">
                 <div class="publication-content">
-                    <span class="publication-title">Human-like Content Analysis for Generative AI with Language-Grounded Sparse Encoders</span>
+                    <span class="publication-title">On the Theoretical Foundation of Sparse Dictionary Learning in Mechanistic Interpretability</span>
                 </div>
-                <a href="https://arxiv.org/abs/2508.18236" target="_blank" class="paper-link">Paper</a>
+                <a href="https://www.arxiv.org/abs/2512.05534" target="_blank" class="paper-link">Paper</a>
             </div>
 
             <div class="publication-item">
@@ -530,6 +562,13 @@
                     <span class="publication-title">How does My Model Fail? Automatic Identification and Interpretation of Physical Plausibility Failure Modes with Matryoshka Transcoders</span>
                 </div>
                 <a href="https://arxiv.org/abs/2511.10094" target="_blank" class="paper-link">Paper</a>
+            </div>
+
+            <div class="publication-item">
+                <div class="publication-content">
+                    <span class="publication-title">Human-like Content Analysis for Generative AI with Language-Grounded Sparse Encoders</span>
+                </div>
+                <a href="https://arxiv.org/abs/2508.18236" target="_blank" class="paper-link">Paper</a>
             </div>
 
             <div class="publication-item">
@@ -689,7 +728,6 @@
                 <div class="mentorship-content">
                     <span class="publication-title">Harshvardhan Saini</span>
                     <p style="margin-top: 5px; color: #555; font-size: 0.95em;">Indian Institute of Technology, India</p>
-                    <p class="mentorship-description">Together we identify personal related features from LLMs and find personal stirring prompts.</p>
                 </div>
             </div>
 
@@ -698,7 +736,6 @@
                 <div class="mentorship-content">
                     <span class="publication-title">Zheng Lin</span>
                     <p style="margin-top: 5px; color: #555; font-size: 0.95em;">Hong Kong University of Science and Technology, Hong Kong</p>
-                    <p class="mentorship-description">Together we enhance model interpretability for medical diagnostic models by visual pattern identification.</p>
                 </div>
             </div>
 
@@ -707,7 +744,6 @@
                 <div class="mentorship-content">
                     <span class="publication-title">Zhaoqian Yao</span>
                     <p style="margin-top: 5px; color: #555; font-size: 0.95em;">Chinese University of Hong Kong, Hong Kong</p>
-                    <p class="mentorship-description">Together we scale up LanSE for advanced model quality for the community to use.</p>
                 </div>
             </div>
 
@@ -716,11 +752,8 @@
                 <div class="mentorship-content">
                     <span class="publication-title">Qinglin Qi</span>
                     <p style="margin-top: 5px; color: #555; font-size: 0.95em;">Lund University, Sweden</p>
-                    <p class="mentorship-description">Together we identify visual patterns from fMRI data to better understand human visual perception.</p>
                 </div>
             </div>
-
-            
         </section>
                 <section id="personal">
             <h2>Personal</h2>
