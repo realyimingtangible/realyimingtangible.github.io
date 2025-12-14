@@ -409,7 +409,7 @@
                 <li><a href="#education">Education</a></li>
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#mentorship">Mentorship</a></li>
-                <li><a href="#personal">Personal</a></li>
+                <li><a href="#personal">Desmond</a></li>
             </ul>
         </div>
     </nav>
@@ -756,71 +756,86 @@
             </div>
         </section>
                 <section id="personal">
-            <h2>Personal</h2>
-            <p class="research-interest" style="margin-bottom: 20px;">
-                It is such an honor and a great pleasure to introduce to you here my black cat cyber pet, Desmond. You are cordially invited to pat Desmond by clicking the button below!
+            <h2>Meet Desmond</h2>
+            <p class="research-interest" style="margin-bottom: 30px;">
+                It is such an honor and a great pleasure to introduce to you here my black cat cyber pet, Desmond. You are cordially invited to pat Desmond and chat with him!
             </p>
-            <div style="text-align: center;">
-                <img id="catImage" src="life8.png" alt="Black Cat Cyber Pet" style="max-width: 400px; width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 20px;">
-                <br>
-                <button id="patButton" onclick="patCat()" 
-                        style="padding: 12px 24px; background-color: #555; color: white; border: none; border-radius: 5px; font-size: 1em; cursor: pointer; font-weight: 500; transition: background-color 0.3s ease;">
-                    Pat Desmond
-                </button>
-                <p id="limitMessage" style="margin-top: 15px; color: #555; font-size: 0.95em; display: none;">
-                    Desmond is Tired! You Have Reached Maximum Patting Times per Visit. Come Back Later or Subscribe to Desmond Pro for Unlimited Pats (>w<).
-                </p>
-            </div>
 
-            <!-- Chat with Desmond Section -->
-            <div style="margin-top: 40px;">
-                <h3 style="text-align: center; color: #2c3e50; margin-bottom: 20px;">💬 Chat with Desmond</h3>
-                <div id="chatContainer" style="max-width: 600px; margin: 0 auto; border: 2px solid #555; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-                    <!-- Chat messages area -->
-                    <div id="chatMessages" style="height: 400px; overflow-y: auto; padding: 20px; background-color: #f8f9fa;">
-                        <div style="text-align: center; color: #666; font-style: italic; padding: 20px;">
-                            Start a conversation with Desmond! 🐱
-                        </div>
-                    </div>
+            <!-- Container for animated layout -->
+            <div id="desmondContainer" style="display: flex; gap: 30px; align-items: flex-start; flex-wrap: wrap; justify-content: center; transition: all 0.5s ease;">
 
-                    <!-- Chat input area -->
-                    <div style="display: flex; border-top: 2px solid #555; background-color: #fff;">
-                        <input
-                            type="text"
-                            id="chatInput"
-                            placeholder="Type your message to Desmond..."
-                            style="flex: 1; padding: 15px; border: none; font-size: 1em; outline: none;"
-                            onkeypress="handleChatKeyPress(event)"
-                        >
-                        <button
-                            id="sendButton"
-                            onclick="sendMessage()"
-                            style="padding: 15px 25px; background-color: #555; color: white; border: none; cursor: pointer; font-size: 1em; font-weight: 500; transition: background-color 0.3s ease;"
-                            onmouseover="this.style.backgroundColor='#333'"
-                            onmouseout="this.style.backgroundColor='#555'"
-                        >
-                            Send
+                <!-- Left side: Cat display and action buttons -->
+                <div id="catSection" style="flex: 0 1 auto; min-width: 300px; max-width: 450px; text-align: center; transition: all 0.5s ease;">
+                    <img id="catImage" src="life8.png" alt="Black Cat Cyber Pet" style="max-width: 400px; width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 20px;">
+
+                    <!-- Action buttons -->
+                    <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-bottom: 15px;">
+                        <button id="patButton" onclick="patCat()"
+                                style="padding: 12px 24px; background-color: #555; color: white; border: none; border-radius: 5px; font-size: 1em; cursor: pointer; font-weight: 500; transition: background-color 0.3s ease;">
+                            Pat Desmond
+                        </button>
+                        <button id="chatToggleButton" onclick="toggleChat()"
+                                style="padding: 12px 24px; background-color: #555; color: white; border: none; border-radius: 5px; font-size: 1em; cursor: pointer; font-weight: 500; transition: background-color 0.3s ease;">
+                            Have a Chat!
                         </button>
                     </div>
+
+                    <p id="limitMessage" style="margin-top: 5px; color: #555; font-size: 0.95em; display: none;">
+                        Desmond is Tired! You Have Reached Maximum Patting Times per Visit. Come Back Later or Subscribe to Desmond Pro for Unlimited Pats (>w<).
+                    </p>
                 </div>
+
+                <!-- Right side: Chat Interface (initially hidden) -->
+                <div id="chatSection" style="flex: 0 0 0; min-width: 0; max-width: 0; opacity: 0; overflow: hidden; transition: all 0.5s ease;">
+                    <div id="chatContainer" style="border: 2px solid #555; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                        <!-- Chat messages area -->
+                        <div id="chatMessages" style="height: 400px; overflow-y: auto; padding: 20px; background-color: #f8f9fa;">
+                            <div style="text-align: center; color: #666; font-style: italic; padding: 20px;">
+                                Wellcome, visitor! Master is out, let us talk. 🐱
+                            </div>
+                        </div>
+
+                        <!-- Chat input area -->
+                        <div style="display: flex; border-top: 2px solid #555; background-color: #fff;">
+                            <input
+                                type="text"
+                                id="chatInput"
+                                placeholder="Type your message to Desmond..."
+                                style="flex: 1; padding: 15px; border: none; font-size: 1em; outline: none;"
+                                onkeypress="handleChatKeyPress(event)"
+                            >
+                            <button
+                                id="sendButton"
+                                onclick="sendMessage()"
+                                style="padding: 15px 25px; background-color: #555; color: white; border: none; cursor: pointer; font-size: 1em; font-weight: 500; transition: background-color 0.3s ease;"
+                                onmouseover="this.style.backgroundColor='#333'"
+                                onmouseout="this.style.backgroundColor='#555'"
+                            >
+                                Send
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <script>
                 let isHappy = false;
                 let patCount = 0;
                 const maxPats = 10;
-                
+                let isChatVisible = false;
+
                 function patCat() {
                     if (patCount >= maxPats) {
                         return;
                     }
-                    
+
                     const catImage = document.getElementById('catImage');
                     const patButton = document.getElementById('patButton');
                     const limitMessage = document.getElementById('limitMessage');
-                    
+
                     patCount++;
-                    
+
                     if (!isHappy) {
                         catImage.src = 'cat_happy.jpg';
                         patButton.textContent = 'Stop Patting';
@@ -830,12 +845,48 @@
                         patButton.textContent = 'Pat Desmond';
                         isHappy = false;
                     }
-                    
+
                     if (patCount >= maxPats) {
                         patButton.disabled = true;
                         patButton.style.backgroundColor = '#999';
                         patButton.style.cursor = 'not-allowed';
                         limitMessage.style.display = 'block';
+                    }
+                }
+
+                function toggleChat() {
+                    const chatSection = document.getElementById('chatSection');
+                    const catSection = document.getElementById('catSection');
+                    const desmondContainer = document.getElementById('desmondContainer');
+                    const chatToggleButton = document.getElementById('chatToggleButton');
+
+                    isChatVisible = !isChatVisible;
+
+                    if (isChatVisible) {
+                        // Change container alignment and show chat with animation
+                        desmondContainer.style.justifyContent = 'flex-start';
+                        catSection.style.flex = '0 0 320px';
+                        catSection.style.maxWidth = '320px';
+                        chatSection.style.flex = '1 1 auto';
+                        chatSection.style.minWidth = '300px';
+                        chatSection.style.maxWidth = '450px';
+                        chatSection.style.opacity = '1';
+                        chatToggleButton.textContent = 'Hide Chat';
+
+                        // Focus on chat input after animation
+                        setTimeout(() => {
+                            document.getElementById('chatInput').focus();
+                        }, 500);
+                    } else {
+                        // Hide chat and recenter cat with animation
+                        desmondContainer.style.justifyContent = 'center';
+                        catSection.style.flex = '0 1 auto';
+                        catSection.style.maxWidth = '450px';
+                        chatSection.style.flex = '0 0 0';
+                        chatSection.style.minWidth = '0';
+                        chatSection.style.maxWidth = '0';
+                        chatSection.style.opacity = '0';
+                        chatToggleButton.textContent = 'Have a Chat!';
                     }
                 }
 
