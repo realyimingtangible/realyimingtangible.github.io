@@ -825,7 +825,6 @@
                 let patCount = 0;
                 const maxPats = 10;
                 let isChatVisible = false;
-                let hasBeenPatted = false;  // Track if cat has ever been patted
 
                 function patCat() {
                     if (patCount >= maxPats) {
@@ -837,7 +836,6 @@
                     const limitMessage = document.getElementById('limitMessage');
 
                     patCount++;
-                    hasBeenPatted = true;  // Mark that cat has been patted
 
                     if (!isHappy) {
                         catImage.src = 'cat_happy.jpg';
@@ -1007,7 +1005,7 @@
                             },
                             body: JSON.stringify({
                                 message: message,
-                                hasBeenPatted: hasBeenPatted
+                                hasBeenPatted: isHappy
                             })
                         });
 
