@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Linear Representation Hypothesis - Yiming Tang</title>
+    
+    <!-- MathJax for rendering LaTeX formulas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        ::selection {
+            background-color: #000;
+            color: #fff;
+        }
+
+        ::-moz-selection {
+            background-color: #000;
+            color: #fff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 70px;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            z-index: 1000;
+            padding: 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .nav-brand {
+            font-weight: 600;
+            font-size: 1.2em;
+            color: #2c3e50;
+            text-decoration: none;
+            padding: 15px 0;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 5px;
+        }
+
+        .nav-links a {
+            color: #555;
+            text-decoration: none;
+            padding: 20px 15px;
+            display: block;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            background-color: #555;
+            color: white;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        article {
+            background-color: #fff;
+            padding: 50px 60px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .article-meta {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .article-meta p {
+            margin: 8px 0;
+            color: #666;
+        }
+
+        .article-meta a {
+            color: #555;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .article-meta a:hover {
+            text-decoration: underline;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #555;
+        }
+
+        h3 {
+            color: #2c3e50;
+            font-size: 1.4em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 1.05em;
+        }
+
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            font-size: 1.05em;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 30px auto;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .math-block {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-left: 4px solid #555;
+            overflow-x: auto;
+        }
+
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+
+        strong {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        hr {
+            margin: 40px 0;
+            border: none;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 10px 20px;
+            background-color: #555;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-link:hover {
+            background-color: #333;
+        }
+
+        .hypothesis-motto {
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .hypothesis-motto p {
+            color: #1a1a1a;
+            font-size: 1.3em;
+            font-weight: 400;
+            line-height: 1.7;
+            margin: 0;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-style: italic;
+            letter-spacing: 0.3px;
+        }
+
+        @media (max-width: 768px) {
+            article {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-brand">Yiming Tang's Homepage</a>
+            <ul class="nav-links">
+                <li><a href="../../blog.html">← Back to Blog</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <article>
+            <h1>Paper Walkthroughs</h1>
+            <h3 style="color: #555; font-weight: 600; font-size: 1.35em; margin-top: -10px; margin-bottom: 30px;">The Linear Representation Hypothesis and the Geometry of Large Language Models</h3>
+
+            <div class="article-meta">
+                <p><strong>Authors:</strong> Kiho Park, Yo Joong Choe, Victor Veitch</p>
+                <p><strong>Walkthrough by:</strong> Yiming Tang</p>
+                <p><strong>Paper:</strong> <a href="https://arxiv.org/abs/2311.03658" target="_blank">https://arxiv.org/abs/2311.03658</a></p>
+                <p><strong>Conference:</strong> ICML 2024</p>
+            </div>
+
+            <div class="hypothesis-motto">
+                <p>Informally, the "linear representation hypothesis" is the idea that high-level concepts are represented linearly as directions in some representation space.</p>
+            </div>
+
+            <h2>Background on Language Models</h2>
+
+            <p>A <strong>language model</strong> is fundamentally a probability distribution over sequences of tokens. Given a context sequence \(x = (x_1, x_2, \ldots, x_t)\), the model predicts the next token \(y\) by computing \(\mathbb{P}(y \mid x)\).</p>
+
+            <p>Modern LLMs implement this distribution through a two-stage process:</p>
+
+            <ol>
+                <li><strong>Embedding Stage:</strong> The context \(x\) is mapped to a <strong>representation vector</strong> (or <strong>embedding vector</strong>) \(\lambda(x) \in \Lambda \simeq \mathbb{R}^d\), where \(\Lambda\) is the representation space and \(d\) is the model's hidden dimension. This embedding captures the semantic and syntactic information from the context.</li>
+                
+                <li><strong>Unembedding Stage:</strong> Each possible output word \(y\) in the vocabulary is associated with an <strong>unembedding vector</strong> \(\gamma(y) \in \Gamma \simeq \mathbb{R}^d\), where \(\Gamma\) is the unembedding space. The probability of generating word \(y\) is then given by the <strong>softmax distribution</strong>:</li>
+            </ol>
+
+            <div class="math-block">
+                $$\mathbb{P}(y \mid x) \propto \exp\left(\lambda(x)^\top \gamma(y)\right) = \exp\left(\langle \lambda(x), \gamma(y) \rangle\right)$$
+            </div>
+
+            <p>More precisely, normalizing over the entire vocabulary \(\mathcal{V}\):</p>
+
+            <div class="math-block">
+                $$\mathbb{P}(y \mid x) = \frac{\exp\left(\lambda(x)^\top \gamma(y)\right)}{\sum_{y' \in \mathcal{V}} \exp\left(\lambda(x)^\top \gamma(y')\right)}$$
+            </div>
+
+            <img src="main.png" alt="Language Model Architecture">
+
+            <h2>What is a Concept?</h2>
+
+            <p>Before we can talk about whether concepts are represented linearly, we need to be precise about what a "concept" even means in the context of LLMs. The key insight is surprisingly simple: <strong>a concept is anything you can change about an output while keeping everything else the same</strong>.</p>
+
+            <h3>Concepts as Factors of Variation</h3>
+
+            <p>Think about the sentence "The king rules the kingdom." We can transform this in various independent ways:</p>
+
+            <ul>
+                <li><strong>Language:</strong> "The king rules the kingdom" → "Le roi règne sur le royaume" (English → French)</li>
+                <li><strong>Gender:</strong> "The king rules the kingdom" → "The queen rules the kingdom" (male → female)</li>
+                <li><strong>Number:</strong> "The king rules the kingdom" → "The kings rule the kingdom" (singular → plural)</li>
+                <li><strong>Tense:</strong> "The king rules the kingdom" → "The king ruled the kingdom" (present → past)</li>
+            </ul>
+
+            <p>Each of these transformations changes <em>one aspect</em> of the output while leaving the others intact. These aspects—language, gender, number, tense—are what we call <strong>concepts</strong>.</p>
+
+            <h3>Formalizing Concepts with Causal Language</h3>
+
+            <p>To make this precise, we model a concept as a <strong>concept variable</strong> \(W\) that:</p>
+
+            <ul>
+                <li>Is caused by the context \(X\) (the input to the model)</li>
+                <li>Acts as a cause of the output \(Y\) (the word the model generates)</li>
+            </ul>
+
+            <p>This gives us a simple causal chain: \(X \to W \to Y\).</p>
+
+            <p>For simplicity, let's focus on <strong>binary concepts</strong>—concepts that take two values. For example:</p>
+
+            <ul>
+                <li>Gender: \(W \in \{\text{male}, \text{female}\}\)</li>
+                <li>Language: \(W \in \{\text{English}, \text{French}\}\)</li>
+                <li>Number: \(W \in \{\text{singular}, \text{plural}\}\)</li>
+            </ul>
+
+            <p>To make the math cleaner, we'll encode binary concepts numerically. For instance, we might set male \(\Rightarrow\) 0 and female \(\Rightarrow\) 1. The choice of which value is 0 or 1 is arbitrary, but it will affect the <em>sign</em> of concept vectors we discover (more on this later).</p>
+
+            <h2>The Linear Representation Hypothesis</h2>
+
+            <h3>The Cone of a Vector</h3>
+
+            <p>Before stating the definition, we need a geometric tool. Given a vector \(v \in \mathbb{R}^d\), its <strong>cone</strong> is:</p>
+
+            <div class="math-block">
+                $$\text{Cone}(v) = \{\alpha v : \alpha > 0\}$$
+            </div>
+
+            <h3>Definition: Unembedding Representation</h3>
+
+            <img src="2.1.png" alt="Unembedding Representation Definition">
+
+            <p><strong>What does this mean geometrically?</strong></p>
+
+            <ul>
+                <li>Take any counterfactual pair \((Y(0), Y(1))\) for concept \(W\)—for example, ("king", "queen")</li>
+                <li>Compute the difference of their unembedding vectors: \(\gamma(\text{"queen"}) - \gamma(\text{"king"})\)</li>
+                <li>This difference should point in the same direction as \(\widetilde{\gamma}_W\)</li>
+                <li>The same should hold for <em>all</em> pairs: ("man", "woman"), ("actor", "actress"), etc.</li>
+            </ul>
+
+            <h3>Connection to Measurement</h3>
+
+            <p>The first major result of the paper is that this unembedding representation is intimately connected to <em>measuring</em> concepts using linear probes:</p>
+
+            <img src="2.2.png" alt="Theorem: Connection to Measurement">
+
+            <p><strong>What does this theorem say?</strong></p>
+
+            <p>Consider a concrete scenario: suppose we know the output token will be either "king" or "queen" (say, because the context is about a monarch). The theorem tells us that the probability of outputting "king" (versus "queen") is <strong>logit-linear</strong> in the language model representation \(\lambda\), with regression coefficients given by \(\widetilde{\gamma}_W\).</p>
+
+            <p>More formally: the log-odds</p>
+
+            <div class="math-block">
+                $$\log \frac{\mathbb{P}(\text{output is "king"})}{\mathbb{P}(\text{output is "queen"})} = \alpha \lambda^\top \widetilde{\gamma}_W$$
+            </div>
+
+            <h3>Embedding vs Unembedding</h3>
+
+            <p>Recall that a language model involves two spaces:</p>
+
+            <ul>
+                <li><strong>Unembedding space</strong> \(\Gamma\): where output words \(y\) live as vectors \(\gamma(y)\)</li>
+                <li><strong>Embedding space</strong> \(\Lambda\): where context representations \(\lambda(x)\) live</li>
+            </ul>
+
+            <p>We've just seen that if concept differences \(\gamma(Y(1)) - \gamma(Y(0))\) align in the unembedding space, we get linear measurement. What happens if we look at <em>context</em> differences in the embedding space?</p>
+
+            <img src="2.3.png" alt="Embedding Representation">
+
+            <img src="2.4.png" alt="Dual Relationship">
+
+            <p><strong>Theorem 2.5</strong> tells us what happens when we add the embedding representation \(\overline{\lambda}_W\) to a context embedding. This is the mathematical foundation for model steering or activation engineering.</p>
+
+            <img src="2.5.png" alt="Linear Representation Summary">
+
+            <p>More results and experiments are in the paper. Check it out at <a href="https://arxiv.org/abs/2311.03658" target="_blank">arxiv.org/abs/2311.03658</a>!</p>
+            
+            <hr>
+        </article>
+    </div>
+
+    <footer>
+        <div style="text-align: center; padding: 40px 20px 30px;">
+            <p style="color: #666; font-size: 0.9em;">&copy; 2025 Yiming Tang. All rights reserved.</p>
+        </div>
+    </footer>
+    
+</body>
+</html>
