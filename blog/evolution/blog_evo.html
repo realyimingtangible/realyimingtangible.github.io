@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Evolution of Multimodal Model Architectures - Yiming Tang</title>
+    
+    <!-- MathJax for rendering LaTeX formulas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        ::selection {
+            background-color: #000;
+            color: #fff;
+        }
+
+        ::-moz-selection {
+            background-color: #000;
+            color: #fff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 70px;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            z-index: 1000;
+            padding: 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .nav-brand {
+            font-weight: 600;
+            font-size: 1.2em;
+            color: #2c3e50;
+            text-decoration: none;
+            padding: 15px 0;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 5px;
+        }
+
+        .nav-links a {
+            color: #555;
+            text-decoration: none;
+            padding: 20px 15px;
+            display: block;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            background-color: #555;
+            color: white;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        article {
+            background-color: #fff;
+            padding: 50px 60px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .article-meta {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .article-meta p {
+            margin: 8px 0;
+            color: #666;
+        }
+
+        .article-meta a {
+            color: #555;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .article-meta a:hover {
+            text-decoration: underline;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #555;
+        }
+
+        h3 {
+            color: #2c3e50;
+            font-size: 1.4em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 1.05em;
+        }
+
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            font-size: 1.05em;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 30px auto;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .math-block {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-left: 4px solid #555;
+            overflow-x: auto;
+        }
+
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+
+        strong {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        hr {
+            margin: 40px 0;
+            border: none;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 10px 20px;
+            background-color: #555;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-link:hover {
+            background-color: #333;
+        }
+
+        .hypothesis-motto {
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .hypothesis-motto p {
+            color: #1a1a1a;
+            font-size: 1.3em;
+            font-weight: 400;
+            line-height: 1.7;
+            margin: 0;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-style: italic;
+            letter-spacing: 0.3px;
+        }
+
+        @media (max-width: 768px) {
+            article {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-brand">Yiming Tang's Homepage</a>
+            <ul class="nav-links">
+                <li><a href="../../blog.html">← Back to Blog</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <article>
+            <h1>Paper Walkthroughs</h1>
+            <h3 style="color: #555; font-weight: 600; font-size: 1.35em; margin-top: -10px; margin-bottom: 30px;">The Evolution of Multimodal Model Architectures: A Taxonomy</h3>
+
+            <div class="article-meta">
+                <p><strong>Authors:</strong> Wadekar et al.</p>
+                <p><strong>Walkthrough by:</strong> Yiming Tang</p>
+                <p><strong>Paper:</strong> <a href="https://arxiv.org/pdf/2405.17927v1" target="_blank">https://arxiv.org/pdf/2405.17927v1</a></p>
+            </div>
+
+            <h2>Introduction</h2>
+
+            <p>The multimodal AI landscape has exploded in recent years, with models like GPT-4V, Gemini, and LLaVA demonstrating remarkable capabilities in understanding and generating content across vision, language, audio, and more. Yet beneath this diversity lies a fundamental question: how do we actually combine different modalities in a neural network?</p>
+
+            <p>A recent paper by Wadekar et al. (2024) provides the first systematic taxonomy of multimodal architectures, identifying four distinct architectural patterns that dominate the field. This taxonomy is more than academic—it reveals the core design decisions that determine a model's capabilities, training efficiency, and ability to scale to new modalities.</p>
+
+            <p>The key insight is surprisingly simple: multimodal architectures differ primarily in where and how they fuse information from different modalities. Some models perform "deep fusion" by integrating modalities within the internal layers of the network. Others perform "early fusion" by combining modalities at the input stage. Within these two broad categories, we find four specific types:</p>
+
+            <ul>
+                <li><strong>Type-A (Standard Cross-Attention Deep Fusion):</strong> Uses standard cross-attention layers to deeply integrate modalities</li>
+                <li><strong>Type-B (Custom Layer Deep Fusion):</strong> Employs custom-designed layers for better deep fusion</li>
+                <li><strong>Type-C (Non-Tokenized Early Fusion):</strong> Fuses modalities at input without discrete tokenization</li>
+                <li><strong>Type-D (Tokenized Early Fusion):</strong> Tokenizes all modalities for unified input processing</li>
+            </ul>
+
+            <img src="main.png" alt="Multimodal Architecture Taxonomy Overview">
+
+            <p>Each architectural type represents different trade-offs between flexibility, efficiency, scalability, and the ability to generate multimodal outputs. Understanding these patterns is crucial for anyone building or working with multimodal systems—whether you're selecting a model for your application, designing a new architecture, or simply trying to understand why certain models behave the way they do.</p>
+
+            <h2>Type-A: Standard Cross-Attention Deep Fusion</h2>
+
+            <p><strong>What it is:</strong> Type-A architectures take a pretrained Large Language Model (LLM) and inject standard cross-attention layers into its internal structure. These cross-attention layers act as "bridges" that allow the LLM to attend to encoded representations of other modalities (like images or audio) at multiple depths in the network.</p>
+
+            <p>Think of it like this: imagine you have a powerful language model that's great at text. To make it multimodal, you periodically interrupt its normal processing to let it "look at" image features. At layer 10, it might use cross-attention to inspect visual features before continuing with text processing. Then at layer 15, it does this again, building progressively richer multimodal representations.</p>
+
+            <img src="type_a.png" alt="Type-A Architecture Diagram">
+
+            <h3>Key characteristics</h3>
+
+            <ul>
+                <li><strong>Deep fusion:</strong> Modalities interact throughout the network depth, not just at input</li>
+                <li><strong>Modality-specific encoders:</strong> Images, audio, etc. are processed by dedicated encoders (e.g., Vision Transformer for images)</li>
+                <li><strong>Resampler modules:</strong> Convert variable-length modality sequences into fixed-length representations</li>
+                <li><strong>Standard architecture:</strong> Uses vanilla cross-attention without custom modifications</li>
+            </ul>
+
+            <p>The cross-attention can be placed either before or after the self-attention layer in each transformer block, creating two subtypes:</p>
+
+            <ul>
+                <li><strong>Subtype A.1:</strong> Cross-attention before self-attention (e.g., Flamingo, OpenFlamingo)</li>
+                <li><strong>Subtype A.2:</strong> Cross-attention after self-attention (e.g., VL-BART, VL-T5)</li>
+            </ul>
+
+            <h3>Representative models</h3>
+
+            <p>The archetypal Type-A model is <strong>Flamingo</strong> (DeepMind, 2022), which pioneered the approach of interleaving cross-attention layers into a frozen LLM. Flamingo uses a Perceiver Resampler to compress variable-length image sequences into fixed-length visual tokens, then injects these via cross-attention layers placed before every self-attention layer in the LLM decoder.</p>
+
+            <p>Other notable Type-A models include:</p>
+
+            <ul>
+                <li><strong>OpenFlamingo (2023):</strong> Open-source replication of Flamingo, trained on 60M interleaved image-text examples</li>
+                <li><strong>IDEFICS (2024):</strong> HuggingFace's open reproduction using LLaMA as the base LLM</li>
+                <li><strong>PaLI-X (2023):</strong> Google's 55B parameter model using ViT-22B vision encoder</li>
+                <li><strong>Otter (2023):</strong> Enhanced with instruction-following capabilities via the MIMIC-IT dataset</li>
+            </ul>
+
+            <h3>Trade-offs and considerations</h3>
+
+            <p><strong>Advantages:</strong></p>
+
+            <ul>
+                <li>Fine-grained control over modality information flow at multiple network depths</li>
+                <li>End-to-end trainable with standard transformer components</li>
+                <li>Can leverage powerful pretrained LLMs directly</li>
+            </ul>
+
+            <p><strong>Disadvantages:</strong></p>
+
+            <ul>
+                <li>Difficult to scale to additional modalities beyond the initially designed ones</li>
+                <li>Cannot easily generate non-text outputs (limited to text generation)</li>
+            </ul>
+
+            <p><strong>When to use Type-A:</strong> This architecture shines when you need fine-grained multimodal understanding and have significant computational resources. It's particularly effective for tasks requiring deep reasoning across modalities, like visual question answering or detailed image captioning. However, the computational demands make it less suitable for resource-constrained scenarios or rapid prototyping.</p>
+
+            <h2>Type-B: Custom Layer Deep Fusion</h2>
+
+            <p><strong>What it is:</strong> Type-B architectures are the "custom-engineered" cousins of Type-A. Like Type-A, they perform deep fusion by integrating modalities within the internal layers of the network. However, instead of using standard cross-attention, they employ specially designed layers optimized for multimodal fusion.</p>
+
+            <p>The key innovation is in the design of these fusion layers. For example, some Type-B models learn separate query/key/value projections for each modality, or introduce gating mechanisms that control how much each modality contributes at each layer. These custom designs can significantly improve efficiency and performance compared to vanilla cross-attention.</p>
+
+            <img src="type_b.png" alt="Type-B Architecture Diagram">
+
+            <h3>Key characteristics</h3>
+
+            <ul>
+                <li><strong>Deep fusion with custom layers:</strong> Modalities fuse within internal layers, but using specialized architectures</li>
+                <li><strong>Two subtypes based on layer design:</strong>
+                    <ul>
+                        <li>Subtype B.1: Custom cross-attention layers with specialized Q/K/V mechanisms</li>
+                        <li>Subtype B.2: Other custom learnable layers (e.g., LoRA-based, Mixture-of-Experts)</li>
+                    </ul>
+                </li>
+                <li><strong>Efficiency optimizations:</strong> Custom designs often reduce parameters and compute vs. Type-A</li>
+                <li><strong>Gating mechanisms:</strong> Many use learnable gates to control modality contributions</li>
+            </ul>
+
+            <h3>Representative models</h3>
+
+            <p><strong>LLaMA-Adapter series</strong> introduced one of the first custom fusion mechanisms: learnable "adapter" prompts combined with a zero-initialized gating factor that gradually learns to incorporate visual information. The architecture adds only 1.2M parameters on top of LLaMA-7B.</p>
+
+            <p><strong>CogVLM (2023)</strong> takes a different approach, learning separate Q/K/V embeddings for text and images in each decoder layer. It introduces a "visual expert module" that processes encoded image features before they enter custom cross-attention layers.</p>
+
+            <p><strong>mPLUG-Owl2 (2023)</strong> uses a "Modality Adaptive Module"—a custom cross-attention where queries are shared across modalities but keys and values are modality-specific.</p>
+
+            <p><strong>MM-Interleaved (2024)</strong> introduces MMFS (Multi-scale Multi-image Feature Synchronizer), enabling both image understanding and image generation by synchronizing features across modalities at multiple scales.</p>
+
+            <p>Other notable models:</p>
+
+            <ul>
+                <li><strong>InternVL (2023):</strong> 6B parameter vision model with custom fusion for visual-linguistic tasks</li>
+                <li><strong>CogAgent (2023):</strong> Specialized for GUI understanding with 18B parameters</li>
+                <li><strong>MoE-LLaVA (2024):</strong> Uses Mixture-of-Experts layers in the FFN blocks (Subtype B.2)</li>
+                <li><strong>LION (2023):</strong> Combines LoRA adapters with MoE layers</li>
+            </ul>
+
+            <h3>Trade-offs and considerations</h3>
+
+            <p><strong>Advantages:</strong></p>
+
+            <ul>
+                <li>More efficient than Type-A due to optimized custom layers</li>
+                <li>Better control over modality fusion through specialized designs</li>
+                <li>Easier to add new modalities via gating mechanisms</li>
+                <li>Can achieve comparable or better performance with fewer parameters</li>
+                <li>End-to-end trainable</li>
+            </ul>
+
+            <p><strong>Disadvantages:</strong></p>
+
+            <ul>
+                <li>Requires architectural expertise to design effective custom layers</li>
+                <li>Scalability still challenging, though better than Type-A</li>
+                <li>Like Type-A, difficult to generate non-text outputs without additional components</li>
+            </ul>
+
+            <p><strong>When to use Type-B:</strong> Choose Type-B when you need the deep multimodal reasoning of Type-A but want better efficiency. It's particularly suitable when you're designing a model from scratch and can invest in custom layer development. The gating mechanisms make it more amenable to incremental addition of new modalities compared to Type-A.</p>
+
+            <h2>Type-C: Non-Tokenized Early Fusion</h2>
+
+            <p><strong>What it is:</strong> Type-C represents a paradigm shift: instead of fusing modalities deep within the network, these architectures perform early fusion at the input stage. Modality-specific encoders process different inputs (images, audio, etc.), and their outputs are projected into the LLM's embedding space and concatenated with text tokens at the input.</p>
+
+            <p>Crucially, Type-C models do not use discrete tokenization for non-text modalities. Instead, they work directly with continuous embeddings from pretrained encoders. This makes them fundamentally modular—you can swap encoders and LLMs independently, connecting them with lightweight "projection layers."</p>
+
+            <img src="type_c.png" alt="Type-C Architecture Diagram">
+
+            <h3>Key characteristics</h3>
+
+            <ul>
+                <li><strong>Early fusion:</strong> All modalities combined at input, no fusion in internal layers</li>
+                <li><strong>Continuous embeddings:</strong> No discrete tokenization of images/audio/video</li>
+                <li><strong>Modular architecture:</strong> Encoder + Projection + LLM can be mixed and matched</li>
+                <li><strong>Minimal LLM modifications:</strong> Often no changes to LLM internal layers</li>
+                <li><strong>Four subtypes based on projection layer design:</strong>
+                    <ul>
+                        <li>C.1: Simple Linear/MLP projection</li>
+                        <li>C.2: Q-Former + Linear/MLP</li>
+                        <li>C.3: Perceiver Resampler</li>
+                        <li>C.4: Custom learnable layers</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>Representative models</h3>
+
+            <p><strong>LLaVA</strong> (Liu et al., 2024) is perhaps the most influential Type-C model, demonstrating that a simple linear projection can effectively connect vision and language. It uses CLIP's visual encoder, a single linear layer for projection, and Vicuna LLM. Despite its simplicity, LLaVA achieves impressive results and has spawned numerous derivatives.</p>
+
+            <p><strong>BLIP-2</strong> (Li et al., 2023) introduced the Q-Former, a lightweight transformer that acts as an information bottleneck between frozen vision encoders and frozen LLMs. The Q-Former uses learnable queries to extract fixed-length representations from variable-length visual features, achieving remarkable efficiency—it trains the Q-Former (188M parameters) while keeping both the vision encoder (1.2B) and LLM (3B-11B) frozen.</p>
+
+            <p><strong>MiniGPT-4</strong> (2023) combines Q-Former with a linear projection layer, creating a two-stage training process: first aligning vision and language, then fine-tuning for instruction following.</p>
+
+            <p><strong>Idefics2</strong> (2024) uses a Perceiver Resampler to process visual features before feeding them to the LLM, achieving better vision-language alignment with improved efficiency over IDEFICS (Type-A).</p>
+
+            <p>The LLaVA family has grown to include:</p>
+
+            <ul>
+                <li><strong>LLaVA-1.5 (2023):</strong> Enhanced with higher resolution and more training data</li>
+                <li><strong>LLaVA-Med (2024):</strong> Specialized for biomedical applications</li>
+                <li><strong>LLaVA-NeXT (2024):</strong> Improved reasoning and world knowledge</li>
+                <li><strong>LLaVA-Phi (2024):</strong> Uses smaller Phi-2 language model for efficiency</li>
+            </ul>
+
+            <p>Other notable Type-C models include Qwen-VL, MM1 (Apple, 2024), mPLUG-Owl, Osprey, MobileVLM, and many more—Type-C is by far the most popular architecture type.</p>
+
+            <h3>Trade-offs and considerations</h3>
+
+            <p><strong>Advantages:</strong></p>
+
+            <ul>
+                <li>Simplicity: Easiest architecture to implement and understand</li>
+                <li>Modularity: Can swap any encoder or LLM with minimal changes</li>
+                <li>Scalability: Easy to add new modalities—just add encoder + projection layer</li>
+                <li>Smallest parameter overhead: Projection layers add minimal parameters</li>
+            </ul>
+
+            <p><strong>Disadvantages:</strong></p>
+
+            <ul>
+                <li>No fine-grained control of modality fusion within network</li>
+                <li>Difficult to generate non-text outputs with standard auto-regressive training</li>
+                <li>May have less nuanced multimodal reasoning than deep fusion approaches</li>
+            </ul>
+
+            <p><strong>When to use Type-C:</strong> This should be your default choice for most multimodal applications. Its simplicity, efficiency, and modularity make it ideal for prototyping, research, and production systems with limited computational budgets. Type-C models can be trained in hours on a single 8-GPU machine, making them accessible to academic researchers and small teams. The modular design also means you can easily upgrade components—swap in a better vision encoder or newer LLM—without retraining the entire model.</p>
+
+            <h2>Type-D: Tokenized Early Fusion</h2>
+
+            <p><strong>What it is:</strong> Type-D architectures take early fusion one step further: they tokenize all modalities into discrete tokens before feeding them to the model. Just as text is tokenized into discrete word-pieces, images are tokenized into discrete visual tokens, audio into discrete audio tokens, and so on. This creates a unified representation space where the model can process and generate all modalities using the same auto-regressive objective.</p>
+
+            <p>The key insight is that tokenization enables multimodal generation. Because all modalities are discrete tokens, the model can be trained with standard next-token prediction to generate images, audio, and video—not just text. This is why Type-D is at the forefront of "any-to-any" multimodal models.</p>
+
+            <img src="type_d.png" alt="Type-D Architecture Diagram">
+
+            <h3>Key characteristics</h3>
+
+            <ul>
+                <li><strong>Tokenization of all modalities:</strong> Uses VQ-VAE, VQ-GAN, or similar to discretize inputs</li>
+                <li><strong>Unified token space:</strong> All modalities represented as discrete tokens</li>
+                <li><strong>Auto-regressive generation:</strong> Standard next-token prediction for all modalities</li>
+                <li><strong>Two subtypes based on core architecture:</strong>
+                    <ul>
+                        <li>D.1: Decoder-only (LLM-style) transformer</li>
+                        <li>D.2: Encoder-decoder transformer</li>
+                    </ul>
+                </li>
+                <li><strong>Multimodal output capability:</strong> Can generate images, audio, video, not just text</li>
+            </ul>
+
+            <h3>Representative models</h3>
+
+            <p><strong>Unified-IO 2</strong> (Lu et al., 2023) is a landmark Type-D model trained on an unprecedented scale of multimodal data: 1 billion image-text pairs, 1 trillion text tokens, 180M video clips, 130M interleaved image-text sequences, and more. It uses VQ-GAN style tokenizers for images and dense structures, and ViT-VQGAN for audio. The model is trained from scratch (7B parameters) using a Mixture of Denoisers objective.</p>
+
+            <p><strong>4M</strong> (Mizrahi et al., 2024) takes a different tokenization approach: VQ-VAE for image-like modalities (RGB, depth, normals, semantic segmentation) and WordPiece for text. It uses a MultiMAE pretraining strategy with cross-modal prediction.</p>
+
+            <p><strong>CM3Leon</strong> (Meta, 2023) is a decoder-only model (Subtype D.1) that tokenizes images using image-specific tokenizers and trains with standard next-token prediction. It was pretrained on 2 trillion tokens with 256-512 A100 GPUs.</p>
+
+            <p><strong>LaVIT</strong> (2024) trains its own visual tokenizer as a first stage, then trains the main model to maximize likelihood of multimodal sequences using cross-entropy loss for both image and text tokens.</p>
+
+            <p><strong>TEAL</strong> (2024) uses pretrained tokenizers for all modalities and a projection layer to align embeddings, achieving efficient any-to-any generation.</p>
+
+            <p><strong>VL-GPT</strong> (2023) first trains a tokenizer to convert images to tokens, then trains the multimodal model on both image-text pairs and interleaved sequences.</p>
+
+            <p>Other Type-D models include SEED, Unicode, and the earlier Unified-IO.</p>
+
+            <h3>Trade-offs and considerations</h3>
+
+            <p><strong>Advantages:</strong></p>
+
+            <ul>
+                <li>Unified training: Single auto-regressive objective for all modalities</li>
+                <li>Multimodal generation: Can generate images, audio, video, not just text</li>
+                <li>Simplified architecture: All modalities processed uniformly as tokens</li>
+                <li>Any-to-any capability: True multimodal input and output</li>
+            </ul>
+
+            <p><strong>Disadvantages:</strong></p>
+
+            <ul>
+                <li>Training complexity: Must train or adapt tokenizers for each modality</li>
+                <li>High computational cost: Comparable to or exceeding Type-A/B</li>
+                <li>Large data requirements: Billions of samples needed for good performance</li>
+                <li>Tokenization challenges: Not all modalities tokenize well, information loss</li>
+                <li>Difficult to add new modalities: Requires training new tokenizers</li>
+                <li>Large parameter count: Often larger than other types</li>
+            </ul>
+
+            <p><strong>When to use Type-D:</strong> Choose Type-D when you need multimodal generation capabilities—when your model must output images, audio, or video, not just text. This architecture is essential for any-to-any systems where users might input text and expect an image, or input an image and expect a video. However, be prepared for significant computational investment: Type-D models typically require hundreds of GPUs and weeks of training. They're currently the domain of well-resourced industry labs, though this may change as methods improve.</p>
+
+            <p>Type-D is also emerging as a key architecture for the next generation of general-purpose multimodal systems. While Type-C dominates current vision-language models, Type-D's unified tokenization approach may be the path to truly general multimodal intelligence.</p>
+
+            <h2>Comparison and Practical Guidance</h2>
+
+            <p>The taxonomy reveals a fundamental trade-off space:</p>
+
+            <p><strong>Deep Fusion (Type-A, Type-B)</strong> offers fine-grained control and rich multimodal reasoning but at high computational cost. <strong>Early Fusion (Type-C, Type-D)</strong> is simpler and more efficient but with less nuanced interaction between modalities.</p>
+
+            <p>For most practitioners, <strong>Type-C is the practical choice</strong>: it's efficient, modular, and proven effective across a wide range of tasks. Start with LLaVA-style architecture unless you have specific reasons to choose otherwise.</p>
+
+            <p>Choose <strong>Type-A or Type-B</strong> when you need the deepest possible multimodal reasoning and have computational resources to match (dozens to hundreds of GPUs). Type-B is preferable if you can invest in custom layer design for better efficiency.</p>
+
+            <p>Choose <strong>Type-D</strong> when multimodal generation is essential—when text-only outputs aren't sufficient. Be prepared for significant engineering and computational investment.</p>
+
+            <p>The field is rapidly evolving. New architectures like VL-Mamba and Cobra are exploring State Space Models (SSMs) as alternatives to transformers, potentially offering better efficiency. But the four-type taxonomy provides a stable framework for understanding the design space, regardless of the underlying sequence model.</p>
+
+            <p>More contents are in the paper. Check it out at <a href="https://arxiv.org/abs/2405.17927" target="_blank">arxiv.org/abs/2311.03658</a>!</p>
+           
+            <hr>
+        </article>
+    </div>
+
+    <footer>
+        <div style="text-align: center; padding: 40px 20px 30px;">
+            <p style="color: #666; font-size: 0.9em;">&copy; 2025 Yiming Tang. All rights reserved.</p>
+        </div>
+    </footer>
+    
+</body>
+</html>
