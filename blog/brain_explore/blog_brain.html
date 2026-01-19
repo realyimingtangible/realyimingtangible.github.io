@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrainExplore: Discovering Visual Concepts in the Human Brain - Yiming Tang</title>
+    
+    <!-- MathJax for rendering LaTeX formulas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        ::selection {
+            background-color: #000;
+            color: #fff;
+        }
+
+        ::-moz-selection {
+            background-color: #000;
+            color: #fff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 70px;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            z-index: 1000;
+            padding: 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .nav-brand {
+            font-weight: 600;
+            font-size: 1.2em;
+            color: #2c3e50;
+            text-decoration: none;
+            padding: 15px 0;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 5px;
+        }
+
+        .nav-links a {
+            color: #555;
+            text-decoration: none;
+            padding: 20px 15px;
+            display: block;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            background-color: #555;
+            color: white;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        article {
+            background-color: #fff;
+            padding: 50px 60px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .article-meta {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .article-meta p {
+            margin: 8px 0;
+            color: #666;
+        }
+
+        .article-meta a {
+            color: #555;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .article-meta a:hover {
+            text-decoration: underline;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #555;
+        }
+
+        h3 {
+            color: #2c3e50;
+            font-size: 1.4em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 1.05em;
+        }
+
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            font-size: 1.05em;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 30px auto;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .math-block {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-left: 4px solid #555;
+            overflow-x: auto;
+        }
+
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+
+        strong {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        hr {
+            margin: 40px 0;
+            border: none;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 10px 20px;
+            background-color: #555;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-link:hover {
+            background-color: #333;
+        }
+
+        .hypothesis-motto {
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .hypothesis-motto p {
+            color: #1a1a1a;
+            font-size: 1.3em;
+            font-weight: 400;
+            line-height: 1.7;
+            margin: 0;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-style: italic;
+            letter-spacing: 0.3px;
+        }
+
+        @media (max-width: 768px) {
+            article {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-brand">Yiming Tang's Homepage</a>
+            <ul class="nav-links">
+                <li><a href="../../blog.html">← Back to Blog</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <article>
+            <h1>Paper Walkthroughs</h1>
+            <h3 style="color: #555; font-weight: 600; font-size: 1.35em; margin-top: -10px; margin-bottom: 30px;">BrainExplore: Large-Scale Discovery of Interpretable Visual Representations in the Human Brain</h3>
+
+            <div class="article-meta">
+                <p><strong>Authors:</strong> Navve Wasserman*, Matias Cosarinsky*, Yuval Golbari, Aude Oliva, Antonio Torralba, Tamar Rott Shaham, Michal Irani</p>
+                <p><strong>Institutions:</strong> Weizmann Institute of Science, Massachusetts Institute of Technology</p>
+                <p><strong>Walkthrough by:</strong> Yiming Tang</p>
+                <p><strong>Paper:</strong> <a href="https://arxiv.org/abs/2512.08560" target="_blank">https://arxiv.org/abs/2512.08560</a></p>
+            </div>
+
+            <div class="hypothesis-motto">
+                <p>An automated framework that discovers thousands of interpretable visual concepts encoded across the human visual cortex.</p>
+            </div>
+
+            <h2>Introduction</h2>
+
+            <p>Understanding how the human brain represents visual concepts has been a fundamental challenge in neuroscience. Where in the brain do we encode "open mouths," "cuddling," or "forests"? For decades, researchers have used functional magnetic resonance imaging (fMRI) to study these representations, but progress has been limited by manual inspection, small-scale analyses, and a focus on specific brain regions or predefined categories.</p>
+
+            <p>Enter <strong>BrainExplore</strong>, a groundbreaking automated framework that discovers and explains visual representations across the entire visual cortex. Instead of manually testing whether a brain region responds to faces versus places, BrainExplore automatically identifies thousands of interpretable patterns and describes them in natural language—from specific sports like "surfing" and "tennis" to nuanced concepts like "bent knees" and "two identical objects."</p>
+
+            <p>The key innovation? BrainExplore combines unsupervised decomposition of fMRI activity with modern vision-language models to create an end-to-end pipeline for discovering, validating, and explaining brain representations at unprecedented scale. The result is a comprehensive map of visual concepts encoded across different brain regions, including many fine-grained representations that have never been reported before.</p>
+
+            <img src="main.jpg" alt="BrainExplore Overview: From fMRI decomposition to interpretable patterns across the visual cortex">
+
+            <h2>The Challenge: Limited Scale in Brain Interpretability</h2>
+
+            <p>Traditional fMRI research faces several fundamental bottlenecks:</p>
+
+            <ul>
+                <li><strong>Manual inspection doesn't scale:</strong> Researchers typically examine only a handful of fMRI patterns by hand, making it impossible to systematically map thousands of potential visual concepts.</li>
+                <li><strong>Small datasets:</strong> fMRI datasets contain only ~10,000 images per subject due to the cost and time required for brain scanning, while the space of possible visual concepts is vast.</li>
+                <li><strong>Region-specific analyses:</strong> Most studies focus on specific regions like the fusiform face area (FFA) or parahippocampal place area (PPA), missing representations that may be distributed across multiple areas.</li>
+                <li><strong>Category-selective contrasts:</strong> Traditional approaches compare responses to predefined categories (faces vs. objects), but this requires researchers to predefine what to look for and use relatively "clean" images dominated by single concepts.</li>
+            </ul>
+
+            <p>These limitations mean that our understanding of visual representations in the brain remains incomplete. We know about high-level distinctions (faces, places, bodies), but the fine-grained structure of these representations—and how they're organized across the cortex—remains largely unmapped.</p>
+
+            <h2>The BrainExplore Solution: Automated Discovery at Scale</h2>
+
+            <p>BrainExplore addresses these challenges through a four-stage automated pipeline:</p>
+
+            <img src="method.jpg" alt="BrainExplore Framework: Four-stage pipeline for discovering and scoring interpretable brain patterns">
+
+            <h3>Stage 1: Per-Region Decomposition</h3>
+
+            <p>The framework starts by decomposing fMRI activity in each brain region into interpretable component patterns. Think of it like finding the "building blocks" of brain activity—patterns such that any fMRI response can be expressed as a combination of these patterns.</p>
+
+            <p>BrainExplore employs multiple decomposition methods:</p>
+
+            <ul>
+                <li><strong>Principal Component Analysis (PCA):</strong> Finds orthogonal patterns that capture maximum variance</li>
+                <li><strong>Non-negative Matrix Factorization (NMF):</strong> Discovers additive, non-negative patterns</li>
+                <li><strong>Independent Component Analysis (ICA):</strong> Identifies statistically independent sources of brain activity</li>
+                <li><strong>Sparse Autoencoders (SAE):</strong> A novel application to fMRI that learns overcomplete dictionaries with sparsity constraints—inspired by recent work in AI interpretability</li>
+            </ul>
+
+            <p>Importantly, all decompositions are learned purely from fMRI responses with no image features or labels, ensuring that discovered representations emerge from brain activity rather than being imposed externally.</p>
+
+            <h3>Stage 2: Visualize & Explain</h3>
+
+            <p>For each discovered pattern, BrainExplore identifies the images that most strongly activate it. The framework then uses vision-language models to:</p>
+
+            <ol>
+                <li>Generate detailed captions for these top-activating images</li>
+                <li>Synthesize natural language hypotheses about what these images share</li>
+                <li>Propose 5-10 candidate explanations for each pattern (e.g., "open mouths," "surfing," "kitchen scenes")</li>
+            </ol>
+
+            <p>This stage transforms raw fMRI patterns into interpretable visual concepts, bridging brain activity and human-understandable descriptions.</p>
+
+            <h3>Stage 3: Upscale with a Brain-Inspired Dictionary</h3>
+
+            <p>To scale beyond manually explaining each pattern, BrainExplore builds a comprehensive dictionary of visual concepts inspired by brain activity. The framework:</p>
+
+            <ol>
+                <li>Selects the most consistent patterns across all decompositions (using CLIP similarity of top-activating images)</li>
+                <li>Generates hypotheses for these high-quality patterns</li>
+                <li>Merges similar concepts to create a unified dictionary of ~1,300 visual concepts</li>
+                <li>Labels every image in the dataset with respect to every concept in the dictionary</li>
+            </ol>
+
+            <p>This creates a massive hypothesis-image matrix that can be used to evaluate any brain pattern—no need to explain each one individually.</p>
+
+            <h3>Stage 4: Discover & Score Interpretability</h3>
+
+            <p>The final stage systematically evaluates which patterns are most interpretable and which concepts they best explain. For each pattern:</p>
+
+            <ol>
+                <li>Retrieve its top 0.2% most activating images</li>
+                <li>For each hypothesis, calculate what fraction of these images express that concept</li>
+                <li>Normalize by global concept frequency (rare concepts get higher scores for the same match rate)</li>
+                <li>Assign the best-matching hypothesis and a quantitative alignment score</li>
+            </ol>
+
+            <p>This scoring enables pattern search ("which patterns are most interpretable?") and hypothesis search ("which pattern best represents 'open mouth'?")—both within specific regions and across the entire brain.</p>
+
+            <h2>Breakthrough Innovation: Augmentation with Predicted fMRI</h2>
+
+            <p>One of BrainExplore's most impactful contributions is using predicted fMRI to overcome data scarcity. The framework leverages an image-to-fMRI encoder that synthesizes brain responses for images never actually viewed by subjects.</p>
+
+            <p>This augmentation expands the dataset from ~10,000 measured images to over 120,000 total images (measured + predicted), which:</p>
+
+            <ul>
+                <li><strong>Improves decomposition quality:</strong> More training data enables more stable and robust pattern discovery</li>
+                <li><strong>Increases diversity of discovered concepts:</strong> A larger image pool means patterns can be explained with more specific, less common visual concepts</li>
+                <li><strong>Boosts interpretability dramatically:</strong> For ICA, augmentation improves interpretable hypothesis coverage from 0.8% to 18.3%</li>
+            </ul>
+
+            <p>Crucially, all final interpretations are validated on actual measured fMRI—predicted responses are used only for training and image retrieval, never for evaluation.</p>
+
+            <h2>Sparse Autoencoders for Brain Decomposition</h2>
+
+            <p>Perhaps the most novel methodological contribution is applying Sparse Autoencoders (SAEs) to fMRI decomposition. Originally developed for interpreting artificial neural networks, SAEs learn overcomplete representations (more components than input dimensions) while enforcing that each sample uses only a few components.</p>
+
+            <p>For brain interpretability, SAEs offer unique advantages:</p>
+
+            <ul>
+                <li><strong>More interpretable patterns:</strong> SAEs discover significantly more interpretable components than traditional methods (17.4% of concepts explained vs. 7.4% for PCA)</li>
+                <li><strong>Complementary representations:</strong> SAEs reveal concepts not captured by other methods</li>
+                <li><strong>Better spatial localization:</strong> Despite receiving only 1D voxel vectors with no spatial information, SAE patterns are notably more spatially clustered than ICA patterns—suggesting they capture functionally coherent neural populations</li>
+            </ul>
+
+            <p>The framework uses separate encoder networks for measured and predicted fMRI (due to noise differences) while sharing a common decoder, enabling both data types to be decomposed into the same component dictionary.</p>
+
+            <h2>Fine-Grained Concepts Across the Visual Cortex</h2>
+
+            <p>BrainExplore reveals thousands of interpretable patterns spanning many distinct visual concepts. Some highlights:</p>
+
+            <img src="qualitative_examples.jpg" alt="Discovered Interpretable Patterns in EBA and RSC brain regions showing fine-grained visual concepts">
+
+            <h3>Extrastriate Body Area (EBA)</h3>
+
+            <p>Known for body processing, BrainExplore uncovers specific sports (surfing, soccer, tennis, frisbee), actions (jumping, tooth brushing), and body-oriented concepts (hands, neckwear, bent knees, open mouths).</p>
+
+            <h3>Parahippocampal Place Area (PPA)</h3>
+
+            <p>Beyond the standard indoor/outdoor distinction, the framework finds nuanced scene categories: stone buildings, commercial buildings, kitchens, countertops, landscapes, healthy food presentations, and collages.</p>
+
+            <h3>Occipital Place Area (OPA)</h3>
+
+            <p>Captures scene layout and navigability with concepts like clock towers, signboards, vehicles, horizons, toilets, and artificial lighting.</p>
+
+            <h3>Early Visual Area V4</h3>
+
+            <p>Encodes mid-level features including black and white images, lighting contrast, airplanes, and specific object categories.</p>
+
+            <h3>Fusiform Face Area (FFA) and Body-Selective Regions</h3>
+
+            <p>Show selectivity for smiling, eyes, animals, fabric, legs extended, hands relaxed, and clothes—going well beyond generic face or body selectivity.</p>
+
+            <p>Many of these fine-grained representations have never been reported in previous literature, demonstrating the power of automated, large-scale discovery.</p>
+
+            <h2>Quantitative Evaluation: Measuring Interpretability</h2>
+
+            <p>BrainExplore introduces rigorous metrics for interpretability:</p>
+
+            <ul>
+                <li><strong>Percentage of Interpretable Hypotheses:</strong> The fraction of concepts that achieve high alignment (>0.5 or >0.8) with at least one pattern</li>
+                <li><strong>Number of Interpretable Patterns:</strong> How many distinct patterns have clear, high-scoring explanations (removing near-duplicates)</li>
+            </ul>
+
+            <p>Key quantitative findings:</p>
+
+            <ul>
+                <li><strong>Predicted fMRI is essential:</strong> Across all methods, augmentation with predicted responses dramatically improves interpretability. ICA jumps from 0.8% to 18.3% explained concepts.</li>
+                <li><strong>SAEs excel:</strong> Sparse Autoencoders explain 17.4% of concepts (single model) and discover ~9,000 interpretable patterns at the 0.5 threshold—far more than other methods.</li>
+                <li><strong>Method integration wins:</strong> Combining SAE and ICA yields the best performance (21.5% of concepts explained), demonstrating that different decompositions capture complementary aspects of brain representations.</li>
+                <li><strong>Higher-level regions are more interpretable:</strong> Regions encoding semantic information (EBA, PPA, OPA) show greater interpretability than early visual areas (V1-V3)—likely because they encode concepts more naturally described in language.</li>
+            </ul>
+
+            <p>All evaluations are performed on held-out measured fMRI data not used during interpretation, ensuring results reflect genuine brain representations rather than artifacts of the discovery process.</p>
+
+            <hr>
+
+            <p><strong>For more details, check out the paper:</strong> <a href="https://arxiv.org/abs/2512.08560" target="_blank">BrainExplore on arXiv</a></p>
+           
+        </article>
+    </div>
+
+    <footer>
+        <div style="text-align: center; padding: 40px 20px 30px;">
+            <p style="color: #666; font-size: 0.9em;">&copy; 2025 Yiming Tang. All rights reserved.</p>
+        </div>
+    </footer>
+    
+</body>
+</html>
