@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modality Gap–Driven Subspace Alignment - Yiming Tang</title>
+    
+    <!-- MathJax for rendering LaTeX formulas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        ::selection {
+            background-color: #000;
+            color: #fff;
+        }
+
+        ::-moz-selection {
+            background-color: #000;
+            color: #fff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 70px;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            z-index: 1000;
+            padding: 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .nav-brand {
+            font-weight: 600;
+            font-size: 1.2em;
+            color: #2c3e50;
+            text-decoration: none;
+            padding: 15px 0;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 5px;
+        }
+
+        .nav-links a {
+            color: #555;
+            text-decoration: none;
+            padding: 20px 15px;
+            display: block;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            background-color: #555;
+            color: white;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        article {
+            background-color: #fff;
+            padding: 50px 60px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .article-meta {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .article-meta p {
+            margin: 8px 0;
+            color: #666;
+        }
+
+        .article-meta a {
+            color: #555;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .article-meta a:hover {
+            text-decoration: underline;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #555;
+        }
+
+        h3 {
+            color: #2c3e50;
+            font-size: 1.4em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 1.05em;
+        }
+
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            font-size: 1.05em;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 30px auto;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .math-block {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-left: 4px solid #555;
+            overflow-x: auto;
+        }
+
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+
+        strong {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        hr {
+            margin: 40px 0;
+            border: none;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 10px 20px;
+            background-color: #555;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-link:hover {
+            background-color: #333;
+        }
+
+        .hypothesis-motto {
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .hypothesis-motto p {
+            color: #1a1a1a;
+            font-size: 1.3em;
+            font-weight: 400;
+            line-height: 1.7;
+            margin: 0;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-style: italic;
+            letter-spacing: 0.3px;
+        }
+
+        .figure-caption {
+            text-align: center;
+            font-size: 0.92em;
+            color: #666;
+            margin-top: -15px;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .pipeline-box {
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px 30px;
+            margin: 25px 0;
+        }
+
+        .pipeline-box ol {
+            margin-left: 20px;
+        }
+
+        .pipeline-box li {
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 768px) {
+            article {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-brand">Yiming Tang's Homepage</a>
+            <ul class="nav-links">
+                <li><a href="../../blog.html">← Back to Blog</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <article>
+            <h1>Paper Walkthroughs</h1>
+            <h3 style="color: #555; font-weight: 600; font-size: 1.35em; margin-top: -10px; margin-bottom: 30px;">Modality Gap–Driven Subspace Alignment Training Paradigm For Multimodal Large Language Models</h3>
+
+            <div class="article-meta">
+                <p><strong>Authors:</strong> Xiaomin Yu, Yi Xin, Wenjie Zhang, Chonghan Liu, Hanzhen Zhao, Xiaoxing Hu, Xinlei Yu, Ziyue Qiao, Hao Tang, Xue Yang, Xiaobin Hu, Chengwei Qin, Hui Xiong, Yu Qiao, Shuicheng YAN</p>
+                <p><strong>Walkthrough by:</strong> Yiming Tang</p>
+                <p><strong>Paper:</strong> <a href="https://arxiv.org/abs/2602.07026" target="_blank">https://arxiv.org/abs/2602.07026</a></p>
+                <p><strong>Date:</strong> February 10, 2026</p>
+            </div>
+
+            <div class="hypothesis-motto">
+                <p>"Hidden Harmony Is Better Than the Obvious."<br>— Heraclitus</p>
+            </div>
+
+            <h2>What is the Modality Gap?</h2>
+
+            <img src="geometric_decomposition.jpg" alt="Geometric decomposition of the modality gap">
+            <p class="figure-caption"><strong>Figure 1.</strong> Geometric decomposition of the modality gap. Unlike prior isotropic assumptions, the gap consists of a systematic Stable Bias and Anisotropic Residuals within a frozen reference frame.</p>
+
+            <p>When we train a multimodal contrastive model like CLIP on massive image-text pairs, we expect that an image and its paired caption should end up in roughly the same region of the joint embedding space. After all, they describe the same thing. But a curious geometric anomaly persists: <strong>even after extensive training, image embeddings and text embeddings that express identical semantics do not coincide—they systematically occupy distinct, offset regions of the shared space.</strong> This is the <strong>Modality Gap</strong>.</p>
+
+            <p>To see why this matters, think about the opportunity it creates. If we can precisely characterize <em>and bridge</em> this geometric misalignment, we can use abundant, cheap text data as a stand-in for expensive image-text pairs when training Multimodal Large Language Models (MLLMs). Text data is everywhere; high-quality paired image-text data is not.</p>
+
+            <p>Prior work has tried to close this gap, but has largely relied on a critical oversimplification: treating the residual noise as <strong>isotropic</strong>—uniformly distributed in all directions, like a sphere around the mean. This paper argues that assumption is geometrically wrong, and the consequences of getting it wrong are real.</p>
+
+            <h2>The Isotropic Fallacy</h2>
+
+            <p>The dominant prior framework (C3) describes the modality gap as a centroid shift plus isotropic random noise. The centroid correction works well, but then they add spherical Gaussian noise to the text representations to "spread them out" to match the image distribution. The paper makes a sharp critique: <strong>imposing an isotropic prior onto an inherently anisotropic manifold induces a spectral whitening effect</strong>, which dilutes the fine-grained semantic hierarchy and distorts the angular topology of the embedding space.</p>
+
+            <p>In plain terms: high-dimensional representations don't distribute uniformly in all directions. They have a rich hierarchical structure—some semantic directions are much more important than others (think of a covariance matrix with a few dominant eigenvalues and a long tail of small ones). Injecting isotropic noise flattens this hierarchy, destroying exactly the structure that makes representations useful for downstream tasks like reasoning and fine-grained perception.</p>
+
+            <h2>A Formal Decomposition of the Modality Gap</h2>
+
+            <p>The paper's first main contribution is to move beyond simple mean descriptions. They train a contrastive dual-encoder from scratch and carefully track how the modality gap evolves throughout training, introducing a <strong>Fixed Reference Frame</strong> to decompose the gap precisely.</p>
+
+            <h3>Setting Up the Reference Frame</h3>
+
+            <p>Let \(e_x(t), e_y(t) \in \mathbb{R}^d\) be unit-normalized embeddings of paired image \(x\) and text \(y\) at training step \(t\). They fix a reference time \(t_0\) and compute the empirical covariance of embeddings at that time:</p>
+
+            <div class="math-block">
+                $$\hat{\Sigma}(t_0) := \text{Cov}_p(e_x(t_0)) + \text{Cov}_p(e_y(t_0))$$
+            </div>
+
+            <p>They then take the top-\(r\) eigenvectors (by an energy threshold) to define the <strong>effective task subspace</strong>:</p>
+
+            <div class="math-block">
+                $$U := \text{span}\{q_1, \ldots, q_r\}, \quad V := U^\perp \subset \mathbb{R}^d$$
+            </div>
+
+            <p>Here, \(U\) is the subspace where gradients concentrate and semantic information lives. \(V\) is its orthogonal complement—a "null channel" that gradients barely touch.</p>
+
+            <h3>Bias–Residual Decomposition</h3>
+
+            <p>For a paired example, the modality gap is \(\Delta(t) := e_x(t) - e_y(t)\). Under the fixed frame, this decomposes into four clean components:</p>
+
+            <div class="math-block">
+                $$\Delta(t) = \underbrace{\beta(t)}_{\text{PMB}} + \underbrace{\delta(t)}_{\text{U-residual}} + \underbrace{\gamma(t)}_{\text{COB}} + \underbrace{\zeta(t)}_{\text{V-residual}}$$
+            </div>
+
+            <p>where \(\beta(t) = P_U \mathbb{E}[\Delta(t)]\) is the <strong>Principal Modality Bias (PMB)</strong>—the mean component inside the task subspace; and \(\gamma(t) = P_V \mathbb{E}[\Delta(t)]\) is the <strong>Constant Orthogonal Bias (COB)</strong>—the mean component in the orthogonal complement. The terms \(\delta(t)\) and \(\zeta(t)\) are the corresponding zero-mean residuals.</p>
+
+            <h3>Four Key Empirical Findings</h3>
+
+            <p>By tracking these components through training, the paper uncovers four fundamental geometric properties:</p>
+
+            <img src="geometric_statistics.jpg" alt="Geometric Statistics of the Modality Gap">
+            <p class="figure-caption"><strong>Figure 2.</strong> Geometric Statistics of the Modality Gap. (a) Gradients are confined within the evolving task subspace. (b) The orthogonal bias exhibits high step-to-step stability with only slow cumulative drift. (c) In subspace U, residual variance is locked to the gradient covariance structure. (d) In subspace V, the static bias and dynamic noise are geometrically decoupled at ~90°.</p>
+
+            <ol>
+                <li><strong>Geometric Gradient Constraint.</strong> Gradients are highly concentrated within the task subspace \(U_t\). The fraction of gradient energy leaking into \(V\) is tightly bounded by \(\sin\theta(U_t, U)\), the principal angle between the instantaneous and reference subspaces. Near convergence, this angle shrinks, making corrections in \(V\) nearly impossible through standard training.</li>
+
+                <li><strong>Passive Bias Evolution.</strong> The COB component \(\gamma(t)\) in the orthogonal complement drifts very slowly—it is not being actively optimized. This is a passive byproduct of subspace rotation and L2-normalization, not direct gradient descent. The model simply cannot "see" this component well enough to correct it.</li>
+
+                <li><strong>Semantic Signal Locking (U-side).</strong> In the principal subspace \(U\), the condition number of the residual covariance \(\kappa(\Sigma_U)\) remains extremely high (over \(10^3\)) throughout training—meaning the variance is highly concentrated on a few principal directions rather than spread uniformly. Moreover, these directions align tightly with the gradient covariance structure, confirming that residual fluctuations are coupled to semantic importance.</li>
+
+                <li><strong>Orthogonal Noise Decoupling (V-side).</strong> In the complement \(V\), the residual noise \(\zeta(t)\) also maintains a highly stretched, anisotropic shape (\(\kappa > 10\)). Crucially, the bias vector \(\gamma(t)\) maintains an angle of approximately \(90°\) relative to the principal noise direction—meaning the static bias and dynamic noise are geometrically decoupled and orthogonal.</li>
+            </ol>
+
+            <h3>The Phantom Drift Problem</h3>
+
+            <p>This last finding leads to a subtle but important phenomenon called <strong>Phantom Drift</strong>. Because \(\zeta(t)\) is anisotropic (ellipsoidal rather than spherical) in \(V\), and because embeddings are projected onto the unit hypersphere via L2-normalization, the angular distribution of the data gets distorted. Even after correctly subtracting the centroid \(\gamma(t)\) in Euclidean space, the nonlinear projection creates a spurious directional bias on the hypersphere. In math:</p>
+
+            <div class="math-block">
+                $$\mathbb{E}\left[\frac{\mu + \zeta}{\|\mu + \zeta\|}\right] \neq \frac{\mu}{\|\mu\|}$$
+            </div>
+
+            <p>The anisotropy of \(\zeta\) causes the effective centroid on the sphere to drift away from the true mean direction. This is not corrected by simply shifting the mean, because the bias and the noise are orthogonal—correcting one leaves the other untouched. Any alignment strategy that ignores the shape of the noise will suffer from this phantom drift.</p>
+
+            <h2>ReAlign: Training-Free Modality Alignment</h2>
+
+            <p>Armed with this precise geometric understanding, the paper introduces <strong>ReAlign</strong>—a closed-form, training-free strategy to map text representations into the image representation distribution. It proceeds in three stages:</p>
+
+            <img src="realign.jpg" alt="The ReAlign Pipeline">
+            <p class="figure-caption"><strong>Figure 3.</strong> The ReAlign Pipeline. (a) Original state with misaligned centroids. (b) Anchor Alignment shifts the source to the target mean. (c) Trace Alignment scales the energy, inducing a centroid drift µ′. (d) Centroid Alignment corrects the Phantom Drift. (e) Final re-normalization yields the aligned embedding.</p>
+
+            <div class="pipeline-box">
+                <ol>
+                    <li><strong>Anchor Alignment:</strong> Correct the first-order (mean) bias by centering the source and shifting to the target anchor.</li>
+                    <li><strong>Trace Alignment:</strong> Match the global energy scale (trace of the covariance) via a scalar multiplication, preserving anisotropy.</li>
+                    <li><strong>Centroid Alignment:</strong> Correct the Phantom Drift induced by spherical projection via an explicit re-centering step.</li>
+                </ol>
+            </div>
+
+            <h3>Step 1: Anchor Alignment</h3>
+
+            <p>Let \(\mu_y = \mathbb{E}[e_y]\) and \(\mu_x = \mathbb{E}[e_x]\) be the population means of the text and image embeddings, respectively. We center the source and shift to the target:</p>
+
+            <div class="math-block">
+                $$\dot{e}_y = (e_y - \mu_y) + \mu_x$$
+            </div>
+
+            <p>This eliminates the first-order distributional shift. Simple enough—and it's exactly what C3 does. But the paper shows this is nowhere near sufficient on its own.</p>
+
+            <h3>Step 2: Trace Alignment</h3>
+
+            <p>Next, we match the global variance scale. Define the trace of centered embeddings as:</p>
+
+            <div class="math-block">
+                $$T_y := \mathbb{E}[\|e_y - \mu_y\|^2], \quad T_x := \mathbb{E}[\|e_x - \mu_x\|^2]$$
+            </div>
+
+            <p>We compute a global scaling factor \(s = \sqrt{T_x / T_y}\) and apply the affine transformation:</p>
+
+            <div class="math-block">
+                $$\tilde{e}_y = \mu_x + s(e_y - \mu_y)$$
+            </div>
+
+            <p>A key insight here is that this is a <em>scalar</em> scaling, not a full covariance matching. Scalar multiplication strictly preserves the covariance structure and anisotropy of the source modality—the semantic hierarchy of the data is not distorted. This is the key property that distinguishes ReAlign from blockwise covariance alignment, which attempts a more aggressive full second-moment match and catastrophically destroys local semantic topology (retaining only 10% of semantic neighborhoods, compared to 87% for ReAlign).</p>
+
+            <p>After this step, we apply a spherical projection: \(e'_y = \tilde{e}_y / \|\tilde{e}_y\|\).</p>
+
+            <h3>Step 3: Centroid Alignment</h3>
+
+            <p>The spherical projection in Step 2 induces exactly the Phantom Drift we analyzed above. The actual centroid of \(e'_y\) drifts to some \(\mu' = \mathbb{E}[e'_y] \neq \mu_x\). We correct this explicitly:</p>
+
+            <div class="math-block">
+                $$e''_y = e'_y - \mu' + \mu_x$$
+            </div>
+
+            <p>This pulls the distribution back to the correct anchor on the hypersphere. The final aligned embedding is obtained by re-normalizing:</p>
+
+            <div class="math-block">
+                $$\hat{e}_y = \frac{e''_y}{\|e''_y\|}, \quad \hat{e}_x = e_x$$
+            </div>
+
+            <p>The result: on the Bunny pretraining dataset, the original modality gap of 0.39 is reduced by C3 to only 0.0023 (a geometric bottleneck due to isotropic assumptions), while ReAlign drives it down to \(2.64 \times 10^{-4}\)—a reduction of another order of magnitude. On DenseFusion, similar results hold (0.43 → 0.0024 → \(1.39 \times 10^{-4}\)).</p>
+
+            <img src="measuring_modality_gaps.jpg" alt="Measuring modality gaps on Bunny and DenseFusion">
+            <p class="figure-caption"><strong>Figure 4.</strong> Modality gap between aligned centroids on Bunny and DenseFusion. C3 stagnates at a geometric bottleneck (~0.0023) due to isotropic assumptions, while ReAlign reduces the gap to the 10⁻⁴ scale.</p>
+
+            <h2>ReVision: A Scalable Training Paradigm</h2>
+
+            <p>Building on ReAlign, the paper proposes <strong>ReVision</strong>, a two-stage training pipeline for MLLMs that uses text-only pretraining to avoid expensive paired image-text data.</p>
+
+            <h3>Stage 1: Modality Substitution Pretraining</h3>
+
+            <p>The key idea is to use the ReAlign operator \(S_{y \to x}\) to convert text embeddings from a large unpaired text corpus into pseudo-visual embeddings:</p>
+
+            <div class="math-block">
+                $$\tilde{e}_x = S_{y \to x}(E_{\text{text}}(y))$$
+            </div>
+
+            <p>These pseudo-visual embeddings are then used to train an MLP adapter \(\varphi\) (with the LLM backbone \(\theta\) frozen) to reconstruct the original text conditioned on the pseudo-visual input:</p>
+
+            <div class="math-block">
+                $$\mathcal{L}_{\text{pre}}(\varphi) = -\sum_{t=1}^{T} \log p_\theta(y_t \mid y_{&lt;t}, T_\varphi(\tilde{e}_x))$$
+            </div>
+
+            <p>This is inexpensive: text is abundant and cheap. The model absorbs broad world knowledge and visual semantics purely from text, without ever seeing a single image. Because ReAlign preserves the geometric statistics of the visual modality, the pseudo-visual embeddings are geometrically compatible with real image embeddings.</p>
+
+            <h3>Stage 2: Visual Instruction Tuning</h3>
+
+            <p>Real images are then introduced for standard supervised fine-tuning, supplementing the fine-grained visual details that statistical alignment inevitably abstracts away:</p>
+
+            <div class="math-block">
+                $$\mathcal{L}_{\text{sft}}(\theta, \varphi) = -\sum_{t=1}^{L} \log p_\theta(r_t \mid r_{&lt;t}, I, T_\varphi(e_x))$$
+            </div>
+
+            <p>During inference, the model simply takes real images directly—no special calibration needed, since the alignment was in the direction text → image (not the reverse), giving single-image inference without overhead.</p>
+
+            <h2>Experimental Results</h2>
+
+            <h3>Alignment Quality</h3>
+
+            <img src="performace_comparison.jpg" alt="Performance comparison of different geometric alignment strategies">
+            <p class="figure-caption"><strong>Table 1.</strong> Performance comparison of different geometric alignment strategies across General, Reasoning, and Hallucination benchmarks. ReVision achieves the highest average score of 51.16.</p>
+
+            <p>Across multiple benchmarks, ReVision achieves an average score of 51.16, outperforming C3 alignment (48.06), raw text without alignment (47.50), and text-only blind evaluation (7.85). The gains are consistent across general perception, complex reasoning, and hallucination tasks. Particularly notable: in reasoning-intensive benchmarks, ReVision's advantage grows because C3's noise injection erodes the fine-grained semantic hierarchy essential for multi-step reasoning. In hallucination metrics, correcting Phantom Drift prevents the projection layer from overfitting to spurious directional biases.</p>
+
+            <h3>Scaling vs. Paired Data</h3>
+
+            <p>The most striking result: <strong>ReVision-2M (training on 2M unpaired text samples) outperforms a baseline trained on 1M ground-truth image-text pairs</strong> (49.75 vs. 48.91), at only 74% of the data cost. This supports the paper's central claim: how you align matters as much as what you align. Simple mean-shifting (as in the competing Unicorn method) yields only 43.94, while ReVision-2M reaches 49.75—a dramatic gap, attributable entirely to the geometric precision of the alignment strategy.</p>
+
+            <h3>The Long-Caption Paradox</h3>
+
+            <p>An intriguing side finding: counterintuitively, models pretrained on <em>shorter</em> captions consistently outperform those trained on longer, denser captions. The paper attributes this to three structural constraints. First, long captions exceed encoder context windows and get truncated, creating a supervision mismatch between the complete visual embedding and the truncated text. Second, long captions produce a diffuse, high-entropy covariance structure (effective rank ≈ 52.9) that is harder to align statistically than the compact manifold of short captions (effective rank ≈ 41.0). Third, dense captions contain large amounts of non-visual linguistic noise—abstract inferences, contextual associations, subjective interpretations—that geometrically pull the semantic centroid away from the visual anchor, widening the initial modality gap by ~30%.</p>
+
+            <h2>Why Does the Modality Gap Persist at All?</h2>
+
+            <p>The paper provides a clean theoretical explanation: the modality gap is an <strong>architectural inevitability</strong> under standard multimodal contrastive learning, arising from three necessary structural conditions acting together:</p>
+
+            <ol>
+                <li><strong>Dual-encoder isolation:</strong> Two independent encoders with different architectures initialize with non-zero mean differences, creating the biases \(\beta, \gamma\) from the start.</li>
+                <li><strong>Enforced spherical topology:</strong> L2-normalization at the encoder outputs is the geometric source of Phantom Drift. Anisotropic noise \(\zeta\) with \(\mathbb{E}[\zeta] = 0\) in Euclidean space produces a non-zero centroid shift on the sphere: \(\mathbb{E}[(\mu + \zeta)/\|\mu + \zeta\|] \neq \mu/\|\mu\|\).</li>
+                <li><strong>Dot-product similarity head:</strong> InfoNCE gradients are linear combinations of contrastive-set embeddings, hence \(\nabla \mathcal{L}(t) \in U_t^{(B)}\). As training converges, gradients concentrate in \(U_t\), leaving \(V\) as a null space that is never directly optimized. The orthogonal bias \(\gamma\) persists precisely because gradient signals cannot reach it.</li>
+            </ol>
+
+            <p>This theoretical grounding is important: it explains why naive training alone cannot close the gap, and why explicit geometric rectification—like ReAlign—is necessary.</p>
+
+            <h2>Summary</h2>
+
+            <p>This paper makes several genuinely novel contributions that connect theory to practice in a satisfying way. The Fixed-frame Modality Gap Theory gives us a precise mathematical vocabulary for talking about something that was previously described only loosely. The discovery that the modality gap has both stable bias and <em>anisotropic</em> residual structure—not isotropic noise—is the key insight that unlocks everything downstream. ReAlign's three-step procedure is elegant: it matches first-order statistics, then second-order global scale (without destroying anisotropy), then corrects the nonlinear Phantom Drift from spherical projection. And the practical payoff is clear: text-only pretraining with properly aligned representations can surpass expensive paired image-text baselines at lower cost.</p>
+
+            <p>For those working on multimodal models, vision-language representation learning, or data-efficient training, this paper offers both a useful theoretical lens and a practical toolkit. Check out the full paper and code at the links above!</p>
+
+            <hr>
+        </article>
+    </div>
+
+    <footer>
+        <div style="text-align: center; padding: 40px 20px 30px;">
+            <p style="color: #666; font-size: 0.9em;">&copy; 2026 Yiming Tang. All rights reserved.</p>
+        </div>
+    </footer>
+    
+</body>
+</html>
