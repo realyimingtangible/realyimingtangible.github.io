@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What We Work On - Yiming Tang</title>
+
+    <!-- MathJax for rendering LaTeX formulas -->
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        ::selection {
+            background-color: #000;
+            color: #fff;
+        }
+
+        ::-moz-selection {
+            background-color: #000;
+            color: #fff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 70px;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            z-index: 1000;
+            padding: 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .nav-brand {
+            font-weight: 600;
+            font-size: 1.2em;
+            color: #2c3e50;
+            text-decoration: none;
+            padding: 15px 0;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 5px;
+        }
+
+        .nav-links a {
+            color: #555;
+            text-decoration: none;
+            padding: 20px 15px;
+            display: block;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            background-color: #555;
+            color: white;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        article {
+            background-color: #fff;
+            padding: 50px 60px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .article-meta {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .article-meta p {
+            margin: 8px 0;
+            color: #666;
+        }
+
+        .article-meta a {
+            color: #555;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .article-meta a:hover {
+            text-decoration: underline;
+        }
+
+        article a {
+            color: #333;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        article a:hover {
+            color: #000;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #555;
+        }
+
+        h3 {
+            color: #2c3e50;
+            font-size: 1.4em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 1.05em;
+        }
+
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            font-size: 1.05em;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 30px auto;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .caption {
+            text-align: center;
+            font-size: 0.92em;
+            color: #777;
+            margin-top: -18px;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .math-block {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-left: 4px solid #555;
+            overflow-x: auto;
+        }
+
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+
+        strong {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        hr {
+            margin: 40px 0;
+            border: none;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 10px 20px;
+            background-color: #555;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-link:hover {
+            background-color: #333;
+        }
+
+        .hypothesis-motto {
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .hypothesis-motto p {
+            color: #1a1a1a;
+            font-size: 1.3em;
+            font-weight: 400;
+            line-height: 1.7;
+            margin: 0;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-style: italic;
+            letter-spacing: 0.3px;
+        }
+
+        @media (max-width: 768px) {
+            article {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-brand">Yiming Tang's Homepage</a>
+            <ul class="nav-links">
+                <li><a href="../../blog.html">← Back to Blog</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <article>
+            <h1>What We Work On</h1>
+            <h3 style="color: #555; font-weight: 600; font-size: 1.35em; margin-top: -10px; margin-bottom: 30px;">Concept-Based Mechanistic Interpretability and Empirical Learning Mechanics at NUS Artificial Scientific Intelligence Lab</h3>
+
+            <div class="article-meta">
+                <p><strong>Written by:</strong> Yiming Tang</p>
+            </div>
+
+            <div class="hypothesis-motto">
+                <p>We want to know what a neural network has learned — not by watching what it says, but by reading what it computes, or "representations".</p>
+            </div>
+
+            <h2>1. Introduction</h2>
+
+            <p>This post is an informal tour of what our group does. It is written for undergraduates, master's students, and prospective PhD students who have read a bit about interpretability and want to know what it actually looks like in our research — what questions we ask, what tools we build, what has worked, and what we are currently excited about.</p>
+
+            <p>Our work has two aspects.</p>
+
+            <p>The first is <strong>concept-based mechanistic interpretability</strong>, which asks: <em>what concepts are encoded in a representation?</em> The premise is that a representation is not an undifferentiated soup of numbers — it contains identifiable, nameable units of meaning that can be extracted, validated, and intervened upon. Our tooling here is built around <em>sparse dictionary learning</em> (SDL): sparse autoencoders, transcoders, crosscoders, and their variants.</p>
+
+            <p>The second is <strong>empirical learning mechanics</strong>, which asks: <em>how do training pipelines influence a representation?</em> A modern model is not one model but a trajectory — pretraining, then supervised fine-tuning, then reinforcement learning — so instead of analysing a single frozen checkpoint we track what changes across it.</p>
+
+            <p>Both aspects serve the same two motivations: <strong>scientific discovery</strong> (large models are among the most complex artifacts humans have ever built, and understanding them is a legitimate scientific goal in the way that understanding visual cortex is) and <strong>AI safety</strong> (it is impossible to ensure AI safety if we treat these systems as black boxes and do not understand how they work at all).</p>
+
+            <h2>2. A Short Introduction to the Field</h2>
+
+            <h3>Where mechanistic interpretability sits</h3>
+
+            <p>Broadly, <strong>interpretability</strong> is a model's capability to use its outputs to justify its predictions — to give us some account of why it produced a particular result. That capability can be achieved in many different ways, which are arranged here from left to right.</p>
+
+            <img src="interpretability_paradigms.jpg" alt="Four interpretability paradigms: behavioral, attributional, concept-based, mechanistic">
+            <p class="caption">Behavioral → attributional → concept-based → mechanistic. Each step commits harder to explaining internals rather than input–output relations.</p>
+
+            <ul>
+                <li><strong>Behavioral</strong> approaches treat the model as a black box and study input–output relations.</li>
+                <li><strong>Attributional</strong> approaches use gradients to ask which parts of the input mattered for the output.</li>
+                <li><strong>Concept-based</strong> approaches use probes to ask whether particular human concepts are encoded in the intermediate representations.</li>
+                <li><strong>Mechanistic</strong> approaches focus on reverse-engineering the model into human-interpretable components — features, circuits, algorithms — that actually <em>produce</em> the behaviour, rather than explaining a prediction after the fact.</li>
+            </ul>
+
+            <p>Our group lives in the overlap of the last two: we take <em>concepts</em> as the unit of analysis, but we hold ourselves to <em>mechanistic</em> standards of evidence. If we claim a feature means something, we should be able to intervene on it and change the model's behaviour in the predicted direction.</p>
+
+            <h3>Two representative works from the field</h3>
+
+            <p>To make this concrete, here are two works that are representative of what research in this area looks like.</p>
+
+            <p><strong><a href="https://transformer-circuits.pub/2024/scaling-monosemanticity/" target="_blank">Scaling Monosemanticity</a></strong> (Anthropic, 2024) extracted interpretable features from Claude 3 Sonnet, a production-scale language model, using a sparse autoencoder. Below is one of the discovered features: a "sycophantic praise" feature. On the left are the dataset examples that most strongly activate it — exaggerated flattery like "your wisdom is unquestionable."</p>
+
+            <img src="scalingmonosemanticity.jpg" alt="Sycophantic praise feature discovered in Claude 3 Sonnet">
+            <p class="caption">A "sycophantic praise" feature. Left: top-activating examples. Right: clamping the feature high makes the model tell the user their ordinary saying is a "brilliant and insightful expression of wisdom."</p>
+
+            <p>What makes this mechanistic rather than merely correlational is the intervention on the right. Clamping the feature to a high value turns the model's completion into over-the-top praise. The feature is not just <em>correlated</em> with sycophancy; activating it <em>causally produces</em> sycophantic behaviour.</p>
+
+            <p>Two properties of these features are worth internalising, because they show up again and again in our own work. The first is that features are multimodal and multilingual — they capture the concept, not the surface form:</p>
+
+            <img src="golden_gate_bridge.jpg" alt="Golden Gate Bridge feature firing across languages and modalities">
+            <p class="caption">The Golden Gate Bridge feature fires on English, Japanese, Korean and Russian text about the bridge — and on images of it.</p>
+
+            <p>The second is abstraction: features are units of <em>meaning</em>, not keyword detectors.</p>
+
+            <img src="brain_science.jpg" alt="Brain sciences feature">
+            <p class="caption">A "brain sciences" feature firing across neuroscience discussions in diverse contexts.</p>
+
+            <p>And here is the property that points most directly at safety applications:</p>
+
+            <img src="code_error_feature.jpg" alt="Code error feature that generalises across programming languages">
+            <p class="caption">A "code error" feature activating on a misspelled Python variable — and on the same class of bug in C and in Scheme. The model has a language-agnostic internal representation of "there is a bug here."</p>
+
+            <p>If we can read off, from the inside, that the model has detected an error — or that it is about to behave sycophantically — we have a monitoring channel that pure output evaluation cannot provide.</p>
+
+            <p>The <strong>second</strong> work asks a different question: how are behaviours organised <em>geometrically</em> in representation space? <a href="https://arxiv.org/abs/2406.11717" target="_blank">Refusal in LLMs is mediated by a single direction</a> showed that whether a model refuses collapses, to a first approximation, onto one linear direction.</p>
+
+            <img src="refusal_prompts.jpg" alt="Refusal direction added to a harmless yoga prompt">
+            <p class="caption">The prompt is entirely harmless — "list three benefits that yoga has on physical health." Adding the refusal direction to the residual stream makes the model refuse, claiming yoga information could be "dangerous and potentially harmful."</p>
+
+            <p>The direction itself is computed almost embarrassingly simply. Take the mean activation on harmful instructions and the mean activation on harmless ones, at a given layer:</p>
+
+            <img src="equation1.jpg" alt="Mean activations on harmful and harmless instructions" style="max-width: 90%; box-shadow: none;">
+
+            <p>and subtract:</p>
+
+            <img src="equation2.jpg" alt="Refusal direction as difference of means" style="max-width: 30%; box-shadow: none;">
+
+            <p>Removing that one direction from the model's representations collapses refusal behaviour across thirteen models spanning the Qwen, Yi, Gemma and Llama families:</p>
+
+            <img src="refusal_results.jpg" alt="Refusal and safety scores collapse under directional ablation across 13 models">
+            <p class="caption">Refusal score and safety score are high without intervention, and collapse dramatically under directional ablation — in every model family tested.</p>
+
+            <p>Together these two works establish the premise that everything below builds on: <strong>model internals are structured, that structure is discoverable, and intervening on it gives causal control.</strong></p>
+
+            <h2>3. What We Have Done</h2>
+
+            <p>What follows is deliberately ordered, from theoretical foundation to downstream application, and then outward into new domains.</p>
+
+            <h3>A theoretical framework for SDL in mechanistic interpretability</h3>
+
+            <p>The field employs various architectures, usually introduced, trained and analysed as separate, bespoke things.</p>
+
+            <img src="sae.jpg" alt="Sparse autoencoder architecture">
+            <p class="caption"><strong>Sparse autoencoders</strong> reconstruct a model representation from a sparse latent code.</p>
+
+            <img src="transcoder.jpg" alt="Transcoder architecture">
+            <p class="caption"><strong>Transcoders</strong> map from a representation upstream in the model — say, the input of an MLP block — to a representation downstream, so their features capture the function the block computes.</p>
+
+            <img src="crosscoder.jpg" alt="Crosscoder architecture">
+            <p class="caption"><strong>Crosscoders</strong> fit one shared dictionary across representations from multiple models or checkpoints, making features directly comparable across sources.</p>
+
+            <p>The literature around these modules is rich in empirical results and discoveries, but very thin on theoretical analysis of the modules themselves. So we developed one, starting from the observation that all of these architectures are instances of a single mathematical object.</p>
+
+            <img src="theoretical_framework.jpg" alt="Definition 3.1: Sparse Dictionary Learning">
+
+            <p>The crucial design choice is what this definition <em>stays silent about</em>: it never specifies what \(\mathbf{x}_p\) and \(\mathbf{x}_r\) are. If \(\mathbf{x}_r = \mathbf{x}_p\), this is a sparse autoencoder. If they are upstream and downstream representations in the same forward pass, it is a transcoder. If they are concatenations across multiple models, it is a crosscoder. Once the active support of the sparsity function is fixed, the objective is piecewise biconvex in the encoder and decoder weights — and any theorem proved at this level transfers to all three architectures without modification.</p>
+
+            <p>This lets us give the first principled explanation of why <strong>feature absorption</strong> — a widely reported empirical curiosity in the SAE literature — happens at all.</p>
+
+            <img src="feature_absorption.jpg" alt="Feature absorption: Border Collie is carved out of the Dog feature">
+            <p class="caption">Ideally we recover one feature per concept. Under absorption, a sub-concept like "Border Collie" is carved out and given its own direction, and is silently withdrawn from the parent "Dog" feature — so the ostensible Dog feature no longer fires on Border Collie inputs at all.</p>
+
+            <p>Absorption turns out to be a structural consequence rather than an accident: whenever the faithful compositional solution is realisable, the absorbed one is <em>also</em> realisable, and both achieve identical reconstruction loss. The loss function alone cannot prefer the faithful solution — which one you get is decided by optimisation dynamics, not by the loss landscape. That diagnosis also suggests the fix, and constraining learned features toward known anchor directions improves ground-truth feature recovery for every method we tested.</p>
+
+            <h3>Evaluating generative models the way a human critic would</h3>
+
+            <p>Here we move from theory to application. Evaluation of generative image models today leans on metrics like FID and CLIP score, which compress an entire model's behaviour into a single opaque number. Humans do not evaluate that way. Like an art critic, a human identifies distinct, nameable patterns — the lighting works, the anatomy is broken — and weighs them collectively.</p>
+
+            <p>So we utilised SDL latents to provide <strong>pattern-based analysis of generated content</strong>.</p>
+
+            <img src="lanse.jpg" alt="Image-caption pairs mapped into a sparse, interpretable feature space">
+            <p class="caption">Given an image–caption pair — here, "a glamorous knight holding a cavalry lance" — both inputs are mapped into a sparse feature space where each neuron corresponds to a natural-language-described visual pattern.</p>
+
+            <p>Each neuron belongs to one of three evaluation-relevant groups: <em>semantic meaning</em> neurons ("horses and equestrian activities"), <em>visual realism</em> neurons ("stylised representation departing from realistic depiction"), and <em>physical plausibility</em> neurons ("structures with unrealistic proportions"). Only a few neurons activate per input, and the activations align with human evaluation.</p>
+
+            <p>The recipe is <em>discover-then-curate</em>: train a large ensemble of sparse autoencoders to propose millions of candidate patterns, then use a large multimodal model to describe each candidate and keep only those whose activating images actually match the description. That curation step is what separates these neurons from raw SDL features — it deliberately discards the noisy, polysemantic ones our theory says <em>must</em> exist.</p>
+
+            <p>Because everything downstream rests on the neurons meaning what we say they mean, we validated them with humans rather than asserting it.</p>
+
+            <img src="human_evaluation.jpg" alt="Human evaluation interface for validating neuron interpretations">
+            <p class="caption">An annotator sees one of a neuron's top-activating images alongside the neuron's natural-language interpretation, and answers one question: does the interpretation accurately describe what you see?</p>
+
+            <p>Human agreement with the neuron interpretations was high enough that we felt justified building evaluation metrics on top of them. From the curated neurons we derive four diagnostic metrics: semantic loyalty, realistic fidelity, physics preservation (to our knowledge the first automatic evaluation method for intuitive physics violations in generated images), and content diversity.</p>
+
+            <img src="benchmarking.jpg" alt="Benchmarking eight generative models on four interpretable metrics">
+            <p class="caption">Eight state-of-the-art generative models across four axes; the dashed line in each panel is the real-image reference.</p>
+
+            <p>Two findings stand out. Models have genuinely distinct profiles, and — more strikingly — <em>all</em> of them exceed the real-image reference on semantic loyalty while falling well short of it on realism, physics and diversity. Current models are over-optimised for prompt match, and these differences are largely invisible to existing metrics.</p>
+
+            <p>Retraining the identical pipeline on chest radiographs recovers patterns — pulmonary opacities, chest tubes, atelectasis — that align with the corresponding radiology reports, so the recipe is domain-transferable infrastructure rather than a one-off trick for natural images.</p>
+
+            <h3>Discovering how a model fails, automatically</h3>
+
+            <p>Next we zoomed in on the rarest and most safety-relevant error class from the work above: physical plausibility failures — distorted anatomy, impossible structures. Can we discover these failure modes automatically, at multiple levels of granularity, without manual feature engineering?</p>
+
+            <img src="matryoshka_transcoder.jpg" alt="Pipeline for automatically discovering physical plausibility failures">
+
+            <p>The trick is in the first stage. Annotators label generated images simply as physically correct or as containing a physical error — crucially, <em>without</em> specifying which error, which keeps annotation cheap. We then train a binary classifier on those labels, reasoning that to succeed at the task its intermediate representations must implicitly encode the specific error patterns even though it was never given labels for them. A <strong>Matryoshka Transcoder</strong> with nested dictionary sizes then extracts those patterns at several granularities at once, and an LMM names each one, reusing the curation methodology described above.</p>
+
+            <img src="results_matryoshka_transcoder.jpg" alt="Ablation showing Matryoshka and transcoder objectives are complementary">
+            <p class="caption">We demonstrate that Matryoshka Transcoders are better at targeted feature identification.</p>
+
+            <p>Because the resulting benchmark is grounded in individually <em>named</em> error features, practitioners can see <em>which</em> errors drive a model's ranking, not merely that its score is worse.</p>
+
+            <h3>Prompt engineering with the SDL latents</h3>
+
+            <p>The next step closes the loop from evaluation to control: can the same sparse latents be used to <em>steer</em> model behaviour? The targets are undesirable LLM personas — sycophancy, hallucination, myopic reward-seeking. Controlling these currently forces a choice between manual prompt engineering (intuitive but unscalable) and black-box prompt optimisation (effective but mechanistically opaque).</p>
+
+            <img src="SAEGA.jpg" alt="Constructing a persona steering vector from dense or sparse representations">
+            <p class="caption">A persona steering vector is built either from dense residual-stream representations or from SAE latent activations; fluent gradient ascent then optimises a prompt against an objective combining steering strength and fluency.</p>
+
+            <p>The key property is that the discovered control is just text, so we get feature-level control without modifying the model's forward pass at deployment. On sycophancy this achieves near-perfect neutralisation — the model neither systematically agrees nor systematically disagrees, which is true neutralisation rather than behavioural reversal into contrarianism.</p>
+
+            <p>But the result we find more interesting is geometric.</p>
+
+            <img src="steering_comparison.jpg" alt="PCA of steering trajectories in layer-25 activation space">
+            <p class="caption">Dense steering-vector injection (blue) induces a large linear displacement that exits the natural data manifold entirely. The latent-based prompt (green) converges to a tight, stable region nearly orthogonal to the dense steering direction, while keeping feature sparsity at baseline levels.</p>
+
+            <p>Dense steering also multiplies the number of active SAE features per token several times over — it is pushing the model off-distribution. This gives a <em>measurable</em> operational meaning to "mechanistically grounded" steering: the latent-level vector produces sparser, more selective, on-manifold interventions, not merely a more satisfying story about the same behaviour.</p>
+
+            <h3>Augmenting CBM concepts with SDL latents</h3>
+
+            <p>Concept Bottleneck Models predict through a bottleneck of human-understandable concepts, which is exactly what high-stakes domains like medicine want. But their predefined concept set is inherently incomplete, which costs them accuracy relative to black-box models.</p>
+
+            <img src="SDL-Enhanced_CBM.jpg" alt="Augmenting a concept bottleneck model with SDL-discovered concepts">
+
+            <p>We attack incompleteness directly. A side channel extracts residual features from the backbone that are orthogonal to the predefined concept subspace, so anything discovered there is <em>guaranteed</em> non-redundant with the known concepts. A sparse autoencoder then finds candidate concepts in that residual space, each classified as <em>explicit</em> (nameable in medical vocabulary) or <em>implicit</em> (not directly nameable, but conditionally predictive). On diabetic retinopathy grading, this substantially closes the accuracy gap to black-box models while preserving interpretability.</p>
+
+            <p>The conceptual finding we care about most: black-box diagnostic models evidently rely on <strong>hard-to-describe, implicit concepts</strong>, and SDL can recover them even when they resist direct clinical naming.</p>
+
+            <h3>Reading visual concepts out of the human brain</h3>
+
+            <p>We have also taken the same toolkit from artificial to biological neural representations. We have explored applying SDL to fMRI encoders of human visual cortex, and found a large population of <em>hard-to-interpret low-level visual patterns</em> that the standard pipeline simply misses — which turned out to be a genuinely useful cautionary lesson for the whole field.</p>
+
+            <p>Prior work applying SDL to fMRI achieves high interpretability on <em>high-level semantic</em> patterns in higher visual cortex, and fails badly on the <em>low-level</em> patterns — orientation, spatial frequency — that dominate primary visual cortex. We trace this to a methodological conflation: prevailing pipelines caption a unit's top-activating images with a vision–language model and treat the caption as the unit's meaning, conflating <em>feature recovery</em> with <em>explanation</em>. That is fragile precisely for the low-level patterns that VLMs overlook. So alongside the usual captioning stream we added a <strong>low-level stream</strong> that probes each image through expert-validated decomposition channels — oriented energy, structured edges, opponent colour — validated by predictability from the fMRI response itself, entirely independent of language.</p>
+
+            <img src="fMRI_example.jpg" alt="A low-level visual feature recovered from early visual cortex">
+            <p class="caption">A unit in early visual cortex responding to broad horizontal horizon-like structure. Its top-activating images share no obvious semantic category — this is exactly the kind of hard-to-interpret, low-level pattern that VLM-based analyses do not see.</p>
+
+            <p>This recovers thousands of near-monosemantic low-level visual features precisely where prior pipelines largely fail. Many of them remain genuinely <em>hard to put into words</em> — and that is the point. They are real, they are predictive of the neural response, and language is simply the wrong instrument for naming them.</p>
+
+            <p>The finding that generalises furthest is a systematic confound we call <strong>masquerade</strong>: a unit whose true signal is low-level — say, a contour-contrast edge detector — can be misidentified as semantic, for example as a "sky" detector, whenever that low-level signal happens to co-vary with a salient object category in the dataset. We would flag this as a cautionary finding for language-based interpretability well beyond neuroscience.</p>
+
+            <h3>What does reinforcement learning actually change?</h3>
+
+            <p>This begins the second aspect, empirical learning mechanics. The motivating observation is simple: mechanistic interpretability almost always analyses a single, static checkpoint. That leaves open a question directly relevant to post-training and safety — as a model is fine-tuned with reinforcement learning, <em>which internal features actually change</em>, and can we causally verify their role?</p>
+
+            <img src="Fixed-SAE_Track.jpg" alt="One frozen dictionary applied to every RL checkpoint">
+            <p class="caption">Train one sparse autoencoder on the base model's representations, freeze its weights, and apply that same fixed dictionary to every successive RL checkpoint. Because the dictionary is frozen, every checkpoint's activations are expressed in the same feature basis — so drift is directly comparable across training.</p>
+
+            <p>We can then measure per-feature drift, name the most-drifted features with the same LMM pipeline used above (recovering roles like arithmetic, LaTeX formatting, and entity tracking), and causally validate them by steering the <em>base</em> model along the identified drift directions.</p>
+
+            <p>Two results so far. First, drift grows monotonically toward the output — RL mainly changes the last few layers. Second, and more striking:</p>
+
+            <img src="sterring_or_RL.jpg" alt="Table: steering the base model reproduces RL-final performance">
+            <p class="caption">On GSM8K the base model scores 0.092 on tag-rate and the RL-finetuned model 0.533. Steering the base model along the identified drift features alone — with no further training — reaches 0.600, matching the RL-final model within confidence intervals on all metrics.</p>
+
+            <p>In other words, much of the performance improvement from RL can be elicited by steering instead — causal evidence that a small, fixed-dictionary-identified set of features accounts for much of what RL taught the model.</p>
+
+            <h3>The geometry of supervised fine-tuning versus RL</h3>
+
+            <p>The most recent thread asks how the two dominant post-training paradigms — supervised fine-tuning and reinforcement learning — differently shape model representations. Existing accounts rely almost entirely on behaviour-level evidence, and existing lenses decode <em>what</em> a representation contains, but not <em>how</em> it is geometrically encoded, nor how that geometry changes.</p>
+
+            <img src="capsule_lens.jpg" alt="Fitting a capsule to each concept's representation cloud across checkpoints">
+            <p class="caption">Each concept's representation cloud is fit with a simple closed-form object — a <em>capsule</em>, defined by a unit axis, a cosine angular span, and a norm band. We checkpoint the model throughout SFT or RL, fit a capsule to every concept at every checkpoint, and compare matched capsules to get per-concept drift trajectories: axis rotation, span change, and norm-band shift.</p>
+
+            <p>Everything is fit in closed form, which is what makes it cheap enough to run at every checkpoint. The appeal is that it turns previously qualitative geometric hypotheses — the linear representation hypothesis, neural collapse — into directly measurable, falsifiable quantities tracked across training.</p>
+
+            <p>Early results come from two regimes. In <strong>pretraining</strong>, the axis span at the final block of a CLIP model contracts steadily across epochs while earlier blocks' spans stay high or even widen — concepts sharpen at the top of the network as pretraining progresses.</p>
+
+            <img src="axis-span_clip.jpg" alt="Axis span contracting across CLIP training epochs">
+            <img src="axis-span_layer.jpg" alt="Axis span by layer">
+
+            <p>In <strong>post-training</strong>, a controlled PPO experiment on a vision–language model shows concept-geometry drift concentrated almost entirely in the final layer:</p>
+
+            <img src="axis-drift.jpg" alt="Axis drift by layer under PPO, concentrated at layer 27">
+            <p class="caption">Axis drift at layer 27 is an order of magnitude larger than at four earlier layers — independently corroborating the layer-locus finding above, using an entirely different instrument.</p>
+
+            <img src="axis-span_ppo.jpg" alt="Axis span under PPO training">
+
+            <p>The drift further dissociates into a fast, saturating norm contraction within the first 50 PPO steps and a slower, still-ongoing axis rotation. Our preliminary characterisation — pending full validation — is that <strong>RL flattens concept geometry while SFT densifies it</strong>. Extensions to mathematical-reasoning RLVR and preference-based RLHF settings are ongoing.</p>
+
+            <h2>4. Conclusion</h2>
+
+            <p>Pulling this together: our group is organised around one goal — <strong>understanding a model's representation</strong> — approached from two directions:</p>
+
+            <ul>
+                <li>understanding <strong>what concepts are encoded</strong> in a model representation;</li>
+                <li>understanding <strong>how training pipelines influence</strong> a model representation.</li>
+            </ul>
+
+            <p><strong>Concept-based mechanistic interpretability</strong> has taken us from a unified theory of sparse dictionary learning, through evaluation infrastructure and targeted failure discovery, to interpretable control — and is now extending into medicine and neuroscience. The recurring methodological pattern is <em>discover-then-curate</em>: propose a very large number of candidate features, keep only the ones that survive automated validation, then intervene to check they mean what we claim.</p>
+
+            <p><strong>Empirical learning mechanics</strong> turns those same tools onto the training trajectory itself, with early evidence that RL-induced change is concentrated in the last layers, identifiable in a fixed feature basis, and in some cases causally sufficient to reproduce RL's behavioural effect by steering alone.</p>
+
+            <p>What ties the two together is why we study representations at all. Representations are everywhere — language models, image generators, medical classifiers, and biological brains alike — so what we learn about them transfers across models and modalities, rather than stopping at the boundary of one architecture or one dataset.</p>
+
+            <p>If you would like to talk about any of these, please do get in touch.</p>
+
+            <hr>
+        </article>
+    </div>
+
+    <footer>
+        <div style="text-align: center; padding: 40px 20px 30px;">
+            <p style="color: #666; font-size: 0.9em;">&copy; 2026 Yiming Tang. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
