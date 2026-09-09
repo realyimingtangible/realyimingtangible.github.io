@@ -236,6 +236,23 @@
             margin-bottom: 25px;
         }
 
+        .publications-scroll {
+            max-height: 420px;
+            overflow-y: auto;
+            padding-right: 8px;
+        }
+
+        .publications-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+        .publications-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .publications-scroll::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 2px;
+        }
+
         .publication-content {
             flex: 1;
         }
@@ -355,6 +372,12 @@
             font-style: italic;
         }
 
+        .news-scroll {
+            max-height: 320px;      /* adjust to taste */
+            overflow-y: auto;
+            padding-right: 8px;     /* prevent scrollbar overlapping text */
+        }
+
         footer {
             text-align: center;
             padding: 30px;
@@ -453,7 +476,7 @@
 
         <section id="news">
             <h2>News</h2>
-            <ul class="publications-list">
+            <ul class="publications-list news-scroll">
                 <li>[2026.8] One paper accepted in npj Artificial Intelligence (<a href="https://arxiv.org/abs/2508.18236" target="_blank">LanSE</a>) <span>. 🎉</span></li>
                 <li>[2026.7] I have passed all of my qualifying examinations for my PhD program at NUS. 🎉</span></li>
                 <li>[2026.7] One paper finished and preprinted on arXiv (<a href="https://arxiv.org/abs/2607.16295" target="_blank">GCFF</a>) <span>. 🎉</span></li>
@@ -500,6 +523,28 @@
             <div class="selected-publication">
                 <div class="publication-item">
                     <div class="publication-content">
+                        <span class="publication-title">Capsule Lens: Locating and Tracking Concept Geometry in Model Representations</span>
+                        <p style="margin-top: 8px; color: #555; font-size: 0.95em; line-height: 1.6;">We develop Capsule Lens to provide a training-free utility to analyze and track concept geometry for both static and dynamic representations.</p>
+                    </div>
+                    <a href="https://arxiv.org/abs/2609.05575" target="_blank" class="paper-link">Paper</a>
+                </div>
+                <img src="capsule.png" alt="LanSE Diagram" class="publication-diagram">
+            </div>
+
+            <div class="selected-publication">
+                <div class="publication-item">
+                    <div class="publication-content">
+                        <span class="publication-title">Human-like Content Analysis for Generative AI with Language-Grounded Sparse Encoders</span>
+                        <p style="margin-top: 8px; color: #555; font-size: 0.95em; line-height: 1.6;">We develop LanSE and decompose natural and medical images into interpretable visual patterns grounded in natural language, supporting fine-grained analysis on AI generated contents.</p>
+                    </div>
+                    <a href="https://arxiv.org/abs/2508.18236" target="_blank" class="paper-link">Paper</a>
+                </div>
+                <img src="LanSE.png" alt="LanSE Diagram" class="publication-diagram">
+            </div>
+            
+            <div class="selected-publication">
+                <div class="publication-item">
+                    <div class="publication-content">
                         <span class="publication-title">A Unified Theory of Sparse Dictionary Learning in Mechanistic Interpretability: Piecewise Biconvexity and Spurious Minima</span>
                         <p style="margin-top: 8px; color: #555; font-size: 0.95em; line-height: 1.6;">We develop the first theoretical framework for sparse dictionary learning in mechanistic interpretability.</p>
                     </div>
@@ -517,17 +562,6 @@
                     <a href="https://arxiv.org/abs/2511.10094" target="_blank" class="paper-link">Paper</a>
                 </div>
                 <img src="matryoshka_transcoders.png" alt="Matryoshka Transcoders Diagram" class="publication-diagram">
-            </div>
-
-            <div class="selected-publication">
-                <div class="publication-item">
-                    <div class="publication-content">
-                        <span class="publication-title">Human-like Content Analysis for Generative AI with Language-Grounded Sparse Encoders</span>
-                        <p style="margin-top: 8px; color: #555; font-size: 0.95em; line-height: 1.6;">We develop LanSE and decompose natural and medical images into interpretable visual patterns grounded in natural language, supporting fine-grained analysis on AI generated contents.</p>
-                    </div>
-                    <a href="https://arxiv.org/abs/2508.18236" target="_blank" class="paper-link">Paper</a>
-                </div>
-                <img src="LanSE.png" alt="LanSE Diagram" class="publication-diagram">
             </div>
 
             <div class="selected-publication">
@@ -577,17 +611,6 @@
             <div class="selected-publication">
                 <div class="publication-item">
                     <div class="publication-content">
-                        <span class="publication-title">When Language Overwrites Vision: Over-Alignment and Geometric Debiasing in Vision-Language Models</span>
-                        <p style="margin-top: 8px; color: #555; font-size: 0.95em; line-height: 1.6;">We identify, analyze, and mitigate the existence of textual biases in visual tokens in vision-language models.</p>
-                    </div>
-                    <a href="https://arxiv.org/abs/2605.08245" target="_blank" class="paper-link">Paper</a>
-                </div>
-                <img src="overalignment.png" alt="Over-Alignment Diagram" class="publication-diagram">
-            </div>
-
-            <div class="selected-publication">
-                <div class="publication-item">
-                    <div class="publication-content">
                         <span class="publication-title">The Integrated Forward-Forward Algorithm: Integrating Forward-Forward and Shallow Backpropagation with Local Losses</span>
                         <p style="margin-top: 8px; color: #555; font-size: 0.95em; line-height: 1.6;">We follow Hinton's Forward-Forward algorithm and make it applicable for deeper layers via the introduction of local losses.</p>
                     </div>
@@ -599,105 +622,113 @@
 
         <section id="publications">
             <h2>Publications and Preprints</h2>
-
-            <div class="publication-item">
-                <div class="publication-content">
-                    <span class="publication-title">Emergent Hierarchical Monosemantic Neurons from the Group-Contrastive Forward-Forward Algorithm</span>
+            <div class="publications-scroll">
+                    
+                <div class="publication-item">
+                    <div class="publication-content">
+                        <span class="publication-title">Capsule Lens: Locating and Tracking Concept Geometry in Model Representations</span>
+                    </div>
+                    <a href="https://arxiv.org/abs/2609.05575" target="_blank" class="paper-link">Paper</a>
                 </div>
-                <a href="https://arxiv.org/abs/2607.16295" target="_blank" class="paper-link">Paper</a>
-            </div>
 
-            <div class="publication-item">
-                <div class="publication-content">
-                    <span class="publication-title">A Unified Theory of Sparse Dictionary Learning in Mechanistic Interpretability: Piecewise Biconvexity and Spurious Minima</span>
+                <div class="publication-item">
+                    <div class="publication-content">
+                        <span class="publication-title">Emergent Hierarchical Monosemantic Neurons from the Group-Contrastive Forward-Forward Algorithm</span>
+                    </div>
+                    <a href="https://arxiv.org/abs/2607.16295" target="_blank" class="paper-link">Paper</a>
                 </div>
-                <a href="https://www.arxiv.org/abs/2512.05534" target="_blank" class="paper-link">Paper</a>
-            </div>
 
-            <div class="publication-item">
-                <div class="publication-content">
-                    <span class="publication-title">How does My Model Fail? Automatic Identification and Interpretation of Physical Plausibility Failure Modes with Matryoshka Transcoders</span>
+                <div class="publication-item">
+                    <div class="publication-content">
+                        <span class="publication-title">A Unified Theory of Sparse Dictionary Learning in Mechanistic Interpretability: Piecewise Biconvexity and Spurious Minima</span>
+                    </div>
+                    <a href="https://www.arxiv.org/abs/2512.05534" target="_blank" class="paper-link">Paper</a>
                 </div>
-                <a href="https://arxiv.org/abs/2511.10094" target="_blank" class="paper-link">Paper</a>
-            </div>
 
-            <div class="publication-item">
-                <div class="publication-content">
-                    <span class="publication-title">Human-like Content Analysis for Generative AI with Language-Grounded Sparse Encoders</span>
+                <div class="publication-item">
+                    <div class="publication-content">
+                        <span class="publication-title">How does My Model Fail? Automatic Identification and Interpretation of Physical Plausibility Failure Modes with Matryoshka Transcoders</span>
+                    </div>
+                    <a href="https://arxiv.org/abs/2511.10094" target="_blank" class="paper-link">Paper</a>
                 </div>
-                <a href="https://arxiv.org/abs/2508.18236" target="_blank" class="paper-link">Paper</a>
-            </div>
 
-            <div class="publication-item">
-                <div class="publication-content">
-                    <span class="publication-title">LLM as Dataset Analyst: Subpopulation Structure Discovery with Large Language Model</span>
+                <div class="publication-item">
+                    <div class="publication-content">
+                        <span class="publication-title">Human-like Content Analysis for Generative AI with Language-Grounded Sparse Encoders</span>
+                    </div>
+                    <a href="https://arxiv.org/abs/2508.18236" target="_blank" class="paper-link">Paper</a>
                 </div>
-                <a href="https://arxiv.org/abs/2405.02363" target="_blank" class="paper-link">Paper</a>
-            </div>
 
-            <div class="publication-item">
-                <div class="publication-content">
-                    <span class="publication-title">Prompt Engineering Through the Lens of Optimal Control</span>
+                <div class="publication-item">
+                    <div class="publication-content">
+                        <span class="publication-title">LLM as Dataset Analyst: Subpopulation Structure Discovery with Large Language Model</span>
+                    </div>
+                    <a href="https://arxiv.org/abs/2405.02363" target="_blank" class="paper-link">Paper</a>
                 </div>
-                <a href="https://arxiv.org/abs/2310.14201" target="_blank" class="paper-link">Paper</a>
-            </div>
 
-            <div class="publication-item">
-                <div class="publication-content">
-                    <span class="publication-title">The Integrated Forward-Forward Algorithm: Integrating Forward-Forward and Shallow Backpropagation with Local Losses</span>
+                <div class="publication-item">
+                    <div class="publication-content">
+                        <span class="publication-title">Prompt Engineering Through the Lens of Optimal Control</span>
+                    </div>
+                    <a href="https://arxiv.org/abs/2310.14201" target="_blank" class="paper-link">Paper</a>
                 </div>
-                <a href="https://arxiv.org/abs/2305.12960" target="_blank" class="paper-link">Paper</a>
-            </div>
 
-            <div class="publication-item">
-                <div class="publication-content">
-                    <span class="publication-title">Demonstration Notebook: Finding the Most Suited In-Context Learning Example from Interactions</span>
+                <div class="publication-item">
+                    <div class="publication-content">
+                        <span class="publication-title">The Integrated Forward-Forward Algorithm: Integrating Forward-Forward and Shallow Backpropagation with Local Losses</span>
+                    </div>
+                    <a href="https://arxiv.org/abs/2305.12960" target="_blank" class="paper-link">Paper</a>
                 </div>
-                <a href="https://arxiv.org/abs/2406.10878" target="_blank" class="paper-link">Paper</a>
-            </div>
 
-            <div class="publication-item">
-                <div class="publication-content">
-                    <span class="publication-title">Bridging Mechanistic Interpretability and Prompt Engineering with Gradient Ascent for Interpretable Persona Control</span>
+                <div class="publication-item">
+                    <div class="publication-content">
+                        <span class="publication-title">Demonstration Notebook: Finding the Most Suited In-Context Learning Example from Interactions</span>
+                    </div>
+                    <a href="https://arxiv.org/abs/2406.10878" target="_blank" class="paper-link">Paper</a>
                 </div>
-                <a href="https://arxiv.org/abs/2601.02896" target="_blank" class="paper-link">Paper</a>
-            </div>
 
-            <div class="publication-item">
-                <div class="publication-content">
-                    <span class="publication-title">CXR-LanIC: Language-Grounded Interpretable Classifier for Chest X-Ray Diagnosis</span>
+                <div class="publication-item">
+                    <div class="publication-content">
+                        <span class="publication-title">Bridging Mechanistic Interpretability and Prompt Engineering with Gradient Ascent for Interpretable Persona Control</span>
+                    </div>
+                    <a href="https://arxiv.org/abs/2601.02896" target="_blank" class="paper-link">Paper</a>
                 </div>
-                <a href="https://arxiv.org/abs/2510.21464" target="_blank" class="paper-link">Paper</a>
-            </div>
 
-            <div class="publication-item">
-                <div class="publication-content">
-                    <span class="publication-title">Benchmarking Machine Learning Agents for Scientific Research</span>
+                <div class="publication-item">
+                    <div class="publication-content">
+                        <span class="publication-title">CXR-LanIC: Language-Grounded Interpretable Classifier for Chest X-Ray Diagnosis</span>
+                    </div>
+                    <a href="https://arxiv.org/abs/2510.21464" target="_blank" class="paper-link">Paper</a>
                 </div>
-                <a href="https://arxiv.org/abs/2510.10472" target="_blank" class="paper-link">Paper</a>
-            </div>
 
-            <div class="publication-item">
-                <div class="publication-content">
-                    <span class="publication-title">SAN: Hypothesizing Long-Term Synaptic Development and Neural Engram Mechanism in Scalable Model's Parameter-Efficient Fine-Tuning</span>
+                <div class="publication-item">
+                    <div class="publication-content">
+                        <span class="publication-title">Benchmarking Machine Learning Agents for Scientific Research</span>
+                    </div>
+                    <a href="https://arxiv.org/abs/2510.10472" target="_blank" class="paper-link">Paper</a>
                 </div>
-                <a href="https://arxiv.org/abs/2409.06706" target="_blank" class="paper-link">Paper</a>
-            </div>
 
-            <div class="publication-item">
-                <div class="publication-content">
-                    <span class="publication-title">When Language Overwrites Vision: Over-Alignment and Geometric Debiasing in Vision-Language Models</span>
+                <div class="publication-item">
+                    <div class="publication-content">
+                        <span class="publication-title">SAN: Hypothesizing Long-Term Synaptic Development and Neural Engram Mechanism in Scalable Model's Parameter-Efficient Fine-Tuning</span>
+                    </div>
+                    <a href="https://arxiv.org/abs/2409.06706" target="_blank" class="paper-link">Paper</a>
                 </div>
-                <a href="https://arxiv.org/abs/2605.08245" target="_blank" class="paper-link">Paper</a>
-            </div>
 
-            <div class="publication-item">
-                <div class="publication-content">
-                    <span class="publication-title">Rep2Text: Decoding Full Text from a Single LLM Token Representation</span>
+                <div class="publication-item">
+                    <div class="publication-content">
+                        <span class="publication-title">When Language Overwrites Vision: Over-Alignment and Geometric Debiasing in Vision-Language Models</span>
+                    </div>
+                    <a href="https://arxiv.org/abs/2605.08245" target="_blank" class="paper-link">Paper</a>
                 </div>
-                <a href="https://arxiv.org/abs/2511.06571" target="_blank" class="paper-link">Paper</a>
-            </div>
 
+                <div class="publication-item">
+                    <div class="publication-content">
+                        <span class="publication-title">Rep2Text: Decoding Full Text from a Single LLM Token Representation</span>
+                    </div>
+                    <a href="https://arxiv.org/abs/2511.06571" target="_blank" class="paper-link">Paper</a>
+                </div>
+            </div>
 
             <p style="margin-top: 25px; color: #555; font-size: 0.95em;">
                 For a complete list of publications, please visit my <a href="https://scholar.google.co.uk/citations?hl=en&user=0WYAYQ8AAAAJ" target="_blank" style="color: #333; font-weight: 500;">Google Scholar profile</a>.
@@ -727,147 +758,148 @@
 
         <section id="talks">
             <h2>Talks</h2>
+            <div class="publications-scroll">
+                <div class="publication-item">
+                    <div class="publication-content">
+                        <a href="https://drive.google.com/file/d/1kKun0NRKiXPGezpuRg00R0b3xB5zo9Ca/view?usp=sharing" target="_blank" style="color: inherit; text-decoration: none;">
+                            <span class="publication-title">Mechanistic Interpretability on Neural Representations</span>
+                        </a>
+                        <p style="margin-top: 8px; color: #555; font-size: 0.95em;">National University of Singapore</p>
+                        <p style="color: #777; font-size: 0.9em;">July 20th, 2026</p>
+                    </div>
+                </div>
 
-            <div class="publication-item">
-                <div class="publication-content">
-                    <a href="https://drive.google.com/file/d/1kKun0NRKiXPGezpuRg00R0b3xB5zo9Ca/view?usp=sharing" target="_blank" style="color: inherit; text-decoration: none;">
-                        <span class="publication-title">Mechanistic Interpretability on Neural Representations</span>
-                    </a>
-                    <p style="margin-top: 8px; color: #555; font-size: 0.95em;">National University of Singapore</p>
-                    <p style="color: #777; font-size: 0.9em;">July 20th, 2026</p>
+                <div class="publication-item">
+                    <div class="publication-content">
+                        <span class="publication-title">Mechanistic Interpretability and AI Safety</span>
+                        <p style="margin-top: 8px; color: #555; font-size: 0.95em;">Alibaba</p>
+                        <p style="color: #777; font-size: 0.9em;">July 8th, 2026</p>
+                    </div>
+                </div>
+
+                <div class="publication-item">
+                    <div class="publication-content">
+                        <span class="publication-title">Sparse Dictionary Learning on fMRI</span>
+                        <p style="margin-top: 8px; color: #555; font-size: 0.95em;">National University of Singapore</p>
+                        <p style="color: #777; font-size: 0.9em;">January 28th, 2026</p>
+                    </div>
+                </div>
+
+                <div class="publication-item">
+                    <div class="publication-content">
+                        <span class="publication-title">Language-Grounded Sparse Encoders</span>
+                        <p style="margin-top: 8px; color: #555; font-size: 0.95em;">National University of Singapore</p>
+                        <p style="color: #777; font-size: 0.9em;">October 15th, 2025</p>
+                    </div>
+                </div>
+
+                <div class="publication-item">
+                    <div class="publication-content">
+                        <span class="publication-title">Open Problems in Mechanistic Interpretability - Paper Walkthrough</span>
+                        <p style="margin-top: 8px; color: #555; font-size: 0.95em;">National University of Singapore</p>
+                        <p style="color: #777; font-size: 0.9em;">July 10th, 2025</p>
+                    </div>
+                </div>
+
+                <div class="publication-item">
+                    <div class="publication-content">
+                        <span class="publication-title">An Introduction to Methods for LLM Explainability</span>
+                        <p style="margin-top: 8px; color: #555; font-size: 0.95em;">Peking University</p>
+                        <p style="color: #777; font-size: 0.9em;">April 22th, 2024</p>
+                    </div>
+                </div>
+
+                <div class="publication-item">
+                    <div class="publication-content">
+                        <span class="publication-title">An Introduction to LLM as Dataset Analyst and PE Control</span>
+                        <p style="margin-top: 8px; color: #555; font-size: 0.95em;">Peking University</p>
+                        <p style="color: #777; font-size: 0.9em;">March 28th, 2024</p>
+                    </div>
+                </div>
+                
+                <div class="publication-item">
+                    <div class="publication-content">
+                        <span class="publication-title">Yiming's Undergraduate Research Sharing</span>
+                        <p style="margin-top: 8px; color: #555; font-size: 0.95em;">Peking University</p>
+                        <p style="color: #777; font-size: 0.9em;">March 11th, 2024</p>
+                    </div>
                 </div>
             </div>
-
-            <div class="publication-item">
-                <div class="publication-content">
-                    <span class="publication-title">Mechanistic Interpretability and AI Safety</span>
-                    <p style="margin-top: 8px; color: #555; font-size: 0.95em;">Alibaba</p>
-                    <p style="color: #777; font-size: 0.9em;">July 8th, 2026</p>
-                </div>
-            </div>
-
-            <div class="publication-item">
-                <div class="publication-content">
-                    <span class="publication-title">Sparse Dictionary Learning on fMRI</span>
-                    <p style="margin-top: 8px; color: #555; font-size: 0.95em;">National University of Singapore</p>
-                    <p style="color: #777; font-size: 0.9em;">January 28th, 2026</p>
-                </div>
-            </div>
-
-            <div class="publication-item">
-                <div class="publication-content">
-                    <span class="publication-title">Language-Grounded Sparse Encoders</span>
-                    <p style="margin-top: 8px; color: #555; font-size: 0.95em;">National University of Singapore</p>
-                    <p style="color: #777; font-size: 0.9em;">October 15th, 2025</p>
-                </div>
-            </div>
-
-            <div class="publication-item">
-                <div class="publication-content">
-                    <span class="publication-title">Open Problems in Mechanistic Interpretability - Paper Walkthrough</span>
-                    <p style="margin-top: 8px; color: #555; font-size: 0.95em;">National University of Singapore</p>
-                    <p style="color: #777; font-size: 0.9em;">July 10th, 2025</p>
-                </div>
-            </div>
-
-            <div class="publication-item">
-                <div class="publication-content">
-                    <span class="publication-title">An Introduction to Methods for LLM Explainability</span>
-                    <p style="margin-top: 8px; color: #555; font-size: 0.95em;">Peking University</p>
-                    <p style="color: #777; font-size: 0.9em;">April 22th, 2024</p>
-                </div>
-            </div>
-
-            <div class="publication-item">
-                <div class="publication-content">
-                    <span class="publication-title">An Introduction to LLM as Dataset Analyst and PE Control</span>
-                    <p style="margin-top: 8px; color: #555; font-size: 0.95em;">Peking University</p>
-                    <p style="color: #777; font-size: 0.9em;">March 28th, 2024</p>
-                </div>
-            </div>
-            
-            <div class="publication-item">
-                <div class="publication-content">
-                    <span class="publication-title">Yiming's Undergraduate Research Sharing</span>
-                    <p style="margin-top: 8px; color: #555; font-size: 0.95em;">Peking University</p>
-                    <p style="color: #777; font-size: 0.9em;">March 11th, 2024</p>
-                </div>
-            </div>
-
         </section>
 
         <section id="experience">
             <h2>Experiences</h2>
-
-            <div class="education-item">
-                <a href="https://security.alibaba.com/" target="_blank" style="text-decoration: none;">
-                    <img src="alibaba.png" alt="Alibaba Logo" class="education-icon">
-                </a>
-                <div class="education-content">
-                    <span class="publication-title">Research Intern</span>
-                    <p style="margin-top: 5px; color: #555; font-size: 0.95em;"><a href="https://www.alibaba.com/" target="_blank" style="color: #333; text-decoration: none; font-weight: 500;">Alibaba Security</a>, Alibaba Group Holding Limited, Hangzhou</p>
-                    <p style="color: #777; font-size: 0.9em;">June 2026 - Present</p>
-                    <p style="color: #777; font-size: 0.9em;">Supervisor: Hang Zhou</p>
+            <div class="publications-scroll">
+                <div class="education-item">
+                    <a href="https://security.alibaba.com/" target="_blank" style="text-decoration: none;">
+                        <img src="alibaba.png" alt="Alibaba Logo" class="education-icon">
+                    </a>
+                    <div class="education-content">
+                        <span class="publication-title">Research Intern</span>
+                        <p style="margin-top: 5px; color: #555; font-size: 0.95em;"><a href="https://www.alibaba.com/" target="_blank" style="color: #333; text-decoration: none; font-weight: 500;">Alibaba Security</a>, Alibaba Group Holding Limited, Hangzhou</p>
+                        <p style="color: #777; font-size: 0.9em;">June 2026 - Present</p>
+                        <p style="color: #777; font-size: 0.9em;">Supervisor: Hang Zhou</p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="education-item">
-                <a href="https://www.asintelligence.xyz/" target="_blank" style="text-decoration: none;">
-                    <img src="cognitive.png" alt="Cognitive AI for Science Lab Logo" class="education-icon">
-                </a>
-                <div class="education-content">
-                    <span class="publication-title">Research Associate</span>
-                    <p style="margin-top: 5px; color: #555; font-size: 0.95em;"><a href="https://www.asintelligence.xyz/" target="_blank" style="color: #333; text-decoration: none; font-weight: 500;">Artificial Scientific Intelligence Lab</a>, National University of Singapore, Singapore</p>
-                    <p style="color: #777; font-size: 0.9em;">August 2024 - Present</p>
-                    <p style="color: #777; font-size: 0.9em;">Supervisor: Dianbo Liu</p>
+                <div class="education-item">
+                    <a href="https://www.asintelligence.xyz/" target="_blank" style="text-decoration: none;">
+                        <img src="cognitive.png" alt="Cognitive AI for Science Lab Logo" class="education-icon">
+                    </a>
+                    <div class="education-content">
+                        <span class="publication-title">Research Associate</span>
+                        <p style="margin-top: 5px; color: #555; font-size: 0.95em;"><a href="https://www.asintelligence.xyz/" target="_blank" style="color: #333; text-decoration: none; font-weight: 500;">Artificial Scientific Intelligence Lab</a>, National University of Singapore, Singapore</p>
+                        <p style="color: #777; font-size: 0.9em;">August 2024 - Present</p>
+                        <p style="color: #777; font-size: 0.9em;">Supervisor: Dianbo Liu</p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="education-item">
-                <a href="https://pku-hmi-lab.github.io/HMI-Web/" target="_blank" style="text-decoration: none;">
-                    <img src="HMI.jpeg" alt="HMI Lab Logo" class="education-icon">
-                </a>
-                <div class="education-content">
-                    <span class="publication-title">Research Intern</span>
-                    <p style="margin-top: 5px; color: #555; font-size: 0.95em;"><a href="https://pku-hmi-lab.github.io/HMI-Web/" target="_blank" style="color: #333; text-decoration: none; font-weight: 500;">Human Machine Intelligence Lab</a>, Peking University, Beijing</p>
-                    <p style="color: #777; font-size: 0.9em;">2023 - 2024</p>
-                    <p style="color: #777; font-size: 0.9em;">Supervisor: Shanghang Zhang</p>
+                <div class="education-item">
+                    <a href="https://pku-hmi-lab.github.io/HMI-Web/" target="_blank" style="text-decoration: none;">
+                        <img src="HMI.jpeg" alt="HMI Lab Logo" class="education-icon">
+                    </a>
+                    <div class="education-content">
+                        <span class="publication-title">Research Intern</span>
+                        <p style="margin-top: 5px; color: #555; font-size: 0.95em;"><a href="https://pku-hmi-lab.github.io/HMI-Web/" target="_blank" style="color: #333; text-decoration: none; font-weight: 500;">Human Machine Intelligence Lab</a>, Peking University, Beijing</p>
+                        <p style="color: #777; font-size: 0.9em;">2023 - 2024</p>
+                        <p style="color: #777; font-size: 0.9em;">Supervisor: Shanghang Zhang</p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="education-item">
-                <a href="https://bicmr.pku.edu.cn/" target="_blank" style="text-decoration: none;">
-                    <img src="bicmr.jpeg" alt="BICMR Logo" class="education-icon">
-                </a>
-                <div class="education-content">
-                    <span class="publication-title">Research Intern</span>
-                    <p style="margin-top: 5px; color: #555; font-size: 0.95em;"><a href="https://bicmr.pku.edu.cn/" target="_blank" style="color: #333; text-decoration: none; font-weight: 500;">Beijing International Center for Mathematical Research</a>, Peking University, Beijing</p>
-                    <p style="color: #777; font-size: 0.9em;">2023 - 2024</p>
-                    <p style="color: #777; font-size: 0.9em;">Supervisor: Bin Dong</p>
+                <div class="education-item">
+                    <a href="https://bicmr.pku.edu.cn/" target="_blank" style="text-decoration: none;">
+                        <img src="bicmr.jpeg" alt="BICMR Logo" class="education-icon">
+                    </a>
+                    <div class="education-content">
+                        <span class="publication-title">Research Intern</span>
+                        <p style="margin-top: 5px; color: #555; font-size: 0.95em;"><a href="https://bicmr.pku.edu.cn/" target="_blank" style="color: #333; text-decoration: none; font-weight: 500;">Beijing International Center for Mathematical Research</a>, Peking University, Beijing</p>
+                        <p style="color: #777; font-size: 0.9em;">2023 - 2024</p>
+                        <p style="color: #777; font-size: 0.9em;">Supervisor: Bin Dong</p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="education-item">
-                <a href="https://zsdonghao.github.io/#lab" target="_blank" style="text-decoration: none;">
-                    <img src="hyperplane.png" alt="Hyperplane Lab Logo" class="education-icon">
-                </a>
-                <div class="education-content">
-                    <span class="publication-title">Research Intern</span>
-                    <p style="margin-top: 5px; color: #555; font-size: 0.95em;"><a href="https://zsdonghao.github.io/#lab" target="_blank" style="color: #333; text-decoration: none; font-weight: 500;">Hyperplane Lab</a>, Peking University, Beijing</p>
-                    <p style="color: #777; font-size: 0.9em;">2021 - 2022</p>
-                    <p style="color: #777; font-size: 0.9em;">Supervisor: Hao Dong</p>
+                <div class="education-item">
+                    <a href="https://zsdonghao.github.io/#lab" target="_blank" style="text-decoration: none;">
+                        <img src="hyperplane.png" alt="Hyperplane Lab Logo" class="education-icon">
+                    </a>
+                    <div class="education-content">
+                        <span class="publication-title">Research Intern</span>
+                        <p style="margin-top: 5px; color: #555; font-size: 0.95em;"><a href="https://zsdonghao.github.io/#lab" target="_blank" style="color: #333; text-decoration: none; font-weight: 500;">Hyperplane Lab</a>, Peking University, Beijing</p>
+                        <p style="color: #777; font-size: 0.9em;">2021 - 2022</p>
+                        <p style="color: #777; font-size: 0.9em;">Supervisor: Hao Dong</p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="education-item">
-                <a href="https://www.aijianzi.com/" target="_blank" style="text-decoration: none;">
-                    <img src="aijianzi.png" alt="Aijianzi Logo" class="education-icon">
-                </a>
-                <div class="education-content">
-                    <span class="publication-title">Teaching Researcher</span>
-                    <p style="margin-top: 5px; color: #555; font-size: 0.95em;"><a href="https://www.aijianzi.com/" target="_blank" style="color: #333; text-decoration: none; font-weight: 500;">Aijianzi</a>, Beijing Aijianzi Education Technology, Beijing</p>
-                    <p style="color: #777; font-size: 0.9em;">2019 - 2021</p>
-                    <p style="color: #777; font-size: 0.9em;">Supervisor: Xiaojun Hu</p>
+                <div class="education-item">
+                    <a href="https://www.aijianzi.com/" target="_blank" style="text-decoration: none;">
+                        <img src="aijianzi.png" alt="Aijianzi Logo" class="education-icon">
+                    </a>
+                    <div class="education-content">
+                        <span class="publication-title">Teaching Researcher</span>
+                        <p style="margin-top: 5px; color: #555; font-size: 0.95em;"><a href="https://www.aijianzi.com/" target="_blank" style="color: #333; text-decoration: none; font-weight: 500;">Aijianzi</a>, Beijing Aijianzi Education Technology, Beijing</p>
+                        <p style="color: #777; font-size: 0.9em;">2019 - 2021</p>
+                        <p style="color: #777; font-size: 0.9em;">Supervisor: Xiaojun Hu</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -877,52 +909,53 @@
             <p class="research-interest" style="margin-bottom: 25px;">
                 I have had the privilege of mentoring several students working on research topics in Mechanistic Interpretability, Neuroscience, and AI for Biomedical Sciences.
             </p>
-
-            <div class="mentorship-item">
-                <img src="Harsh.jpg" alt="Harshvardhan Saini" class="mentorship-photo">
-                <div class="mentorship-content">
-                    <span class="publication-title">Harshvardhan Saini</span>
-                    <p style="margin-top: 5px; color: #555; font-size: 0.95em;">Indian Institute of Technology, Dhanbad, India</p>
+            <div class="publications-scroll">
+                <div class="mentorship-item">
+                    <img src="Harsh.jpg" alt="Harshvardhan Saini" class="mentorship-photo">
+                    <div class="mentorship-content">
+                        <span class="publication-title">Harshvardhan Saini</span>
+                        <p style="margin-top: 5px; color: #555; font-size: 0.95em;">Indian Institute of Technology, Dhanbad, India</p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="mentorship-item">
-                <img src="Lin Zheng.jpg" alt="Zheng Lin" class="mentorship-photo">
-                <div class="mentorship-content">
-                    <span class="publication-title">Zheng Lin</span>
-                    <p style="margin-top: 5px; color: #555; font-size: 0.95em;">Hong Kong University of Science and Technology, Hong Kong, China</p>
+                <div class="mentorship-item">
+                    <img src="Lin Zheng.jpg" alt="Zheng Lin" class="mentorship-photo">
+                    <div class="mentorship-content">
+                        <span class="publication-title">Zheng Lin</span>
+                        <p style="margin-top: 5px; color: #555; font-size: 0.95em;">Hong Kong University of Science and Technology, Hong Kong, China</p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="mentorship-item">
-                <img src="Zhaoqian.jpg" alt="Zhaoqian Yao" class="mentorship-photo">
-                <div class="mentorship-content">
-                    <span class="publication-title">Zhaoqian Yao</span>
-                    <p style="margin-top: 5px; color: #555; font-size: 0.95em;">Chinese University of Hong Kong, Hong Kong, China</p>
+                <div class="mentorship-item">
+                    <img src="Zhaoqian.jpg" alt="Zhaoqian Yao" class="mentorship-photo">
+                    <div class="mentorship-content">
+                        <span class="publication-title">Zhaoqian Yao</span>
+                        <p style="margin-top: 5px; color: #555; font-size: 0.95em;">Chinese University of Hong Kong, Hong Kong, China</p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="mentorship-item">
-                <img src="qinglin.jpg" alt="Qinglin Qi" class="mentorship-photo">
-                <div class="mentorship-content">
-                    <span class="publication-title">Qinglin Qi</span>
-                    <p style="margin-top: 5px; color: #555; font-size: 0.95em;">Lund University, Lund, Sweden</p>
+                <div class="mentorship-item">
+                    <img src="qinglin.jpg" alt="Qinglin Qi" class="mentorship-photo">
+                    <div class="mentorship-content">
+                        <span class="publication-title">Qinglin Qi</span>
+                        <p style="margin-top: 5px; color: #555; font-size: 0.95em;">Lund University, Lund, Sweden</p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="mentorship-item">
-                <img src="lingheng.jpg" alt="Lingheng Du" class="mentorship-photo">
-                <div class="mentorship-content">
-                    <span class="publication-title">Lingheng Du</span>
-                    <p style="margin-top: 5px; color: #555; font-size: 0.95em;">Peking University, Beijing, China</p>
+                <div class="mentorship-item">
+                    <img src="lingheng.jpg" alt="Lingheng Du" class="mentorship-photo">
+                    <div class="mentorship-content">
+                        <span class="publication-title">Lingheng Du</span>
+                        <p style="margin-top: 5px; color: #555; font-size: 0.95em;">Peking University, Beijing, China</p>
+                    </div>
                 </div>
-            </div>
 
-            <div class="mentorship-item">
-                <img src="yang.jpeg" alt="Yang Tuấn Anh" class="mentorship-photo">
-                <div class="mentorship-content">
-                    <span class="publication-title">Yang Tuấn Anh</span>
-                    <p style="margin-top: 5px; color: #555; font-size: 0.95em;">National University of Singapore, Singapore</p>
+                <div class="mentorship-item">
+                    <img src="yang.jpeg" alt="Yang Tuấn Anh" class="mentorship-photo">
+                    <div class="mentorship-content">
+                        <span class="publication-title">Yang Tuấn Anh</span>
+                        <p style="margin-top: 5px; color: #555; font-size: 0.95em;">National University of Singapore, Singapore</p>
+                    </div>
                 </div>
             </div>
         </section>
