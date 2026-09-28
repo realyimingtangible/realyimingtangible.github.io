@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capsule Lens - Yiming Tang</title>
+
+    <!-- MathJax for rendering LaTeX formulas -->
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        ::selection {
+            background-color: #000;
+            color: #fff;
+        }
+
+        ::-moz-selection {
+            background-color: #000;
+            color: #fff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 70px;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            z-index: 1000;
+            padding: 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .nav-brand {
+            font-weight: 600;
+            font-size: 1.2em;
+            color: #2c3e50;
+            text-decoration: none;
+            padding: 15px 0;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 5px;
+        }
+
+        .nav-links a {
+            color: #555;
+            text-decoration: none;
+            padding: 20px 15px;
+            display: block;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            background-color: #555;
+            color: white;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        article {
+            background-color: #fff;
+            padding: 50px 60px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .article-meta {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .article-meta p {
+            margin: 8px 0;
+            color: #666;
+        }
+
+        .article-meta a {
+            color: #555;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .article-meta a:hover {
+            text-decoration: underline;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #555;
+        }
+
+        h3 {
+            color: #2c3e50;
+            font-size: 1.4em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 1.05em;
+        }
+
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            font-size: 1.05em;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 30px auto 10px auto;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .figure-caption {
+            margin: 0 auto 30px auto;
+            color: #666;
+            font-size: 0.92em;
+            line-height: 1.6;
+            text-align: center;
+            max-width: 95%;
+        }
+
+        .math-block {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-left: 4px solid #555;
+            overflow-x: auto;
+        }
+
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+
+        strong {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        hr {
+            margin: 40px 0;
+            border: none;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 10px 20px;
+            background-color: #555;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-link:hover {
+            background-color: #333;
+        }
+
+        .hypothesis-motto {
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .hypothesis-motto p {
+            color: #1a1a1a;
+            font-size: 1.3em;
+            font-weight: 400;
+            line-height: 1.7;
+            margin: 0;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-style: italic;
+            letter-spacing: 0.3px;
+        }
+
+        @media (max-width: 768px) {
+            article {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-brand">Yiming Tang's Homepage</a>
+            <ul class="nav-links">
+                <li><a href="../../blog.html">← Back to Blog</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <article>
+            <h1>Paper Walkthroughs</h1>
+            <h3 style="color: #555; font-weight: 600; font-size: 1.35em; margin-top: -10px; margin-bottom: 30px;">Capsule Lens: Locating and Tracking Concept Geometry in Model Representations</h3>
+
+            <div class="article-meta">
+                <p><strong>Authors:</strong> Yiming Tang, Harshvardhan Saini, Samyak Jha, Huaming Chen, Xufeng Duan, Dianbo Liu</p>
+                <p><strong>Walkthrough by:</strong> Yiming Tang</p>
+                <p><strong>Preprint:</strong> <a href="https://arxiv.org/abs/2609.05575" target="_blank">arXiv:2609.05575</a></p>
+            </div>
+
+            <div class="hypothesis-motto">
+                <p>We match a concept geometry with understandable shapes to understand the concept geometry and how it changes.</p>
+            </div>
+
+            <h2>Why Study Concept Geometry?</h2>
+
+            <p>Mechanistic interpretability often starts from a simple question: <strong>what information is represented inside a model?</strong> Existing tools answer this in many useful ways. Logit-based lenses map hidden states back to tokens, language-based methods decode representations into natural-language descriptions, and sparse autoencoders decompose activations into interpretable features.</p>
+
+            <p>But there is another question that is equally fundamental: <strong>how does a concept actually occupy the representation space?</strong> Is it concentrated around a direction? Does it spread over a broad region? Does it separate from other concepts only in late layers? And, once the model starts training, how does this geometry move?</p>
+
+            <p>Capsule Lens is designed around two complementary settings:</p>
+
+            <ul>
+                <li><strong>Static representations:</strong> locate and characterize the geometry occupied by a concept at a given model state.</li>
+                <li><strong>Dynamic representations:</strong> track how that geometry changes across training checkpoints.</li>
+            </ul>
+
+            <img src="overview.png" alt="Overview of the Capsule Lens framework">
+            <p class="figure-caption">Overview of Capsule Lens. Concept representations are matched with a compact capsule geometry, validated on held-out data, and then used either to analyze static concept geometry or to track geometric drifts during training.</p>
+
+            <h2>What Is a Concept Geometry?</h2>
+
+            <p>We begin with a deliberately simple definition. Let a model \(\phi_\theta\) map samples from a dataset \(\mathcal{D}\) into a representation space \(\mathbb{R}^d\). A concept \(c\) is a binary indicator \(I_c\) on the dataset, and its positive set contains the samples exhibiting that concept:</p>
+
+            <div class="math-block">
+                $$\phi_\theta:\mathcal{D}\rightarrow\mathbb{R}^d, \qquad I_c:\mathcal{D}\rightarrow\{0,1\}, \qquad \mathcal{D}_c=\{z\in\mathcal{D}:I_c(z)=1\}.$$
+            </div>
+
+            <p>The corresponding <strong>concept geometry</strong> is the region occupied by those positive samples in representation space:</p>
+
+            <div class="math-block">
+                $$\Gamma_c^\theta=\phi_\theta(\mathcal{D}_c)\subset\mathbb{R}^d.$$
+            </div>
+
+            <p>This reframes concept-based interpretability as a geometric problem. Once we collect representations of samples sharing the same concept, we obtain a point cloud. The question becomes: <strong>what compact geometric object can summarize this cloud while remaining interpretable and easy to compare across layers and checkpoints?</strong></p>
+
+            <h2>Why a Capsule?</h2>
+
+            <p>Capsule Lens approximates a concept geometry using a simple parametric region:</p>
+
+            <div class="math-block">
+                $$C(a,s_a,n_{\mathrm{low}},n_{\mathrm{high}})=\left\{x \in \mathbb{R}^d \mid d_{\cos}(x,a)\leq s_a,\; n_{\mathrm{low}}\leq \|x\| \leq n_{\mathrm{high}}\right\}.$$
+            </div>
+
+            <p>Geometrically, a capsule is an <strong>angular cone intersected with a norm shell</strong>. Each parameter has a direct interpretation:</p>
+
+            <ul>
+                <li><strong>Axis \(a\):</strong> the central direction of the concept representations.</li>
+                <li><strong>Axis span \(s_a\):</strong> how broadly the concept spreads around that direction.</li>
+                <li><strong>Lower and upper norm bounds \(n_{\mathrm{low}},n_{\mathrm{high}}\):</strong> the magnitude interval occupied by the concept.</li>
+                <li><strong>Norm band \(N_b=n_{\mathrm{high}}-n_{\mathrm{low}}\):</strong> the width of that magnitude interval.</li>
+            </ul>
+
+            <p>The purpose is not to claim that every concept is literally a perfect capsule. The capsule is a <strong>measurement instrument</strong>: a compact geometry whose parameters can be estimated, interpreted, validated, and compared.</p>
+
+            <h2>Capsule Matching</h2>
+
+            <p>Given a finite set of concept representations, Capsule Lens fits the capsule directly in closed form. Intuitively, it first estimates the concept's central direction, then measures how far the samples spread around that direction, and finally records the range of representation norms.</p>
+
+            <img src="capsule_matching.png" alt="Capsule Matching algorithm">
+            <p class="figure-caption">Capsule matching estimates the axis, angular span, and norm bounds directly from the sampled concept representations. The procedure is closed form and requires no iterative optimization.</p>
+
+            <p>This gives a compact summary of the concept geometry that can be compared across layers, model components, or training checkpoints.</p>
+
+            <h2>Looking Inside the Capsule: Coverage Curves</h2>
+
+            <p>The capsule parameters describe the <em>boundary</em> of the fitted region, but two concepts with similar boundaries may still distribute their samples very differently inside those boundaries. Capsule Lens therefore introduces two empirical coverage curves.</p>
+
+            <h3>Span Curve</h3>
+
+            <p>The span curve asks how quickly samples are covered as we widen the cone around the fitted axis:</p>
+
+            <div class="math-block">
+                $$F_s(t)=\frac{1}{|\bar{\Gamma}_c^\theta|}\left|\left\{x_i\in\bar{\Gamma}_c^\theta : 0\leq d_{\cos}(x_i,a)\leq t\right\}\right|.$$
+            </div>
+
+            <p>A steep rise near \(t=0\) indicates a concept concentrated tightly around its axis. A late rise indicates a genuinely broad angular distribution. Multiple sharp rises separated by plateaus can reveal multiple angular clusters.</p>
+
+            <h3>Norm Curve</h3>
+
+            <p>The norm curve similarly tracks how the samples populate the norm interval:</p>
+
+            <div class="math-block">
+                $$F_n(t)=\frac{1}{|\bar{\Gamma}_c^\theta|}\left|\left\{x_i\in\bar{\Gamma}_c^\theta : n_{\mathrm{low}}\leq\|x_i\|\leq t\right\}\right|.$$
+            </div>
+
+            <p>Together, the fitted capsule and these curves separate two questions: <strong>how large is the region?</strong> and <strong>how are representations distributed inside it?</strong></p>
+
+            <img src="curves.png" alt="Coverage curves for the visual concept stripes">
+            <p class="figure-caption">Coverage curves for the visual concept <em>stripes</em> at layer 12 of CLIP ViT-B/32. The angular distribution contains two separated clusters, producing two sharp rises in the span curve, while the norm distribution is comparatively smooth.</p>
+
+            <h2>Does the Capsule Actually Generalize?</h2>
+
+            <p>A geometric approximation is useful only if it describes more than the samples used to fit it. We therefore split each concept into disjoint fitting and validation sets and evaluate two complementary properties.</p>
+
+            <h3>Held-out Coverage</h3>
+
+            <p>Held-out coverage measures whether unseen examples of the same concept fall inside the fitted capsule:</p>
+
+            <div class="math-block">
+                $$\mathrm{Cov}(C_c)=\mathbb{P}\left(\phi(x)\in C_c \mid I_c(x)=1\right).$$
+            </div>
+
+            <h3>Disentanglement</h3>
+
+            <p>Disentanglement asks whether samples inside the capsule actually belong to the target concept rather than unrelated concepts:</p>
+
+            <div class="math-block">
+                $$\mathrm{Dis}(c)=\mathbb{P}\left(I_c(x)=1 \mid \phi(x)\in C_c\right).$$
+            </div>
+
+            <p>We evaluate these quantities across visual and textual concepts, including CLIP image encoders, multimodal models, and language models. Across <strong>259,636 fitted capsules</strong>, the overall mean held-out coverage is <strong>0.943</strong>.</p>
+
+            <img src="validation.png" alt="Held-out coverage and disentanglement results">
+            <p class="figure-caption">Held-out validation across 259,636 capsules. Coverage remains consistently high across diverse models, components, and concept types, while disentanglement varies substantially across settings.</p>
+
+            <p>The important distinction is that <strong>coverage and disentanglement measure different things</strong>. A capsule may reliably capture unseen examples of a concept while still overlapping strongly with other concepts. In the experiments, visual concept capsules generally achieve high coverage but remain relatively entangled, whereas lexical concepts in LLMs are much more strongly separated.</p>
+
+            <h2>Static Representations: How Does Concept Geometry Change Across Depth?</h2>
+
+            <p>Once concept geometry can be located and validated, we can ask a natural layer-wise question: <strong>where in a network do concepts become geometrically separated?</strong></p>
+
+            <img src="layerwise.png" alt="Layer-wise concept disentanglement">
+            <p class="figure-caption">Concept disentanglement across model depth. Several visual encoders exhibit strong late-layer separation, whereas textual concepts in Qwen2.5 models generally become more entangled toward later layers.</p>
+
+            <p>The two modalities show contrasting depth profiles. For visual representations, several encoders exhibit a pronounced rise in disentanglement near the final layers. In other words, concept regions that overlap strongly earlier in the network become increasingly separated near the output of the vision encoder.</p>
+
+            <p>Textual concepts show a different pattern. In Qwen2.5 models, lexical concepts are highly disentangled in early layers but become progressively more entangled with depth. Labelled semantic concepts and mathematical concepts show weaker but related trends. The main point is not that one profile is universally preferable, but that <strong>Capsule Lens turns these layer-wise changes into directly measurable geometry.</strong></p>
+
+            <h2>From Static Geometry to Dynamic Geometry</h2>
+
+            <p>The same capsule parameters that describe a concept at one model state can also be compared across training checkpoints. This turns Capsule Lens from a static geometric description into a tool for tracking representation dynamics.</p>
+
+            <img src="metrics.png" alt="Capsule drift metrics">
+            <p class="figure-caption">Capsule drift metrics compare the same concept across checkpoints: axis rotation, angular widening or narrowing, and shifts or contractions of the norm band.</p>
+
+            <p>Given a base capsule and a capsule fitted at checkpoint \(t\), we track:</p>
+
+            <ul>
+                <li>\(\Delta a\): rotation of the concept axis.</li>
+                <li>\(\Delta s_a\): widening or narrowing of the angular spread.</li>
+                <li>\(\Delta N_b\): expansion or contraction of the norm band.</li>
+                <li>\(\Delta n_{\mathrm{high}}\) and \(\Delta n_{\mathrm{low}}\): shifts of the upper and lower norm boundaries.</li>
+            </ul>
+
+            <p>Aggregated across concepts and layers, these quantities tell us <strong>where</strong> training changes the model, <strong>which concepts</strong> are affected, and <strong>what kind of geometric change</strong> occurs.</p>
+
+            <h2>Case Study I: CLIP Pretraining</h2>
+
+            <p>We first ask what happens when concept geometry is formed during pretraining from scratch. A standard CLIP model is trained with a contrastive objective, and concept capsules are tracked across multiple vision-transformer blocks and training checkpoints.</p>
+
+            <img src="clip.png" alt="Concept geometry during CLIP pretraining">
+            <p class="figure-caption">CLIP pretraining produces broad geometric restructuring throughout the network. Concept axes rotate at all probed depths, early and middle layers broaden, while the final block becomes substantially more concentrated.</p>
+
+            <p>The changes are large and distributed across the network. Concept axes rotate substantially in every probed block. The angular behavior is strongly depth dependent: blocks 2–8 generally widen, whereas the final block contracts sharply. Norm bands also contract steadily during training.</p>
+
+            <p>The per-concept drift is comparatively uniform, suggesting that pretraining does not merely adjust a few isolated concepts. Instead, it produces a <strong>broad, network-wide restructuring of concept geometry</strong>.</p>
+
+            <h2>Case Study II: PPO Post-training on Visual Question Answering</h2>
+
+            <p>We next study reinforcement-learning post-training of a vision-language model using PPO on visual question answering. Here the picture changes substantially.</p>
+
+            <img src="ppo_vqa.png" alt="Concept geometry during PPO post-training">
+            <p class="figure-caption">PPO-induced geometric changes are much more localized than those observed in pretraining. Most layers remain close to the base representation, while the final layer undergoes the dominant axis rotation and norm-band contraction.</p>
+
+            <p>Axis spans remain nearly unchanged across training. Axis drift, however, is concentrated almost entirely in the final layer, while earlier layers remain very close to their base geometry. The final-layer norm band contracts quickly during the first stage of PPO training and then stabilizes even while its axis continues to rotate.</p>
+
+            <p>Compared with pretraining, PPO therefore induces <strong>smaller and much more localized geometric restructuring</strong>, concentrated primarily near the terminal representation.</p>
+
+            <h2>Case Study III: RLVR on Mathematical Reasoning</h2>
+
+            <p>Finally, we study reinforcement learning with verifiable rewards on mathematical reasoning. We train Qwen2.5-1.5B with GRPO on GSM8K and track 18 mathematical concepts across layers and checkpoints.</p>
+
+            <img src="rlvr.png" alt="Concept geometry during RLVR training">
+            <p class="figure-caption">RLVR produces sparse, concept-specific geometric change. Most concept-layer pairs stay near their base geometry, while a small subset shows pronounced concentration or norm-bound shifts.</p>
+
+            <p>This reveals a third geometric regime. Most concept-layer pairs barely move, but a small number exhibit strong changes at specific depths. One representative example is <code>unit_time_minute</code>: its final-layer angular span contracts sharply late in training, while its axis orientation and norm geometry remain comparatively stable.</p>
+
+            <p>This motivates what we call <strong>concept-specific concentration</strong>: RLVR can selectively sharpen the geometry of particular concepts at particular layers while leaving most concept regions almost unchanged.</p>
+
+            <h2>Three Training Regimes, Three Geometric Signatures</h2>
+
+            <p>Putting the three case studies together gives a simple geometric picture of how very different training procedures reshape representations:</p>
+
+            <ul>
+                <li><strong>CLIP pretraining:</strong> broad, network-wide restructuring.</li>
+                <li><strong>PPO post-training:</strong> small and localized restructuring, concentrated near the final layer.</li>
+                <li><strong>RLVR:</strong> sparse, concept-specific restructuring at particular layers.</li>
+            </ul>
+
+            <p>The important point is that these differences are not visible from task accuracy alone. Capsule Lens provides a common geometric coordinate system in which different forms of representation change can be located and compared.</p>
+
+            <h2>Takeaway</h2>
+
+            <p><strong>Capsule Lens matches concept geometry with simple shapes and tracks those shapes to understand how concept geometry changes.</strong> A concept is treated as a region in representation space and approximated by a simple capsule with interpretable parameters. The fitted region can be validated on held-out samples, its internal distribution can be examined with coverage curves, and its parameters can be compared across layers and training checkpoints.</p>
+
+            <p>This gives one framework for two related questions: <strong>where does a concept live in a model?</strong> and <strong>how does training reshape that concept geometry?</strong> Across static representations and three very different training pipelines, the resulting geometric trajectories reveal structure that is difficult to summarize with aggregate model behavior alone.</p>
+
+            <p>More experiments, robustness analyses, concept construction details, and ablations are available in the full preprint. Check it out on <a href="https://arxiv.org/abs/2609.05575" target="_blank" style="color: #000;">arXiv</a>.</p>
+
+            <hr>
+        </article>
+    </div>
+
+    <footer>
+        <div style="text-align: center; padding: 40px 20px 30px;">
+            <p style="color: #666; font-size: 0.9em;">&copy; 2026 Yiming Tang. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
