@@ -83,6 +83,17 @@
             color: white;
         }
 
+        .nav-links a.active {
+            color: #2c3e50;
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 6px;
+        }
+
+        .nav-links a.active:hover {
+            color: white;
+        }
+
         .nav-toggle {
             display: none;
             background: none;
@@ -466,15 +477,12 @@
             <a href="#" class="nav-brand">Yiming Tang's Homepage</a>
             <button class="nav-toggle" onclick="toggleNav()">☰</button>
             <ul class="nav-links" id="navLinks">
-                <li><a href="#about">About</a></li>
-                <li><a href="#news">News</a></li>
-                <li><a href="#research">Research</a></li>
-                <li><a href="#selected_publications">Selected</a></li>
-                <li><a href="#publications">Publications</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#mentorship">Mentorship</a></li>
-                <li><a href="#personal">Desmond</a></li>
+                <li><a href="#about" data-spy="about">About</a></li>
+                <li><a href="#news" data-spy="news">News</a></li>
+                <li><a href="#research" data-spy="research">Research</a></li>
+                <li><a href="#selected_publications" data-spy="selected_publications publications">Works</a></li>
+                <li><a href="#education" data-spy="education experience mentorship">Experiences</a></li>
+                <li><a href="#personal" data-spy="personal">Desmond</a></li>
                 <li><a href="blog.html">Blog</a></li>
             </ul>
         </div>
@@ -491,8 +499,7 @@
                     <p><strong>alphaXiv:</strong> <a href="https://www.alphaxiv.org/@yiming-tang" target="_blank">View Profile</a></p>
                     <p><strong>Github:</strong> <a href="https://github.com/realyimingtangible" target="_blank">View Profile</a></p>
                     <p><strong>Curriculum Vitae:</strong> <a href="https://drive.google.com/file/d/1VS26HYDXxlhv7SkmmBZtLUUyE6ELRWNw/view?usp=drive_link" target="_blank">View CV</a></p>
-                    <p><strong>WeChat:</strong> Yiming_Tangible</p>
-                    <p><strong>Location:</strong> MD1, 12 Science Drive 2, Singapore</p>
+                    <p><strong>Current Base:</strong> Hangzhou, China</p>
                 </div>
             </div>
         </header>
@@ -975,7 +982,7 @@
                     </div>
 
                     <p id="limitMessage" style="margin-top: 5px; color: #555; font-size: 0.95em; display: none;">
-                        Desmond is Tired! You Have Reached Maximum Patting Times per Visit. Come Back Later or Subscribe to Desmond Pro for Unlimited Pats (>w<).
+                        Desmond is Tired! You Have Reached Maximum Patting Times per Visit. Come Back Later or Feed Desmond for More Pats.
                     </p>
                 </div>
 
@@ -1275,7 +1282,7 @@
 
                     } catch (error) {
                         removeTypingIndicator();
-                        addMessageToChat("Meow! Sorry, we have stopped this feature. Add Yiming's WeChat and ask him why~ 😿", false);
+                        addMessageToChat("Meow! Sorry, we have stopped this feature. Feed Desmond to Know Why! 😿", false);
                         console.error('Error:', error);
                     } finally {
                         // Re-enable input
@@ -1295,5 +1302,46 @@
             </div>
         </footer>
     </div>
+    <script>
+        // Underline the nav button of the section currently in view
+        (function () {
+            const links = Array.from(document.querySelectorAll('.nav-links a[data-spy]'));
+            const sections = Array.from(document.querySelectorAll('section[id]'));
+            if (!links.length || !sections.length) return;
+
+            function currentSectionId() {
+                const nav = document.querySelector('nav');
+                const line = (nav ? nav.offsetHeight : 70) + 40;
+                // at the very bottom of the page, the last section counts as current
+                if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
+                    return sections[sections.length - 1].id;
+                }
+                let current = null;
+                for (const sec of sections) {
+                    if (sec.getBoundingClientRect().top <= line) current = sec.id;
+                }
+                return current;
+            }
+
+            function update() {
+                const id = currentSectionId();
+                links.forEach(a => {
+                    const ids = a.dataset.spy.split(/\s+/);
+                    a.classList.toggle('active', id !== null && ids.includes(id));
+                });
+            }
+
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    ticking = true;
+                    requestAnimationFrame(() => { update(); ticking = false; });
+                }
+            }, { passive: true });
+            window.addEventListener('resize', update);
+            window.addEventListener('load', update);
+            update();
+        })();
+    </script>
 </body>
 </html>
