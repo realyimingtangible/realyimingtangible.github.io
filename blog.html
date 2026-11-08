@@ -176,6 +176,167 @@
             border-color: #2c3e50;
         }
 
+        /* Featured (non-walkthrough) cards: white base, gold accents, faint cathedral tracery */
+        .blog-card.featured {
+            position: relative;
+            overflow: hidden;
+            background-color: #fff;
+            border: 1px solid rgba(201, 162, 39, 0.35);
+            border-top: 4px solid #c9a227;
+            box-shadow: 0 2px 10px rgba(184, 134, 11, 0.18);
+        }
+
+        .blog-card.featured::before,
+        .blog-card.featured::after {
+            content: '';
+            position: absolute;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* repeating gothic lancet windows */
+        .blog-card.featured::before {
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='96' viewBox='0 0 64 96' fill='none' stroke='%23c9a227' stroke-width='1.1'%3E%0A%3Cpath d='M6 96V44Q6 14 32 2Q58 14 58 44V96'/%3E%0A%3Cpath d='M18 96V48Q18 26 32 16Q46 26 46 48V96'/%3E%0A%3Ccircle cx='27' cy='40' r='5'/%3E%3Ccircle cx='37' cy='40' r='5'/%3E%3Ccircle cx='32' cy='35' r='5'/%3E%3Ccircle cx='32' cy='45' r='5'/%3E%0A%3Cpath d='M32 52V96'/%3E%3Cpath d='M0 95.5H64'/%3E%3C/svg%3E");
+            background-size: 64px 96px;
+            background-repeat: repeat;
+            background-position: center top;
+            opacity: 0.10;
+        }
+
+        /* rose window in the upper-right corner */
+        .blog-card.featured::after {
+            top: -70px;
+            right: -70px;
+            width: 260px;
+            height: 260px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200' fill='none' stroke='%23c9a227' stroke-width='1.2'%3E%3Ccircle cx='100' cy='100' r='96'/%3E%3Ccircle cx='100' cy='100' r='84'/%3E%3Ccircle cx='100' cy='100' r='26'/%3E%3Ccircle cx='100' cy='100' r='8'/%3E%3Cline x1='126.0' y1='100.0' x2='184.0' y2='100.0'/%3E%3Ccircle cx='154.1' cy='114.5' r='13'/%3E%3Ccircle cx='175.0' cy='100.0' r='4'/%3E%3Cline x1='122.5' y1='113.0' x2='172.7' y2='142.0'/%3E%3Ccircle cx='139.6' cy='139.6' r='13'/%3E%3Ccircle cx='165.0' cy='137.5' r='4'/%3E%3Cline x1='113.0' y1='122.5' x2='142.0' y2='172.7'/%3E%3Ccircle cx='114.5' cy='154.1' r='13'/%3E%3Ccircle cx='137.5' cy='165.0' r='4'/%3E%3Cline x1='100.0' y1='126.0' x2='100.0' y2='184.0'/%3E%3Ccircle cx='85.5' cy='154.1' r='13'/%3E%3Ccircle cx='100.0' cy='175.0' r='4'/%3E%3Cline x1='87.0' y1='122.5' x2='58.0' y2='172.7'/%3E%3Ccircle cx='60.4' cy='139.6' r='13'/%3E%3Ccircle cx='62.5' cy='165.0' r='4'/%3E%3Cline x1='77.5' y1='113.0' x2='27.3' y2='142.0'/%3E%3Ccircle cx='45.9' cy='114.5' r='13'/%3E%3Ccircle cx='35.0' cy='137.5' r='4'/%3E%3Cline x1='74.0' y1='100.0' x2='16.0' y2='100.0'/%3E%3Ccircle cx='45.9' cy='85.5' r='13'/%3E%3Ccircle cx='25.0' cy='100.0' r='4'/%3E%3Cline x1='77.5' y1='87.0' x2='27.3' y2='58.0'/%3E%3Ccircle cx='60.4' cy='60.4' r='13'/%3E%3Ccircle cx='35.0' cy='62.5' r='4'/%3E%3Cline x1='87.0' y1='77.5' x2='58.0' y2='27.3'/%3E%3Ccircle cx='85.5' cy='45.9' r='13'/%3E%3Ccircle cx='62.5' cy='35.0' r='4'/%3E%3Cline x1='100.0' y1='74.0' x2='100.0' y2='16.0'/%3E%3Ccircle cx='114.5' cy='45.9' r='13'/%3E%3Ccircle cx='100.0' cy='25.0' r='4'/%3E%3Cline x1='113.0' y1='77.5' x2='142.0' y2='27.3'/%3E%3Ccircle cx='139.6' cy='60.4' r='13'/%3E%3Ccircle cx='137.5' cy='35.0' r='4'/%3E%3Cline x1='122.5' y1='87.0' x2='172.7' y2='58.0'/%3E%3Ccircle cx='154.1' cy='85.5' r='13'/%3E%3Ccircle cx='165.0' cy='62.5' r='4'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.20;
+        }
+
+        .blog-card.featured > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .blog-card.featured:hover {
+            box-shadow: 0 6px 18px rgba(184, 134, 11, 0.30);
+        }
+
+        .blog-card.featured .blog-date {
+            color: #b8892b;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .blog-card.featured .blog-date::before {
+            content: '\2726\00a0';
+            color: #c9a227;
+        }
+
+        .blog-card.featured a:hover .blog-title {
+            color: #9a7410;
+        }
+
+        .blog-card.featured .read-more {
+            color: #9a7410;
+            border-bottom-color: #c9a227;
+        }
+
+        .blog-card.featured .read-more:hover {
+            color: #6e5208;
+            border-bottom-color: #9a7410;
+        }
+
+        /* Walkthrough cards: faint grey motifs themed on each paper */
+        .blog-card.motif {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blog-card.motif::before,
+        .blog-card.motif::after {
+            content: '';
+            position: absolute;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .blog-card.motif::before {
+            inset: 0;
+            background-image: var(--motif-tile);
+            background-size: var(--motif-tile-size);
+            background-repeat: repeat;
+            opacity: 0.10;
+        }
+
+        .blog-card.motif::after {
+            top: -70px;
+            right: -70px;
+            width: 260px;
+            height: 260px;
+            background-image: var(--motif-emblem);
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.15;
+        }
+
+        .blog-card.motif > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .blog-card.motif-eval {
+            --motif-tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48' fill='none' stroke='%236b7280' stroke-width='1.1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M0 47.5H48'/%3E%3Cpath d='M0 47.5V43'/%3E%3Cpath d='M8 47.5V45'/%3E%3Cpath d='M16 47.5V43'/%3E%3Cpath d='M24 47.5V45'/%3E%3Cpath d='M32 47.5V43'/%3E%3Cpath d='M40 47.5V45'/%3E%3Ccircle cx='24.0' cy='22.0' r='5'/%3E%3Cpath d='M24 12V32M14 22H34'/%3E%3C/svg%3E");
+            --motif-tile-size: 48px 48px;
+            --motif-emblem: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200' fill='none' stroke='%236b7280' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='100.0' cy='100.0' r='96'/%3E%3Ccircle cx='100.0' cy='100.0' r='84'/%3E%3Ccircle cx='100.0' cy='100.0' r='30'/%3E%3Ccircle cx='100.0' cy='100.0' r='5'/%3E%3Cpath d='M100 20V180M20 100H180'/%3E%3Cline x1='184.0' y1='100.0' x2='176.0' y2='100.0'/%3E%3Cline x1='183.7' y1='107.3' x2='179.7' y2='107.0'/%3E%3Cline x1='182.7' y1='114.6' x2='178.8' y2='113.9'/%3E%3Cline x1='181.1' y1='121.7' x2='177.3' y2='120.7'/%3E%3Cline x1='178.9' y1='128.7' x2='175.2' y2='127.4'/%3E%3Cline x1='176.1' y1='135.5' x2='172.5' y2='133.8'/%3E%3Cline x1='172.7' y1='142.0' x2='165.8' y2='138.0'/%3E%3Cline x1='168.8' y1='148.2' x2='165.5' y2='145.9'/%3E%3Cline x1='164.3' y1='154.0' x2='161.3' y2='151.4'/%3E%3Cline x1='159.4' y1='159.4' x2='156.6' y2='156.6'/%3E%3Cline x1='154.0' y1='164.3' x2='151.4' y2='161.3'/%3E%3Cline x1='148.2' y1='168.8' x2='145.9' y2='165.5'/%3E%3Cline x1='142.0' y1='172.7' x2='138.0' y2='165.8'/%3E%3Cline x1='135.5' y1='176.1' x2='133.8' y2='172.5'/%3E%3Cline x1='128.7' y1='178.9' x2='127.4' y2='175.2'/%3E%3Cline x1='121.7' y1='181.1' x2='120.7' y2='177.3'/%3E%3Cline x1='114.6' y1='182.7' x2='113.9' y2='178.8'/%3E%3Cline x1='107.3' y1='183.7' x2='107.0' y2='179.7'/%3E%3Cline x1='100.0' y1='184.0' x2='100.0' y2='176.0'/%3E%3Cline x1='92.7' y1='183.7' x2='93.0' y2='179.7'/%3E%3Cline x1='85.4' y1='182.7' x2='86.1' y2='178.8'/%3E%3Cline x1='78.3' y1='181.1' x2='79.3' y2='177.3'/%3E%3Cline x1='71.3' y1='178.9' x2='72.6' y2='175.2'/%3E%3Cline x1='64.5' y1='176.1' x2='66.2' y2='172.5'/%3E%3Cline x1='58.0' y1='172.7' x2='62.0' y2='165.8'/%3E%3Cline x1='51.8' y1='168.8' x2='54.1' y2='165.5'/%3E%3Cline x1='46.0' y1='164.3' x2='48.6' y2='161.3'/%3E%3Cline x1='40.6' y1='159.4' x2='43.4' y2='156.6'/%3E%3Cline x1='35.7' y1='154.0' x2='38.7' y2='151.4'/%3E%3Cline x1='31.2' y1='148.2' x2='34.5' y2='145.9'/%3E%3Cline x1='27.3' y1='142.0' x2='34.2' y2='138.0'/%3E%3Cline x1='23.9' y1='135.5' x2='27.5' y2='133.8'/%3E%3Cline x1='21.1' y1='128.7' x2='24.8' y2='127.4'/%3E%3Cline x1='18.9' y1='121.7' x2='22.7' y2='120.7'/%3E%3Cline x1='17.3' y1='114.6' x2='21.2' y2='113.9'/%3E%3Cline x1='16.3' y1='107.3' x2='20.3' y2='107.0'/%3E%3Cline x1='16.0' y1='100.0' x2='24.0' y2='100.0'/%3E%3Cline x1='16.3' y1='92.7' x2='20.3' y2='93.0'/%3E%3Cline x1='17.3' y1='85.4' x2='21.2' y2='86.1'/%3E%3Cline x1='18.9' y1='78.3' x2='22.7' y2='79.3'/%3E%3Cline x1='21.1' y1='71.3' x2='24.8' y2='72.6'/%3E%3Cline x1='23.9' y1='64.5' x2='27.5' y2='66.2'/%3E%3Cline x1='27.3' y1='58.0' x2='34.2' y2='62.0'/%3E%3Cline x1='31.2' y1='51.8' x2='34.5' y2='54.1'/%3E%3Cline x1='35.7' y1='46.0' x2='38.7' y2='48.6'/%3E%3Cline x1='40.6' y1='40.6' x2='43.4' y2='43.4'/%3E%3Cline x1='46.0' y1='35.7' x2='48.6' y2='38.7'/%3E%3Cline x1='51.8' y1='31.2' x2='54.1' y2='34.5'/%3E%3Cline x1='58.0' y1='27.3' x2='62.0' y2='34.2'/%3E%3Cline x1='64.5' y1='23.9' x2='66.2' y2='27.5'/%3E%3Cline x1='71.3' y1='21.1' x2='72.6' y2='24.8'/%3E%3Cline x1='78.3' y1='18.9' x2='79.3' y2='22.7'/%3E%3Cline x1='85.4' y1='17.3' x2='86.1' y2='21.2'/%3E%3Cline x1='92.7' y1='16.3' x2='93.0' y2='20.3'/%3E%3Cline x1='100.0' y1='16.0' x2='100.0' y2='24.0'/%3E%3Cline x1='107.3' y1='16.3' x2='107.0' y2='20.3'/%3E%3Cline x1='114.6' y1='17.3' x2='113.9' y2='21.2'/%3E%3Cline x1='121.7' y1='18.9' x2='120.7' y2='22.7'/%3E%3Cline x1='128.7' y1='21.1' x2='127.4' y2='24.8'/%3E%3Cline x1='135.5' y1='23.9' x2='133.8' y2='27.5'/%3E%3Cline x1='142.0' y1='27.3' x2='138.0' y2='34.2'/%3E%3Cline x1='148.2' y1='31.2' x2='145.9' y2='34.5'/%3E%3Cline x1='154.0' y1='35.7' x2='151.4' y2='38.7'/%3E%3Cline x1='159.4' y1='40.6' x2='156.6' y2='43.4'/%3E%3Cline x1='164.3' y1='46.0' x2='161.3' y2='48.6'/%3E%3Cline x1='168.8' y1='51.8' x2='165.5' y2='54.1'/%3E%3Cline x1='172.7' y1='58.0' x2='165.8' y2='62.0'/%3E%3Cline x1='176.1' y1='64.5' x2='172.5' y2='66.2'/%3E%3Cline x1='178.9' y1='71.3' x2='175.2' y2='72.6'/%3E%3Cline x1='181.1' y1='78.3' x2='177.3' y2='79.3'/%3E%3Cline x1='182.7' y1='85.4' x2='178.8' y2='86.1'/%3E%3Cline x1='183.7' y1='92.7' x2='179.7' y2='93.0'/%3E%3C/svg%3E");
+        }
+
+        .blog-card.motif-capsule {
+            --motif-tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56' fill='none' stroke='%236b7280' stroke-width='1.1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cg transform='rotate(-45 28 28)'%3E%3Crect x='8' y='21' width='40' height='14' rx='7'/%3E%3Cpath d='M14 28H42'/%3E%3C/g%3E%3C/svg%3E");
+            --motif-tile-size: 56px 56px;
+            --motif-emblem: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200' fill='none' stroke='%236b7280' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='5.0' y='63.0' width='190' height='74' rx='37.0' transform='rotate(-35 100 100)'/%3E%3Crect x='22.0' y='72.0' width='156' height='56' rx='28.0' transform='rotate(-35 100 100)'/%3E%3Crect x='39.0' y='80.0' width='122' height='40' rx='20.0' transform='rotate(-35 100 100)'/%3E%3Crect x='56.0' y='87.0' width='88' height='26' rx='13.0' transform='rotate(-35 100 100)'/%3E%3Crect x='73.0' y='94.0' width='54' height='12' rx='6.0' transform='rotate(-35 100 100)'/%3E%3C/svg%3E");
+        }
+
+        .blog-card.motif-sdl {
+            --motif-tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60' fill='none' stroke='%236b7280' stroke-width='1.1' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='30.0' cy='30.0' r='4'/%3E%3Ccircle cx='30.0' cy='30.0' r='10'/%3E%3Ccircle cx='30.0' cy='30.0' r='16'/%3E%3Ccircle cx='30.0' cy='30.0' r='22'/%3E%3Ccircle cx='0.0' cy='0.0' r='4'/%3E%3Ccircle cx='60.0' cy='0.0' r='4'/%3E%3Ccircle cx='0.0' cy='60.0' r='4'/%3E%3Ccircle cx='60.0' cy='60.0' r='4'/%3E%3C/svg%3E");
+            --motif-tile-size: 60px 60px;
+            --motif-emblem: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200' fill='none' stroke='%236b7280' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cellipse cx='72' cy='104' rx='11.5' ry='10'/%3E%3Cellipse cx='72' cy='104' rx='25.299999999999997' ry='22'/%3E%3Cellipse cx='72' cy='104' rx='41.4' ry='36'/%3E%3Cellipse cx='72' cy='104' rx='59.8' ry='52'/%3E%3Cellipse cx='72' cy='104' rx='78.19999999999999' ry='68'/%3E%3Cellipse cx='140' cy='92' rx='9.2' ry='8'/%3E%3Cellipse cx='140' cy='92' rx='20.7' ry='18'/%3E%3Cellipse cx='140' cy='92' rx='34.5' ry='30'/%3E%3Cellipse cx='140' cy='92' rx='50.599999999999994' ry='44'/%3E%3C/svg%3E");
+        }
+
+        .blog-card.motif-gap {
+            --motif-tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='48' viewBox='0 0 64 48' fill='none' stroke='%236b7280' stroke-width='1.1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M25 8Q14 24 25 40'/%3E%3Cpath d='M39 8Q50 24 39 40'/%3E%3Cpath d='M20 14Q11 24 20 34'/%3E%3Cpath d='M44 14Q53 24 44 34'/%3E%3C/svg%3E");
+            --motif-tile-size: 64px 48px;
+            --motif-emblem: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200' fill='none' stroke='%236b7280' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='52.0' cy='100.0' r='14'/%3E%3Ccircle cx='148.0' cy='100.0' r='14'/%3E%3Ccircle cx='52.0' cy='100.0' r='28'/%3E%3Ccircle cx='148.0' cy='100.0' r='28'/%3E%3Ccircle cx='52.0' cy='100.0' r='44'/%3E%3Ccircle cx='148.0' cy='100.0' r='44'/%3E%3Cpath d='M100 14V186' stroke-dasharray='3 6'/%3E%3C/svg%3E");
+        }
+
+        .blog-card.motif-brain {
+            --motif-tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='64' viewBox='0 0 72 64' fill='none' stroke='%236b7280' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cg transform='translate(12 10) scale(.27) translate(-20 -30)' stroke-width='4'%3E%3Cpath d='M40 120C22 112 20 88 36 78C32 60 52 44 70 52C78 34 108 30 120 46C140 36 168 50 166 74C184 84 184 108 168 118C168 136 148 144 132 138C120 150 96 150 88 138C72 146 48 138 40 120Z'/%3E%3Cpath d='M112 46C108 64 118 78 112 92'/%3E%3Cpath d='M60 112C80 100 100 108 124 98'/%3E%3Cpath d='M70 70C82 76 80 90 92 90'/%3E%3Cpath d='M140 68C132 80 144 90 150 102'/%3E%3Cpath d='M56 94C62 86 70 88 72 96'/%3E%3Cpath d='M128 140C140 134 164 138 164 150C164 162 140 166 128 156'/%3E%3Cpath d='M134 146H156M134 152H158'/%3E%3Cpath d='M104 146C104 160 106 172 108 182M116 148C118 160 120 172 122 180'/%3E%3C/g%3E%3C/svg%3E");
+            --motif-tile-size: 72px 64px;
+            --motif-emblem: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200' fill='none' stroke='%236b7280' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cg transform='translate(-14 0)'%3E%3Cpath d='M40 120C22 112 20 88 36 78C32 60 52 44 70 52C78 34 108 30 120 46C140 36 168 50 166 74C184 84 184 108 168 118C168 136 148 144 132 138C120 150 96 150 88 138C72 146 48 138 40 120Z'/%3E%3Cpath d='M112 46C108 64 118 78 112 92'/%3E%3Cpath d='M60 112C80 100 100 108 124 98'/%3E%3Cpath d='M70 70C82 76 80 90 92 90'/%3E%3Cpath d='M140 68C132 80 144 90 150 102'/%3E%3Cpath d='M56 94C62 86 70 88 72 96'/%3E%3Cpath d='M128 140C140 134 164 138 164 150C164 162 140 166 128 156'/%3E%3Cpath d='M134 146H156M134 152H158'/%3E%3Cpath d='M104 146C104 160 106 172 108 182M116 148C118 160 120 172 122 180'/%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .blog-card.motif-brain::after {
+            top: -34px;
+            right: -44px;
+            width: 240px;
+            height: 240px;
+        }
+
+        .blog-card.motif-evo {
+            --motif-tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64' fill='none' stroke='%236b7280' stroke-width='1.1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M32 64V48'/%3E%3Cpath d='M32 48Q32 40 16 32'/%3E%3Cpath d='M32 48Q32 40 48 32'/%3E%3Cpath d='M16 32Q16 24 8 14'/%3E%3Cpath d='M16 32Q16 24 24 14'/%3E%3Cpath d='M48 32Q48 24 40 14'/%3E%3Cpath d='M48 32Q48 24 56 14'/%3E%3Ccircle cx='8.0' cy='12.0' r='2'/%3E%3Ccircle cx='24.0' cy='12.0' r='2'/%3E%3Ccircle cx='40.0' cy='12.0' r='2'/%3E%3Ccircle cx='56.0' cy='12.0' r='2'/%3E%3C/svg%3E");
+            --motif-tile-size: 64px 64px;
+            --motif-emblem: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200' fill='none' stroke='%236b7280' stroke-width='1.1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='100.0' y1='196.0' x2='100.0' y2='144.0'/%3E%3Cline x1='100.0' y1='144.0' x2='84.7' y2='109.8'/%3E%3Cline x1='84.7' y1='109.8' x2='64.7' y2='91.8'/%3E%3Cline x1='64.7' y1='91.8' x2='46.2' y2='85.9'/%3E%3Cline x1='46.2' y1='85.9' x2='32.3' y2='87.4'/%3E%3Ccircle cx='32.3' cy='87.4' r='3'/%3E%3Ccircle cx='32.3' cy='87.4' r='3'/%3E%3Cline x1='46.2' y1='85.9' x2='35.8' y2='76.6'/%3E%3Ccircle cx='35.8' cy='76.6' r='3'/%3E%3Ccircle cx='35.8' cy='76.6' r='3'/%3E%3Cline x1='64.7' y1='91.8' x2='56.7' y2='74.1'/%3E%3Cline x1='56.7' y1='74.1' x2='46.3' y2='64.8'/%3E%3Ccircle cx='46.3' cy='64.8' r='3'/%3E%3Ccircle cx='46.3' cy='64.8' r='3'/%3E%3Cline x1='56.7' y1='74.1' x2='56.7' y2='60.1'/%3E%3Ccircle cx='56.7' cy='60.1' r='3'/%3E%3Ccircle cx='56.7' cy='60.1' r='3'/%3E%3Cline x1='84.7' y1='109.8' x2='84.7' y2='82.9'/%3E%3Cline x1='84.7' y1='82.9' x2='76.8' y2='65.1'/%3E%3Cline x1='76.8' y1='65.1' x2='66.4' y2='55.8'/%3E%3Ccircle cx='66.4' cy='55.8' r='3'/%3E%3Ccircle cx='66.4' cy='55.8' r='3'/%3E%3Cline x1='76.8' y1='65.1' x2='76.8' y2='51.2'/%3E%3Ccircle cx='76.8' cy='51.2' r='3'/%3E%3Ccircle cx='76.8' cy='51.2' r='3'/%3E%3Cline x1='84.7' y1='82.9' x2='92.6' y2='65.1'/%3E%3Cline x1='92.6' y1='65.1' x2='92.6' y2='51.2'/%3E%3Ccircle cx='92.6' cy='51.2' r='3'/%3E%3Ccircle cx='92.6' cy='51.2' r='3'/%3E%3Cline x1='92.6' y1='65.1' x2='103.1' y2='55.8'/%3E%3Ccircle cx='103.1' cy='55.8' r='3'/%3E%3Ccircle cx='103.1' cy='55.8' r='3'/%3E%3Cline x1='100.0' y1='144.0' x2='115.3' y2='109.8'/%3E%3Cline x1='115.3' y1='109.8' x2='115.3' y2='82.9'/%3E%3Cline x1='115.3' y1='82.9' x2='107.4' y2='65.1'/%3E%3Cline x1='107.4' y1='65.1' x2='96.9' y2='55.8'/%3E%3Ccircle cx='96.9' cy='55.8' r='3'/%3E%3Ccircle cx='96.9' cy='55.8' r='3'/%3E%3Cline x1='107.4' y1='65.1' x2='107.4' y2='51.2'/%3E%3Ccircle cx='107.4' cy='51.2' r='3'/%3E%3Ccircle cx='107.4' cy='51.2' r='3'/%3E%3Cline x1='115.3' y1='82.9' x2='123.2' y2='65.1'/%3E%3Cline x1='123.2' y1='65.1' x2='123.2' y2='51.2'/%3E%3Ccircle cx='123.2' cy='51.2' r='3'/%3E%3Ccircle cx='123.2' cy='51.2' r='3'/%3E%3Cline x1='123.2' y1='65.1' x2='133.6' y2='55.8'/%3E%3Ccircle cx='133.6' cy='55.8' r='3'/%3E%3Ccircle cx='133.6' cy='55.8' r='3'/%3E%3Cline x1='115.3' y1='109.8' x2='135.3' y2='91.8'/%3E%3Cline x1='135.3' y1='91.8' x2='143.3' y2='74.1'/%3E%3Cline x1='143.3' y1='74.1' x2='143.3' y2='60.1'/%3E%3Ccircle cx='143.3' cy='60.1' r='3'/%3E%3Ccircle cx='143.3' cy='60.1' r='3'/%3E%3Cline x1='143.3' y1='74.1' x2='153.7' y2='64.8'/%3E%3Ccircle cx='153.7' cy='64.8' r='3'/%3E%3Ccircle cx='153.7' cy='64.8' r='3'/%3E%3Cline x1='135.3' y1='91.8' x2='153.8' y2='85.9'/%3E%3Cline x1='153.8' y1='85.9' x2='164.2' y2='76.6'/%3E%3Ccircle cx='164.2' cy='76.6' r='3'/%3E%3Ccircle cx='164.2' cy='76.6' r='3'/%3E%3Cline x1='153.8' y1='85.9' x2='167.7' y2='87.4'/%3E%3Ccircle cx='167.7' cy='87.4' r='3'/%3E%3Ccircle cx='167.7' cy='87.4' r='3'/%3E%3C/svg%3E");
+        }
+
+        .blog-card.motif-lrh {
+            --motif-tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48' fill='none' stroke='%236b7280' stroke-width='1.1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M0 48L48 0'/%3E%3Cpath d='M-6 6L6 -6'/%3E%3Cpath d='M42 54L54 42'/%3E%3Ccircle cx='24.0' cy='24.0' r='2.5'/%3E%3C/svg%3E");
+            --motif-tile-size: 48px 48px;
+            --motif-emblem: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200' fill='none' stroke='%236b7280' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='100.0' cy='100.0' r='80'/%3E%3Ccircle cx='100.0' cy='100.0' r='3'/%3E%3Cpath d='M100 14V186M14 100H186'/%3E%3Cline x1='100.0' y1='100.0' x2='173.9' y2='69.4'/%3E%3Ccircle cx='173.9' cy='69.4' r='4'/%3E%3Cline x1='100.0' y1='100.0' x2='130.6' y2='26.1'/%3E%3Ccircle cx='130.6' cy='26.1' r='4'/%3E%3Cline x1='100.0' y1='100.0' x2='69.4' y2='26.1'/%3E%3Ccircle cx='69.4' cy='26.1' r='4'/%3E%3Cline x1='100.0' y1='100.0' x2='26.1' y2='69.4'/%3E%3Ccircle cx='26.1' cy='69.4' r='4'/%3E%3Cline x1='100.0' y1='100.0' x2='26.1' y2='130.6'/%3E%3Ccircle cx='26.1' cy='130.6' r='4'/%3E%3Cline x1='100.0' y1='100.0' x2='69.4' y2='173.9'/%3E%3Ccircle cx='69.4' cy='173.9' r='4'/%3E%3Cline x1='100.0' y1='100.0' x2='130.6' y2='173.9'/%3E%3Ccircle cx='130.6' cy='173.9' r='4'/%3E%3Cline x1='100.0' y1='100.0' x2='173.9' y2='130.6'/%3E%3Ccircle cx='173.9' cy='130.6' r='4'/%3E%3C/svg%3E");
+        }
+
         footer {
             text-align: center;
             padding: 30px;
@@ -240,13 +401,8 @@
     </nav>
 
     <div class="container">
-        <div class="page-header">
-            <h1>Blog</h1>
-            <p>Life, Research, People, and Ideas</p>
-        </div>
-
         <div class="blog-grid">
-            <div class="blog-card">
+            <div class="blog-card motif motif-eval">
                 <div class="blog-date">2026/11/8</div>
                 <a href="blog/sdl_evaluation/blog_sdl_evaluation.html" style="text-decoration: none; color: inherit;">
                     <h2 class="blog-title" style="cursor: pointer; transition: color 0.3s ease;">Paper Walkthroughs</h2>
@@ -258,7 +414,7 @@
                 <a href="blog/sdl_evaluation/blog_sdl_evaluation.html" class="read-more">Read More</a>
             </div>
 
-            <div class="blog-card">
+            <div class="blog-card motif motif-capsule">
                 <div class="blog-date">2026/9/28</div>
                 <a href="blog/capsule_lens/blog_capsule.html" style="text-decoration: none; color: inherit;">
                     <h2 class="blog-title" style="cursor: pointer; transition: color 0.3s ease;">Paper Walkthroughs</h2>
@@ -270,19 +426,19 @@
                 <a href="blog/capsule_lens/blog_capsule.html" class="read-more">Read More</a>
             </div>
             
-            <div class="blog-card">
+            <div class="blog-card featured">
                 <div class="blog-date">2026/7/20</div>
                 <a href="blog/yiming_research_intro/blog_research_introduction.html" style="text-decoration: none; color: inherit;">
                     <h2 class="blog-title" style="cursor: pointer; transition: color 0.3s ease;">What We Work On</h2>
                 </a>
-                <p style="color: #666; font-size: 1.05em; margin: -10px 0 15px 0; font-style: italic; font-weight: 600;">Concept-Based Mechanistic Interpretability and Empirical Learning Mechanics at NUS Artificial Scientific Intelligence Lab</p>
+                <p style="color: #666; font-size: 1.05em; margin: -10px 0 15px 0; font-style: italic; font-weight: 600;">Concept-Based Mechanistic Interpretability and Empirical Learning Mechanics</p>
                 <p class="blog-excerpt">
                     An informal tour of our research for students, potential collaborators, and anyone curious about the Interpretability Team. What mechanistic interpretability is, what we have built with sparse dictionary learning—from a theoretical framework to generative model evaluation, medical diagnosis, and the human visual cortex—and how we study the way training itself reshapes a model's representations.
                 </p>
                 <a href="blog/yiming_research_intro/blog_research_introduction.html" class="read-more">Read More</a>
             </div>
 
-            <div class="blog-card">
+            <div class="blog-card motif motif-sdl">
                 <div class="blog-date">2026/3/1</div>
                 <a href="blog/sdl_theory/blog_sdl_theory.html" style="text-decoration: none; color: inherit;">
                     <h2 class="blog-title" style="cursor: pointer; transition: color 0.3s ease;">Paper Walkthroughs</h2>
@@ -294,7 +450,7 @@
                 <a href="blog/sdl_theory/blog_sdl_theory.html" class="read-more">Read More</a>
             </div>
 
-            <div class="blog-card">
+            <div class="blog-card motif motif-gap">
                 <div class="blog-date">2026/2/3</div>
                 <a href="blog/modality_gap/blog_modality_gap.html" style="text-decoration: none; color: inherit;">
                     <h2 class="blog-title" style="cursor: pointer; transition: color 0.3s ease;">Paper Walkthroughs</h2>
@@ -306,7 +462,7 @@
                 <a href="blog/modality_gap/blog_modality_gap.html" class="read-more">Read More</a>
             </div>
 
-            <div class="blog-card">
+            <div class="blog-card motif motif-brain">
                 <div class="blog-date">2026/1/19</div>
                 <a href="blog/brain_explore/blog_brain.html" style="text-decoration: none; color: inherit;">
                     <h2 class="blog-title" style="cursor: pointer; transition: color 0.3s ease;">Paper Walkthroughs</h2>
@@ -318,7 +474,7 @@
                 <a href="blog/brain_explore/blog_brain.html" class="read-more">Read More</a>
             </div>
 
-            <div class="blog-card">
+            <div class="blog-card motif motif-evo">
                 <div class="blog-date">2025/12/16</div>
                 <a href="blog/evolution/blog_evo.html" style="text-decoration: none; color: inherit;">
                     <h2 class="blog-title" style="cursor: pointer; transition: color 0.3s ease;">Paper Walkthroughs</h2>
@@ -330,7 +486,7 @@
                 <a href="blog/evolution/blog_evo.html" class="read-more">Read More</a>
             </div>
 
-            <div class="blog-card">
+            <div class="blog-card motif motif-lrh">
                 <div class="blog-date">2025/12/15</div>
                 <a href="blog/the_linear_representation_hypothesis/blog_lrh.html" style="text-decoration: none; color: inherit;">
                     <h2 class="blog-title" style="cursor: pointer; transition: color 0.3s ease;">Paper Walkthroughs</h2>
