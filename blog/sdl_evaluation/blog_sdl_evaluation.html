@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concept-Based Mechanistic Interpretability Needs a Concrete Evaluation Paradigm - Yiming Tang</title>
+    
+    <!-- MathJax for rendering LaTeX formulas -->
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        ::selection {
+            background-color: #000;
+            color: #fff;
+        }
+
+        ::-moz-selection {
+            background-color: #000;
+            color: #fff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 70px;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            z-index: 1000;
+            padding: 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .nav-brand {
+            font-weight: 600;
+            font-size: 1.2em;
+            color: #2c3e50;
+            text-decoration: none;
+            padding: 15px 0;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 5px;
+        }
+
+        .nav-links a {
+            color: #555;
+            text-decoration: none;
+            padding: 20px 15px;
+            display: block;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            background-color: #555;
+            color: white;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        article {
+            background-color: #fff;
+            padding: 50px 60px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .article-meta {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .article-meta p {
+            margin: 8px 0;
+            color: #666;
+        }
+
+        .article-meta a {
+            color: #555;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .article-meta a:hover {
+            text-decoration: underline;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #555;
+        }
+
+        h3 {
+            color: #2c3e50;
+            font-size: 1.4em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 1.05em;
+        }
+
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            font-size: 1.05em;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 30px auto;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .math-block {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-left: 4px solid #555;
+            overflow-x: auto;
+        }
+
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+
+        strong {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        hr {
+            margin: 40px 0;
+            border: none;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 10px 20px;
+            background-color: #555;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-link:hover {
+            background-color: #333;
+        }
+
+        .hypothesis-motto {
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .hypothesis-motto p {
+            color: #1a1a1a;
+            font-size: 1.3em;
+            font-weight: 400;
+            line-height: 1.7;
+            margin: 0;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-style: italic;
+            letter-spacing: 0.3px;
+        }
+
+        .figure-caption {
+            text-align: center;
+            font-size: 0.92em;
+            color: #666;
+            margin-top: -15px;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .theorem-box {
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-left: 4px solid #2c3e50;
+            border-radius: 4px;
+            padding: 20px 25px;
+            margin: 25px 0;
+        }
+
+        .theorem-box p {
+            margin-bottom: 10px;
+        }
+
+        .theorem-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 768px) {
+            article {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-brand">Yiming Tang's Homepage</a>
+            <ul class="nav-links">
+                <li><a href="../../blog.html">← Back to Blog</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <article>
+            <h1>Paper Walkthroughs</h1>
+            <h3 style="color: #555; font-weight: 600; font-size: 1.35em; margin-top: -10px; margin-bottom: 30px;">Concept-Based Mechanistic Interpretability Needs a Concrete Evaluation Paradigm</h3>
+
+            <div class="article-meta">
+                <p><strong>Authors:</strong> Yiming Tang, Qinglin Qi, Zheng Lin, Dianbo Liu</p>
+                <p><strong>Walkthrough by:</strong> Yiming Tang</p>
+                <p><strong>Paper:</strong> <a href="https://openreview.net/forum?id=fAXSAH3loo" target="_blank">https://openreview.net/forum?id=fAXSAH3loo</a></p>
+                <p><strong>Venue:</strong> NeurIPS 2026, Position Paper Track</p>
+            </div>
+
+            <div class="hypothesis-motto">
+                <p>Before scaling concept-based mechanistic interpretability any further, the field needs to agree on how to tell whether a method actually recovers the concepts a model encodes.</p>
+            </div>
+
+            <h2>Background and Motivation</h2>
+
+            <p>Understanding which concepts are encoded in the internal representations of large language models and vision-language models is one of the central goals of mechanistic interpretability. Over the past few years, <strong>Sparse Dictionary Learning (SDL)</strong>, which covers sparse autoencoders, transcoders, crosscoders and their many variants, has become the dominant methodology for this goal. It has been scaled to frontier models and applied to circuit analysis, steering, unlearning and medical imaging.</p>
+
+            <p>Around SDL, a sizable evaluation suite has grown up: reconstruction loss and sparsity, automated interpretability scoring, human evaluation, feature absorption rates, sparse probing, and model editing benchmarks. Each of these is useful. The question this paper asks is a more basic one: <strong>do any of them measure what SDL is actually supposed to achieve?</strong></p>
+
+            <p>The central goal of SDL is to recover the <strong>ground-truth features</strong> underlying the observed representations. Our position is that none of the standard metrics measures this directly, that the gap is structural rather than incidental, and that the community should converge on a concrete evaluation paradigm before continuing to scale methods whose effectiveness has not been fully verified. This matters more than usual here, because the stated motivation of the whole program is AI safety, where undetected failure is the most costly.</p>
+
+            <h2>How Are SDL Methods Evaluated Today?</h2>
+
+            <p>The existing evaluations are fragmented but can be sorted by what each one fundamentally measures:</p>
+
+            <ol>
+                <li><strong>Reconstruction &amp; Sparsity:</strong> how well activations are rebuilt (loss, L0, loss recovered).</li>
+                <li><strong>Human &amp; LMM Evaluation:</strong> whether top-activating examples form a coherent, describable concept.</li>
+                <li><strong>Sparse Probing:</strong> whether a few latents suffice to predict concept labels.</li>
+                <li><strong>Feature Absorption Rate:</strong> whether a broad feature swallows its sub-concepts.</li>
+                <li><strong>Downstream Tasks:</strong> whether features support steering, unlearning, or disentanglement.</li>
+                <li><strong>Ground-Truth Recovery:</strong> whether learned features match known true features.</li>
+                <li><strong>Unified Benchmark Suites:</strong> bundles of the above (SAEBench, MIB, CE-Bench).</li>
+            </ol>
+
+            <h2>Limitations of Existing Evaluation Methods</h2>
+
+            <p>If the aim is to measure whether SDL recovers the model's ground-truth features, every one of these families has a core limitation:</p>
+
+            <ol>
+                <li><strong>Reconstruction &amp; Sparsity:</strong> zero loss is achievable by infinitely many solutions that recover no ground-truth feature.</li>
+                <li><strong>Human &amp; LMM Evaluation:</strong> polysemantic features can score high, while faithfully recovered but hard-to-describe features are undercounted.</li>
+                <li><strong>Sparse Probing:</strong> it measures utility rather than fidelity, and only tests features tied to a pre-specified concept vocabulary.</li>
+                <li><strong>Feature Absorption Rate:</strong> it covers one failure mode and only gives a lower bound on recovery failures.</li>
+                <li><strong>Downstream Tasks:</strong> polysemantic features can still steer well, so utility is conflated with fidelity.</li>
+                <li><strong>Ground-Truth Recovery:</strong> it is the only direct measure, but it is currently feasible only in synthetic settings.</li>
+                <li><strong>Unified Benchmark Suites:</strong> aggregating insufficient proxies does not yield a sufficient evaluation.</li>
+            </ol>
+
+            <p>The rest of the paper backs this up with theory and with experiments.</p>
+
+            <h2>Theoretical Evidence</h2>
+
+            <h3>Setup: SDL and Its Central Goal</h3>
+
+            <p>Under the Linear Representation Hypothesis, a model's internal representations are generated by \(n\) sparse, non-negative ground-truth features \(x(s) \in \mathbb{R}^n_+\) for each input \(s\), each encoding an interpretable concept. We only ever observe two linear projections of \(x(s)\): the probe-space representation \(x_p(s)\) that the SDL encoder reads, and the reconstruction-space representation \(x_r(s)\) that the decoder rebuilds:</p>
+
+            <div class="math-block">
+                $$x_p(s) = W_p x(s), \qquad x_r(s) = W_r x(s)$$
+            </div>
+
+            <p>An SDL method trains an encoder-decoder pair \((W_E, W_D)\) with \(n_q\) latents and a sparsity-inducing activation \(\sigma\) to minimize</p>
+
+            <div class="math-block">
+                $$\mathcal{L}_{\text{SDL}} = \mathbb{E}_{s}\left[\|x_r(s) - W_D\, \sigma(W_E\, x_p(s))\|_2^2\right]$$
+            </div>
+
+            <p>The common SDL methods differ only in the choice of \((x_p, x_r)\). Sparse autoencoders set \(x_p = x_r\). Transcoders let \(x_p\) and \(x_r\) be activations of successive layers, so the model learns a sparse approximation of the layer-to-layer transformation. Crosscoders encode and reconstruct jointly across multiple layers or models.</p>
+
+            <p>The key observation is that <strong>the loss and the goal live in different places</strong>. The loss is computed on observed quantities, while recovery is a property of the latent \(x(s)\) (and of \(W_p\), \(W_r\)), which is inaccessible in naturalistic settings. That gap is the root of the evaluation problem.</p>
+
+            <h3>Zero Loss Does Not Imply Feature Recovery</h3>
+
+            <p>Under the high-sparsity limit, the objective approximates a per-feature loss over the ground-truth directions:</p>
+
+            <div class="math-block">
+                $$\tilde{\mathcal{L}}_{\text{SDL}}(W_D, W_E) = \sum_{d=1}^{n} \left\| w_r^d - W_D\, \sigma(W_E\, w_p^d) \right\|_2^2$$
+            </div>
+
+            <div class="theorem-box">
+                <p><strong>Theorem 5.1 (Underdetermined Solution Space).</strong> Under the Linear Representation Hypothesis, \(\tilde{\mathcal{L}}_{\text{SDL}} = O((1-S)^2)\) if and only if \(w_r^d = W_D\, \sigma(W_E\, w_p^d)\) for all \(d \in [n]\). When \(n_q > n\), this system is underdetermined and admits infinitely many solutions.</p>
+            </div>
+
+            <p>Some of those solutions achieve zero loss while recovering no ground-truth feature direction at all. A near-zero-loss solution that does recover the ground truth exists, but it is one among infinitely many. Reconstruction loss therefore cannot separate recovery from failure. Related work points the same way: even the optimal SAE under realistic sparsity distorts features through shrinking and vanishing, and SAEs trained on the same model and data with different random seeds recover largely different feature sets.</p>
+
+            <h3>Polysemantic Solutions Are Structurally Pervasive</h3>
+
+            <div class="theorem-box">
+                <p><strong>Theorem 5.2 (Prevalence of Spurious Partial Minima).</strong> Under the Linear Representation Hypothesis with \(n \geq 2\) and \(n_q \geq n\), for any activation pattern that is realizable, polysemantic, and forms a partition of \([n]\), there is a spurious partial minimum of \(\tilde{\mathcal{L}}_{\text{SDL}}\) exhibiting this pattern.</p>
+            </div>
+
+            <p>Hierarchical concept structure, which is present in virtually all real-world representations, guarantees that such minima exist through a provable feature absorption mechanism:</p>
+
+            <div class="theorem-box">
+                <p><strong>Theorem 5.3 (Feature Absorption from Hierarchical Structure).</strong> If the ground-truth features contain a parent concept decomposing into sub-concepts \(\{d_{i,1}, \ldots, d_{i,k_i}\}\) with \(k_i \geq 2\), and the corresponding activation pattern \(\mathcal{P} = (\mathcal{F}_1, \ldots, \mathcal{F}_{i^*}, \ldots, \mathcal{F}_N)\) is realizable, then there exists a sub-concept \(d_{i^*,j^*}\) such that the absorption pattern \(\mathcal{P}' = (\ldots, \mathcal{F}_{i^*} \setminus \{d_{i^*,j^*}\}, \{d_{i^*,j^*}\}, \ldots)\) is realizable and corresponds to a spurious partial minimum.</p>
+            </div>
+
+            <p>Taken together, polysemantic solutions are structural properties of the SDL landscape rather than incidental training failures. They are also compounded by an evaluation blind spot: polysemantic features that fire on semantically coherent sub-concept clusters can receive high interpretability scores, which makes them hard to tell apart from genuine monosemantic recovery without ground-truth access. This matches what has been reported in practice, including feature absorption in trained SAEs and SAE latents that decompose into combinations of finer-grained concepts.</p>
+
+            <h2>Empirical Evidence You May Ignore about SDL</h2>
+
+            <h3>1. SDL Can Achieve Zero Loss, Yet Still Give Misaligned Features</h3>
+
+            <p>We construct a fully synthetic benchmark that satisfies the Linear Representation Hypothesis exactly, with all feature directions known. The ground-truth features form a clean orthogonal basis, and the training loss converges to near zero as usual. Yet the learned encoder and decoder directions are substantially misaligned with the ground-truth features. More broadly, across SDL methods spanning 0% to 89% GT Recovery, reconstruction metrics make them look indistinguishable. This is Theorem 5.1 in action: low reconstruction loss is compatible with complete recovery failure.</p>
+
+            <h3>2. Some Multimodal Features Are Intrinsically Hard to Describe</h3>
+
+            <p>Automated interpretability scoring asks whether a natural-language label predicts a feature's held-out activations. That criterion conflates <em>linguistic expressibility</em> with <em>representational fidelity</em>. We trained SDL modules on natural images, fundus images, chest X-rays and fMRI representations, and asked an LMM to describe the highest-activating samples of each feature.</p>
+
+            <img src="hard_to_describe.png" alt="Cross-modal SDL features that resist natural language grounding">
+            <p class="figure-caption"><strong>Figure 1.</strong> Cross-modal SDL features that resist natural language grounding. The features encode coherent structure across all four modalities, yet the descriptions range from domain-specific (&ldquo;retinal blood vessels and optic nerve head&rdquo;) to vague (&ldquo;complicated edge signals&rdquo;).</p>
+
+            <p>The features clearly capture reproducible structure: retinal vasculature, pulmonary consolidation patterns, complex edge signals. But accurate grounding in language is difficult. Descriptions either need narrow clinical vocabulary that general pipelines do not have, or collapse into vague phrases. An evaluation that relies mainly on linguistic coherence will systematically undercount faithfully recovered features of this kind. In these cases the limit lies in language, and the recovery itself is fine.</p>
+
+            <h3>3. Polysemantic Features Can Still Highly Match with Natural Language</h3>
+
+            <p>The opposite failure mode is a polysemantic feature that gets rated as interpretable. To test this in a controlled way, we use ImageNet-1K class-mean embeddings as ground-truth feature proxies. Individually, Feature 1 (dish racks) and Feature 2 (recreational vehicles) get precise labels and scores of 95% and 96%. We then sum the two embeddings and raise the activation threshold, which gives a feature that is polysemantic by construction.</p>
+
+            <img src="LMM_interpretation_results.png" alt="LMM interpretation of two single-class features and their polysemantic combination">
+            <p class="figure-caption"><strong>Figure 2.</strong> Polysemantic features receive high automated interpretability scores. The combined feature still scores 92%, because the LMM retreats to the coarse superordinate label &ldquo;household furniture and interior design items&rdquo;.</p>
+
+            <p>Instead of flagging a conflict, the LMM falls back to a label that is technically defensible but loses the specificity of both concepts. The consequence is a <strong>coverage blind spot</strong>: a run that absorbs ground-truth concepts into spurious polysemantic combinations can still report high interpretability scores, with no signal about what is missing. Ground-truth recovery metrics measure coverage, while automated scoring does not.</p>
+
+            <p>To check this is systematic, we repeat the procedure over 1,000 randomly sampled ImageNet-1K class pairs:</p>
+
+            <img src="polysemantic.png" alt="Table of LMM interpretability scores for single-class and combined features">
+            <p class="figure-caption"><strong>Table 1.</strong> Automated interpretability scores remain high under polysemanticity. Single features score 98.1% on average, and combinations that are polysemantic by construction still average 91.4%.</p>
+
+            <p>Most combinations still score at or near ceiling, and the mean is pulled down by a smaller set of harder cases rather than by a uniform drop. So the blind spot is a general property of this kind of scoring, and the dish-rack example is representative of it.</p>
+
+            <h2>Toward a Concrete Evaluation Paradigm</h2>
+
+            <p>These results converge on one conclusion: the field needs an evaluation paradigm anchored in ground-truth feature recovery, and eventually one that reaches frontier models. We propose that a benchmark for concept-based mechanistic interpretability should specify, <strong>for each concept, the region of representation space it occupies</strong>, and satisfy four principles:</p>
+
+            <ol>
+                <li><strong>Ground-Truth Accessibility:</strong> known representational structure, obtained through a tiered approach: synthetic benchmarks with exact ground truth, concept approximation as a bridge, and human-annotated evaluation in naturalistic settings as a fidelity proxy.</li>
+                <li><strong>Falsifiability:</strong> the evaluation must be able to report failure, not only degrees of success. A GT Recovery of 0% is an unambiguous failure signal, whereas a reconstruction loss is not.</li>
+                <li><strong>Coverage Beyond Linear Features:</strong> the benchmark should include features with known non-linear or multi-dimensional geometry (periodic concepts such as days and months, for example), and extend to vision and multimodal representations.</li>
+                <li><strong>Separating Utility from Fidelity:</strong> whether features support a downstream task and whether they reflect the model's representational structure are distinct properties, and protocols should report them separately.</li>
+            </ol>
+
+            <p>The type of benchmark we have in mind is simple to state: a set of carefully curated concepts, a model representation in which they are encoded, and, for each concept, the region of that representation space it occupies. The region is known exactly in synthetic settings and approximated in naturalistic ones. Any concept-based method, SDL or otherwise, can then be tested by checking whether the region it identifies matches the known region, regardless of the geometric form the method assumes. For SDL that region is a direction, and for geometric approaches it may be a subspace or a manifold. GT Recovery is the special case where regions are one-dimensional.</p>
+
+            <h2>A Proposal: Capsule-Based Concept Localization</h2>
+
+            <p>To show that this kind of benchmark can be set up in a naturalistic setting, the appendix sketches a concrete evaluation suite built on <strong>capsules</strong>, following our companion work on capsule lenses. The suite is built independently of the method under test, and it uses concept labels that no evaluated method gets to see.</p>
+
+            <h3>Concept Geometry and Capsules</h3>
+
+            <p>A concept \(c\) is a binary indicator on a dataset, and a model \(\phi_\theta\) induces its geometry \(\Gamma_c = \phi_\theta(D_c) \subset \mathbb{R}^d\), the representations of its positive examples. We approximate this geometry with a deliberately simple parametric shape, an angular cone about an axis intersected with a norm shell. With \(d_{\cos}(x, a) = 1 - \langle x, a\rangle / \|x\|\), the capsule is</p>
+
+            <div class="math-block">
+                $$\mathcal{C}(a, s_a, n_{\text{low}}, n_{\text{high}}) = \left\{ x \;\middle|\; d_{\cos}(x, a) \leq s_a,\; n_{\text{low}} \leq \|x\| \leq n_{\text{high}} \right\}$$
+            </div>
+
+            <p>Its parameters can be read off directly: the axis \(a\) gives the direction of the region, the span \(s_a\) its angular spread, and the norm bounds its magnitude range. Other shapes can replace capsules within the same protocol.</p>
+
+            <h3>Building the Suite</h3>
+
+            <p><strong>Capsule matching</strong> fits a capsule to each concept in closed form. The axis is the normalized mean direction of the unit-normalized samples, the span is a quantile of the cosine distances to that axis, and the norm bounds are quantiles of the sample norms.</p>
+
+            <img src="capsule_matching.png" alt="Algorithm 1: CapsuleMatch, closed-form capsule fitting">
+            <p class="figure-caption"><strong>Figure 3.</strong> CapsuleMatch: closed-form capsule fitting from a concept's representations.</p>
+
+            <p><strong>Validation</strong> then certifies each capsule per concept. We split the concept's positive set into a fitting set and a validation set, fit the capsule on the former, and measure two quantities: precision \(P_c\), the fraction of representations inside the capsule that truly belong to the concept (computed over the full dataset), and recall \(R_c^{\text{cov}}\), the fraction of held-out positives the capsule contains. A capsule enters the benchmark only if \(P_c \geq \tau_P\) and \(R_c^{\text{cov}} \geq \tau_R\). A passing capsule approximates the concept's location with known, reported error, and concepts that the capsule form summarizes poorly simply do not enter the benchmark.</p>
+
+            <h3>Using the Suite</h3>
+
+            <p>An SDL feature with decoder direction \(w_f\) <strong>detects</strong> a capsule \(\mathcal{C}_c\) if \(d_{\cos}(w_f, a_c) \leq s_{a,c}\), that is, if the feature's direction falls inside the concept's certified angular region. The threshold is set by the capsule itself and is not a tunable hyperparameter. For methods that propose a subspace or a manifold, a possible detection rule is region overlap with the capsule above a stated threshold.</p>
+
+            <img src="usage.png" alt="Algorithm 3: Capsule detection and evaluation">
+            <p class="figure-caption"><strong>Figure 4.</strong> Scoring a method's full output against the validated capsule set.</p>
+
+            <p>This yields three fidelity metrics:</p>
+
+            <ul>
+                <li><strong>Coverage:</strong> the fraction of capsules detected by at least one output. This is the primary fidelity metric.</li>
+                <li><strong>Ignored:</strong> the concepts that no output detects. An ignored capsule with certified precision and recall is a per-concept recovery failure that is invisible to reconstruction loss, interpretability scoring and downstream tasks.</li>
+                <li><strong>Overlapping:</strong> the number of outputs falling inside each capsule, which diagnoses redundancy in how a method covers a single concept.</li>
+            </ul>
+
+            <p>The suite poses a question that no existing family can answer: are there concepts that are demonstrably encoded in the representation, and that the method ignores entirely?</p>
+
+            <h2>Alternative Views</h2>
+
+            <p>The paper also discusses the objections we consider most serious. <strong>Human and LMM evaluation fills the gap:</strong> linguistic coherence is meaningful and we keep it in the suite, but it cannot detect polysemantic features on coherent clusters, and it says nothing about the concepts a method fails to recover. <strong>The field is young and evaluation will mature on its own:</strong> progress has been real, but inception score, BLEU and probing accuracy all forced a reinterpretation of accumulated work once their limits became clear, and for work tied to AI safety the cost of waiting is higher. <strong>Ground-truth features do not exist in real models:</strong> even under a constructivist view, synthetic settings give a necessary condition, reconstruction loss then measures compression rather than interpretability, and a benchmark marking where concepts live remains the right instrument for the scientific question. The appendix further discusses when utility should take precedence over fidelity (behavioral applications such as steering) and why SDL evaluation still matters in the era of neural-geometry methods.</p>
+
+            <h2>Takeaway</h2>
+
+            <p>Concept-based mechanistic interpretability cannot verify its own progress without an evaluation paradigm grounded in four commitments: ground-truth accessibility, falsifiability, coverage beyond linear features, and a clean separation of utility from fidelity. The theory shows that the current proxies leave failure modes undetected, and the experiments show those failure modes in practice. We hope the community develops and adopts benchmarks along these lines before scaling methods whose effectiveness remains unverified.</p>
+
+            <p>More details, the full survey of evaluation families, additional polysemantic examples and the complete capsule protocol are in the paper.</p>
+
+            <hr>
+        </article>
+    </div>
+
+    <footer>
+        <div style="text-align: center; padding: 40px 20px 30px;">
+            <p style="color: #666; font-size: 0.9em;">&copy; 2026 Yiming Tang. All rights reserved.</p>
+        </div>
+    </footer>
+    
+</body>
+</html>
