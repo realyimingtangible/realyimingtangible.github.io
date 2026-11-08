@@ -261,6 +261,80 @@
             border-bottom-color: #9a7410;
         }
 
+        /* Purple featured card: white base, lavender accents, fingerprint / detection-scan motifs */
+        .blog-card.featured-purple {
+            position: relative;
+            overflow: hidden;
+            background-color: #fff;
+            border: 1px solid rgba(155, 131, 179, 0.35);
+            border-top: 4px solid #9b83b3;
+            box-shadow: 0 2px 10px rgba(120, 95, 150, 0.18);
+        }
+
+        .blog-card.featured-purple::before,
+        .blog-card.featured-purple::after {
+            content: '';
+            position: absolute;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Subtle fingerprint ridges: provenance and synthetic-media forensics */
+        .blog-card.featured-purple::before {
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2292%22%20height%3D%2292%22%20viewBox%3D%220%200%2092%2092%22%20fill%3D%22none%22%20stroke%3D%22%239b83b3%22%20stroke-width%3D%221.15%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M29%2065c-4-8-7-17-7-25%200-15%2011-25%2024-25s24%2010%2024%2025%22%2F%3E%3Cpath%20d%3D%22M35%2073c-8-13-10-24-10-33%200-13%209-22%2021-22s21%209%2021%2022c0%2012-2%2021-5%2031%22%2F%3E%3Cpath%20d%3D%22M41%2077c-6-10-11-24-11-37%200-10%207-17%2016-17s16%207%2016%2017c0%2015-3%2027-8%2038%22%2F%3E%3Cpath%20d%3D%22M47%2071c-5-13-9-22-9-31%200-5%203-9%208-9s8%204%208%209c0%208-1%2017-4%2023%22%2F%3E%3Cpath%20d%3D%22M43%2043c0%205%201%209%203%2014%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.4%22%2F%3E%3Ccircle%20cx%3D%2280%22%20cy%3D%2280%22%20r%3D%221.4%22%2F%3E%3C%2Fsvg%3E");
+            background-size: 92px 92px;
+            background-repeat: repeat;
+            background-position: center top;
+            opacity: 0.075;
+        }
+
+        /* Large fingerprint framed by scanner corners */
+        .blog-card.featured-purple::after {
+            top: -72px;
+            right: -65px;
+            width: 270px;
+            height: 270px;
+            background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22240%22%20height%3D%22240%22%20viewBox%3D%220%200%20240%20240%22%20fill%3D%22none%22%20stroke%3D%22%239b83b3%22%20stroke-width%3D%221.75%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M38%2082V42h40M162%2042h40v40M202%20162v40h-40M78%20202H38v-40%22%20stroke-width%3D%222.3%22%2F%3E%3Cpath%20d%3D%22M73%20148c-9-18-14-35-14-51%200-38%2027-64%2061-64s61%2026%2061%2064c0%2038-10%2067-24%2088%22%2F%3E%3Cpath%20d%3D%22M84%20169c-13-24-20-50-20-72%200-34%2024-58%2056-58s56%2024%2056%2058c0%2039-9%2066-24%2089%22%2F%3E%3Cpath%20d%3D%22M98%20188c-15-28-26-61-26-91%200-30%2021-50%2048-50s48%2020%2048%2050c0%2034-7%2063-20%2088%22%2F%3E%3Cpath%20d%3D%22M113%20194c-18-30-33-66-33-97%200-25%2017-42%2040-42s40%2017%2040%2042c0%2034-6%2060-19%2086%22%2F%3E%3Cpath%20d%3D%22M127%20184c-18-30-38-67-38-87%200-19%2013-32%2031-32s31%2013%2031%2032c0%2030-7%2056-18%2076%22%2F%3E%3Cpath%20d%3D%22M121%20147c-10-23-22-39-22-50%200-13%208-22%2021-22s21%209%2021%2022c0%2020-4%2040-11%2057%22%2F%3E%3Cpath%20d%3D%22M111%2097c0%2011%205%2024%2011%2037%22%2F%3E%3Ccircle%20cx%3D%22120%22%20cy%3D%22120%22%20r%3D%22107%22%20stroke-dasharray%3D%222%2011%22%20stroke-width%3D%221%22%2F%3E%3C%2Fsvg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.18;
+        }
+
+        .blog-card.featured-purple > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .blog-card.featured-purple:hover {
+            box-shadow: 0 6px 18px rgba(120, 95, 150, 0.30);
+        }
+
+        .blog-card.featured-purple .blog-date {
+            color: #866b9f;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .blog-card.featured-purple .blog-date::before {
+            content: '\2726\00a0';
+            color: #9b83b3;
+        }
+
+        .blog-card.featured-purple a:hover .blog-title {
+            color: #795e94;
+        }
+
+        .blog-card.featured-purple .read-more {
+            color: #795e94;
+            border-bottom-color: #9b83b3;
+        }
+
+        .blog-card.featured-purple .read-more:hover {
+            color: #604a78;
+            border-bottom-color: #795e94;
+        }
+
         /* Walkthrough cards: faint grey motifs themed on each paper */
         .blog-card.motif {
             position: relative;
@@ -410,6 +484,18 @@
 
     <div class="container">
         <div class="blog-grid">
+            <div class="blog-card featured-purple">
+                <div class="blog-date">2026/11/9</div>
+                <a href="blog/watermarks_crossroad/blog_watermarks.html" style="text-decoration: none; color: inherit;">
+                    <h2 class="blog-title" style="cursor: pointer; transition: color 0.3s ease;">Watermarks of AI-Generated Content</h2>
+                </a>
+                <p style="color: #666; font-size: 1.05em; margin: -10px 0 15px 0; font-style: italic; font-weight: 600;">The Crossroads of Detection, Reaction, and Annotation</p>
+                <p class="blog-excerpt">
+                    As AI-generated content becomes increasingly difficult to distinguish from human-created work, how can we identify and act on the traces it leaves behind? Drawing on research in LanSE, Matryoshka Transcoders, and ForensicZoom, alongside experience in industrial forgery detection, I explore watermarks as a shared foundation for content detection, policy decisions, and annotation.
+                </p>
+                <a href="blog/watermarks_crossroad/blog_watermarks.html" class="read-more">Read More</a>
+            </div>
+
             <div class="blog-card motif motif-eval">
                 <div class="blog-date">2026/11/8</div>
                 <a href="blog/sdl_evaluation/blog_sdl_evaluation.html" style="text-decoration: none; color: inherit;">

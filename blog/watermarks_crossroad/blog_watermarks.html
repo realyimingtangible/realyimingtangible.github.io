@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watermarks of AI-Generated Content - Yiming Tang</title>
+
+    <!-- MathJax for rendering LaTeX formulas -->
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        ::selection {
+            background-color: #000;
+            color: #fff;
+        }
+
+        ::-moz-selection {
+            background-color: #000;
+            color: #fff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background-color: #f8f9fa;
+            padding-top: 70px;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            z-index: 1000;
+            padding: 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .nav-brand {
+            font-weight: 600;
+            font-size: 1.2em;
+            color: #2c3e50;
+            text-decoration: none;
+            padding: 15px 0;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 5px;
+        }
+
+        .nav-links a {
+            color: #555;
+            text-decoration: none;
+            padding: 20px 15px;
+            display: block;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            background-color: #555;
+            color: white;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Subtle lavender ornamentation matching the featured blog card */
+        article {
+            position: relative;
+            isolation: isolate;
+            overflow: hidden;
+            background-color: #fff;
+            padding: 50px 60px;
+            border-radius: 8px;
+            border: 1px solid rgba(155, 131, 179, 0.35);
+            border-top: 4px solid #9b83b3;
+            box-shadow: 0 2px 10px rgba(115, 90, 139, 0.12);
+        }
+
+        article::before,
+        article::after {
+            content: '';
+            position: absolute;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Very faint gothic tracery along the article margin */
+        article::before {
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='96' viewBox='0 0 64 96' fill='none' stroke='%239b83b3' stroke-width='1.1'%3E%3Cpath d='M6 96V44Q6 14 32 2Q58 14 58 44V96'/%3E%3Cpath d='M18 96V48Q18 26 32 16Q46 26 46 48V96'/%3E%3Ccircle cx='27' cy='40' r='5'/%3E%3Ccircle cx='37' cy='40' r='5'/%3E%3Ccircle cx='32' cy='35' r='5'/%3E%3Ccircle cx='32' cy='45' r='5'/%3E%3Cpath d='M32 52V96'/%3E%3Cpath d='M0 95.5H64'/%3E%3C/svg%3E");
+            background-size: 64px 96px;
+            background-repeat: repeat;
+            opacity: 0.055;
+        }
+
+        /* Delicate rose-window emblem, visible only behind the top heading */
+        article::after {
+            top: -85px;
+            right: -85px;
+            width: 300px;
+            height: 300px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200' fill='none' stroke='%239b83b3' stroke-width='1.2'%3E%3Ccircle cx='100' cy='100' r='96'/%3E%3Ccircle cx='100' cy='100' r='84'/%3E%3Ccircle cx='100' cy='100' r='26'/%3E%3Ccircle cx='100' cy='100' r='8'/%3E%3Cpath d='M100 16V184M16 100H184M40.6 40.6L159.4 159.4M159.4 40.6L40.6 159.4M69 19L131 181M131 19L69 181M19 69L181 131M19 131L181 69'/%3E%3Ccircle cx='100' cy='38' r='12'/%3E%3Ccircle cx='162' cy='100' r='12'/%3E%3Ccircle cx='100' cy='162' r='12'/%3E%3Ccircle cx='38' cy='100' r='12'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.16;
+        }
+
+        .article-meta {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .article-meta p {
+            margin: 8px 0;
+            color: #666;
+        }
+
+        .article-meta a {
+            color: #555;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .article-meta a:hover {
+            text-decoration: underline;
+        }
+
+        article a {
+            color: #333;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        article a:hover {
+            color: #000;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #555;
+        }
+
+        h3 {
+            color: #2c3e50;
+            font-size: 1.4em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 1.05em;
+        }
+
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            font-size: 1.05em;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 30px auto;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .caption {
+            text-align: center;
+            font-size: 0.92em;
+            color: #777;
+            margin-top: -18px;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .math-block {
+            margin: 25px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-left: 4px solid #555;
+            overflow-x: auto;
+        }
+
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+
+        strong {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        hr {
+            margin: 40px 0;
+            border: none;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 10px 20px;
+            background-color: #555;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-link:hover {
+            background-color: #333;
+        }
+
+        .hypothesis-motto {
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .hypothesis-motto p {
+            color: #1a1a1a;
+            font-size: 1.3em;
+            font-weight: 400;
+            line-height: 1.7;
+            margin: 0;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-style: italic;
+            letter-spacing: 0.3px;
+        }
+
+        @media (max-width: 768px) {
+            article {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+        }
+
+        /* Tables and diagram used in this post */
+        .table-wrap {
+            overflow-x: auto;
+            margin: 6px 0 28px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95em;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 10px 12px;
+            text-align: left;
+            vertical-align: top;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .data-table thead th {
+            color: #2c3e50;
+            border-top: 2px solid #2c3e50;
+            border-bottom: 2px solid #2c3e50;
+        }
+
+        .data-table td.num,
+        .data-table th.num {
+            text-align: right;
+            white-space: nowrap;
+        }
+
+        .caption.table-caption {
+            margin-top: 22px;
+            margin-bottom: 8px;
+        }
+
+        .loop-figure {
+            display: block;
+            width: 100%;
+            max-width: 720px;
+            height: auto;
+            margin: 30px auto;
+        }
+
+        .loop-figure text {
+            font-family: inherit;
+        }
+        .closing-wish { margin: 42px 0 20px; text-align: center; font-family: Georgia, 'Times New Roman', Times, serif; font-style: italic; font-size: 1.15em; color: #806995; }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-brand">Yiming Tang's Homepage</a>
+            <ul class="nav-links">
+                <li><a href="../../blog.html">&larr; Back to Blog</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <article>
+            <h1>Watermarks of AI-Generated Content: The Crossroads of Detection, Reaction, and Annotation</h1>
+            <h3 style="color: #555; font-weight: 600; font-size: 1.35em; margin-top: -10px; margin-bottom: 30px;">What three papers and six months of front-line forgery detection taught me about the watermarks AI leaves behind</h3>
+
+            <div class="article-meta">
+                <p><strong>Written by:</strong> Yiming Tang</p>
+                <p><strong>Related papers:</strong>
+                    <a href="https://arxiv.org/abs/2508.18236" target="_blank">LanSE</a> &middot;
+                    <a href="https://arxiv.org/abs/2511.10094" target="_blank">Matryoshka Transcoders</a> &middot;
+                    <a href="https://arxiv.org/abs/2609.31661" target="_blank">ForensicZoom</a>
+                </p>
+            </div>
+
+            <div class="hypothesis-motto">
+                <p>Whenever we must decide on content of uncertain origin, the decision is only as good as the watermarks we can read from it.</p>
+            </div>
+
+            <h2>1. The End of the Human-Only Era</h2>
+
+            <p>For thousands of years, nearly everything people read, looked at, and listened to could be traced back to human thought and effort. A painting had a painter, a diagram had an author, a diagnosis had a clinician. The assumption was so basic that nobody wrote it down.</p>
+
+            <p>Generative AI has brought an end to this era, producing seemingly indistinguishable alternatives at unprecedented scale, permeating every domain from scientific publications to medical diagnostics to artistic designs. In controlled studies, AI-written poetry has been rated as favorably as human poetry and was hard to tell apart from it, and AI-synthesized faces have been judged as more trustworthy than real ones. The point is not that these systems are bad. The point is that the default has changed: when we meet a piece of content today, where it came from has become a question, and many of our institutions (peer review, identity verification, medical records, publishing) still run on the old default.</p>
+
+            <h2>2. Why We Need to Tell Them Apart</h2>
+
+            <p>The news over the past year has made this concrete, and it comes from places that look very different from each other.</p>
+
+            <p><strong>Peer review.</strong> An analysis by Pangram Labs flagged about 21% of the 75,800 reviews submitted to ICLR 2026 as fully AI-generated, with more than half showing some sign of AI use (<a href="https://howaiworks.ai/blog/iclr-2026-ai-generated-peer-reviews-controversy" target="_blank">coverage</a>). ICML 2026 asked reviewers to choose between a policy that bans LLM use and one that permits limited assistance, then hid instructions in each submission PDF so that any LLM reading it would emit chosen phrases. About 1% of reviews were flagged, 506 reviewers who had chosen the no-LLM policy were caught, and 497 papers were desk-rejected under the conference's reciprocal-reviewing rules (<a href="https://blog.icml.cc/2026/03/18/" target="_blank">ICML's account</a>). In the opposite direction, AAAI-26 gave every main-track submission one clearly labeled AI review, 22,977 in total, and surveyed authors and committee members, who rated those reviews higher than human reviews on six of nine quality dimensions (<a href="https://arxiv.org/abs/2604.13940" target="_blank">report</a>).</p>
+
+            <img src="editlens_distribution.jpeg" alt="Pangram EditLens estimates for AI involvement in ICLR 2026 peer reviews" style="max-width: 760px;">
+            <p class="caption"><strong>AI involvement in ICLR 2026 peer reviews, as estimated by Pangram's EditLens.</strong> The chart reports 15,899 reviews (21%) classified as fully AI-generated; these are detector estimates, not manually verified labels. Image: <a href="https://www.pangram.com/blog/pangram-predicts-21-of-iclr-reviews-are-ai-generated" target="_blank">Pangram Labs</a>.</p>
+
+            <p><strong>Micro-dramas.</strong> In China, the question arrived through short serialized video, a market that passed 100 billion yuan in 2025. Rules issued in 2025 require AI-generated audio and video to carry both a visible label and implicit metadata about its origin, guidance on classifying AI micro-dramas has applied since July 2026, and new management measures for micro-dramas took effect on 1 September 2026 (<a href="https://www.ithome.com/0/984/306.htm" target="_blank">IT Home</a>, <a href="https://m.thepaper.cn/newsDetail_forward_33643733" target="_blank">The Paper</a>). Behind the rules are concrete disputes: scripts that models rewrite from web novels without authorization, since roughly 70% of micro-dramas in 2025 were adapted from web novels, and faces or voices blended from recognizable people (<a href="https://www.chinanews.com.cn/cul/2026/09-15/10696522.shtml" target="_blank">China News</a>).</p>
+
+            <img src="micro_drama.png" alt="A browsing page showing a gallery of Chinese short-drama titles" style="max-width: 760px;">
+            <p class="caption"><strong>Chinese micro-drama platforms.</strong> A sample browsing page illustrating the scale and variety of short-form serialized video content.</p>
+
+            <p><strong>Identity.</strong> As generative AI advances, new security threats are emerging in online identity verification. Attackers can use AI-generated face videos that mimic liveness cues, such as blinking or opening the mouth, in attempts to deceive verification systems. A successful attack can lead to account takeover, with compromised accounts subsequently resold or exploited for financial gain. In this setting, the cost of mistaking synthetic content for a real person is immediate and concrete.</p>
+
+            <img src="hack.png" alt="Illustration of AI-generated liveness videos being used to bypass identity verification and hijack accounts" style="max-width: 760px;">
+            <p class="caption"><strong>AI-enabled identity fraud.</strong> Conceptual illustration of a synthetic face video attempting to pass liveness checks and enable account takeover; not a depiction of a specific incident.</p>
+
+            <p>Beyond these, the literature documents a longer list of harms: accelerated misinformation, data-poisoning attacks on medical language models, homogenization of creative output, model collapse when models train on their own outputs, contamination of scientific datasets, and erosion of editorial standards. These are different problems, and they share a first step. To govern AI-generated content, we have to be able to say which content it is. Identification does not complete governance, but governance cannot start without it.</p>
+
+            <h2>3. Look at TPR at Low FPR, Not Just AUC</h2>
+
+            <p>For about six months at Alibaba, I worked on face forgery detection for identity verification. One of the most useful things I learned there was how the problem is judged in practice.</p>
+
+            <p>Papers and benchmarks often report AUC, which summarizes a detector across every possible threshold. A deployed system often relies on one final decision threshold, set in part by how many legitimate users it can afford to flag. In identity verification nearly all traffic is genuine, so even a small false-positive rate produces a large number of wrongly blocked people.</p>
+
+            <p>To make the problem concrete, consider four publicly available detector architectures associated with DeepFakeBench. In the evaluation summarized below, every model reaches an AUC above 0.98. Yet when the false-positive rate is constrained to just 0.1%, their true-positive rates range from 60.7% to 72.0%. A detector can therefore look excellent in a conventional benchmark while missing a substantial fraction of forgeries at a practical operating point.</p>
+
+            <p class="caption table-caption"><strong>Table 1. High AUC does not guarantee strong detection at low FPR.</strong> Results from the evaluated DeepFakeBench-based detectors. TPR@0.1% FPR is reported with the supplied 95% confidence intervals. These results describe this evaluation, not an official leaderboard or a claim about every DeepFakeBench setting.</p>
+            <div class="table-wrap">
+                <table class="data-table" style="min-width: 660px;">
+                    <thead>
+                        <tr>
+                            <th>Detector</th>
+                            <th class="num">AUC</th>
+                            <th class="num">TPR @ 1% FPR</th>
+                            <th class="num">TPR @ 0.1% FPR (95% CI)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>ViT</td><td class="num">0.9922</td><td class="num">88.9%</td><td class="num"><strong>71.9%</strong> (69.4–85.8)</td></tr>
+                        <tr><td>F3-Net</td><td class="num">0.9889</td><td class="num">82.7%</td><td class="num"><strong>72.0%</strong> (60.3–76.8)</td></tr>
+                        <tr><td>Xception</td><td class="num">0.9882</td><td class="num">84.5%</td><td class="num"><strong>65.5%</strong> (46.0–69.8)</td></tr>
+                        <tr><td>SPSL</td><td class="num">0.9871</td><td class="num">86.6%</td><td class="num"><strong>60.7%</strong> (45.2–77.0)</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p>This suggests a change in how we benchmark forgery detection. Rather than treating AUC as the headline metric, we should report TPR at fixed, low FPR budgets with confidence intervals. Ideally, benchmarks should also test robustness to distribution shift and changes in attack prevalence.</p>
+
+            <h2>4. Watermarks: The Crossroad for Content Analysis</h2>
+
+            <p>Through my work at Alibaba, one object kept coming back under different names: the specific thing in a piece of content that tells us a machine made it. I will call it a <strong>watermark</strong>. Three jobs depend on it: detection, reaction, and annotation.</p>
+
+            <h3>Detection reads watermarks as evidence</h3>
+
+            <p>A verdict without evidence cannot be audited, appealed, or improved. A detector that outputs "fake, 0.97" gives a reviewer nothing to check and gives an engineer nothing to fix. A detector that points to the watermarks behind its decision gives both.</p>
+
+            <img src="Forensic_Zoom.png" alt="ForensicZoom inference pipeline with NEED_ZOOM and an attribution report">
+            <p class="caption"><strong>ForensicZoom ends in an attribution report, not a score.</strong> In round 1 the model returns a verdict or requests a closer look with &lt;NEED_ZOOM&gt;; the region it attended to is cropped and magnified, and round 2 produces a verdict together with a report identifying visual watermarks (a blending seam at the jawline, an anomalous pupil reflection), alongside supporting device evidence (identifier missing) and behavioral evidence (three failed attempts in 24 hours).</p>
+
+            <h3>Reaction acts on watermarks</h3>
+
+            <p>A policy can be written over watermarks. Whether to accept, reject, or escalate a request depends on which watermarks are present, how strong they are, and what other evidence is available. A blending seam together with a missing device identifier may justify a rejection, while a single weak watermark may only justify asking the user to retry. Rules written over named watermarks can be reviewed, tested against false rejections, and explained to the person who was rejected. A rule written over a bare score can only be tuned.</p>
+
+            <h3>Annotation teaches watermarks</h3>
+
+            <p>Models are trained on labeled data, and labelers work from a standard operating procedure. "Is this image AI-generated?" is a difficult question to answer consistently. "Which of these watermarks are present?" is easier. When the vocabulary of watermarks is shared between the SOP, the detector, and the policy, a disagreement can be traced to a particular watermark and corrected there, instead of being argued about as a whole-image judgment.</p>
+
+            <p>The three jobs also feed each other. Annotation produces data, data produces better detectors, better detectors surface new failures, and new failures become new watermarks in the vocabulary.</p>
+
+            <svg class="loop-figure" viewBox="0 -45 720 345" role="img" aria-label="Detection, reaction and annotation all read from and write to a shared vocabulary of watermarks">
+                <defs>
+                    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                        <path d="M0 0L10 5L0 10z" fill="#2c3e50"/>
+                    </marker>
+                </defs>
+                <path d="M600 30C600 -40 120 -40 120 30" fill="none" stroke="#2c3e50" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arr)"/>
+                <text x="360" y="-20" text-anchor="middle" font-size="14" fill="#555" font-style="italic">new failures become new watermarks</text>
+
+                <rect x="20" y="30" width="200" height="90" rx="10" fill="#fff" stroke="#2c3e50" stroke-width="1.6"/>
+                <text x="120" y="68" text-anchor="middle" font-size="18" font-weight="700" fill="#2c3e50">Detection</text>
+                <text x="120" y="94" text-anchor="middle" font-size="14" fill="#555">reads watermarks as evidence</text>
+
+                <rect x="260" y="30" width="200" height="90" rx="10" fill="#fff" stroke="#2c3e50" stroke-width="1.6"/>
+                <text x="360" y="68" text-anchor="middle" font-size="18" font-weight="700" fill="#2c3e50">Reaction</text>
+                <text x="360" y="94" text-anchor="middle" font-size="14" fill="#555">policy acts on watermarks</text>
+
+                <rect x="500" y="30" width="200" height="90" rx="10" fill="#fff" stroke="#2c3e50" stroke-width="1.6"/>
+                <text x="600" y="68" text-anchor="middle" font-size="18" font-weight="700" fill="#2c3e50">Annotation</text>
+                <text x="600" y="94" text-anchor="middle" font-size="14" fill="#555">SOPs teach new watermarks</text>
+
+                <line x1="222" y1="75" x2="258" y2="75" stroke="#2c3e50" stroke-width="1.5" marker-end="url(#arr)"/>
+                <line x1="462" y1="75" x2="498" y2="75" stroke="#2c3e50" stroke-width="1.5" marker-end="url(#arr)"/>
+
+                <line x1="120" y1="122" x2="120" y2="186" stroke="#2c3e50" stroke-width="1.5" marker-start="url(#arr)" marker-end="url(#arr)"/>
+                <line x1="360" y1="122" x2="360" y2="186" stroke="#2c3e50" stroke-width="1.5" marker-start="url(#arr)" marker-end="url(#arr)"/>
+                <line x1="600" y1="122" x2="600" y2="186" stroke="#2c3e50" stroke-width="1.5" marker-start="url(#arr)" marker-end="url(#arr)"/>
+
+                <rect x="20" y="190" width="680" height="76" rx="14" fill="#f5f0f9" stroke="#9b83b3" stroke-width="2"/>
+                <text x="360" y="225" text-anchor="middle" font-size="19" font-weight="700" fill="#2c3e50">Watermarks</text>
+                <text x="360" y="249" text-anchor="middle" font-size="14" fill="#555">a shared, named vocabulary of watermarks</text>
+            </svg>
+            <p class="caption"><strong>All three jobs read from and write to one vocabulary of watermarks.</strong> Detection reads watermarks as evidence, reaction writes policy over them, and annotation extends them; the dashed arc shows failures found in deployment returning to the vocabulary as new watermarks.</p>
+
+            <h2>5. What Is a Watermark?</h2>
+
+            <p>Let me provide a definition for watermarks.</p>
+
+            <div class="math-block">
+                <p style="margin: 0;"><strong>Watermark.</strong> A pattern in content whose presence reliably indicates that the content was AI-generated, whether planted deliberately or arising from the generation process.</p>
+            </div>
+
+            <p>Two properties separate one kind of watermark from another. The first is <strong>origin</strong>: who or what put it there. The second is <strong>articulability</strong>: whether a person can read it and check it, or only a detector can.</p>
+
+            <p class="caption table-caption"><strong>Table 2. Watermarks differ by origin and by articulability.</strong> The rows give the three origins considered here; &ldquo;Planted by&rdquo; names who or what introduces the watermark, &ldquo;Example&rdquo; gives one instance, and the last column says whether a person can typically read it.</p>
+            <div class="table-wrap">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Origin</th>
+                            <th>Planted by</th>
+                            <th>Example</th>
+                            <th>Articulable to a person?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Embedded</strong></td>
+                            <td>the provider, at generation time</td>
+                            <td>statistical patterns in generated text; invisible watermarks in images; origin metadata required by labeling rules</td>
+                            <td>Mostly no; a detector verifies it (metadata can be read directly)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Planted by the defender</strong></td>
+                            <td>the party who receives the content</td>
+                            <td>hidden instructions in a submission PDF that make an LLM reviewer emit chosen phrases</td>
+                            <td>The phrases are readable once triggered</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Emergent</strong></td>
+                            <td>no one; the generation process leaves it</td>
+                            <td>distorted text in generated images, anatomically impossible structures, a characteristic stylization</td>
+                            <td>Often yes, when it can be put into words</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p>Two consequences follow. Planted watermarks depend on cooperation or foresight: someone has to put them there before the content is generated or before it arrives. Emergent watermarks do not, but they have to be found. And articulability matters unevenly across the three jobs. Detection at scale can live with opaque watermarks. Reaction and annotation cannot, because a person must read a watermark to act on it or to write it into an SOP. A watermark in this sense is evidence, not a verdict.</p>
+
+            <h2>6. Where Do Watermarks Come From?</h2>
+
+            <h3>Planted by providers</h3>
+
+            <p>Some providers embed watermarks in what their models generate: statistical watermarks for text, signed provenance metadata for images, and, where regulation requires it, implicit identifiers in audio and video files. When they work, they are the cleanest evidence available. They also have limits. They need the provider to cooperate, they do not exist for open-weight models run privately, and a watermark that can be planted can often be removed by paraphrasing, re-encoding, or a screenshot. ICML's organizers say the same about their own planted phrases: a reviewer could discover the instruction and work around it, so the number caught is a floor and not a ceiling.</p>
+
+            <img src="claude_invisible_watermarks.png" alt="Minimal line illustration of a hand marking a document" style="max-width: 600px;">
+            <p class="caption"><strong>Invisible watermarks.</strong> A conceptual illustration of watermarks that may not be apparent to a human reader but can be designed for verification by a detector.</p>
+
+            <h3>Watermarks can be found in LMM representations</h3>
+
+            <p>Where nobody planted a watermark, the generation process often leaves one anyway. The problem is finding such watermarks without a person guessing in advance what to look for. This is where tools from mechanistic interpretability are useful. A model's representation already encodes many patterns, and sparse dictionary learning separates them into units we can inspect one at a time.</p>
+
+            <p>In LanSE, we turn this into a vocabulary. Given an image and its caption, the encoder produces a sparse set of active neurons, each carrying a natural-language description of the pattern it detects.</p>
+
+            <img src="LanSE.png" alt="LanSE decomposes an image-caption pair into language-described neurons">
+            <p class="caption"><strong>LanSE reads an image as a short list of named patterns.</strong> An image&ndash;caption pair is encoded into a sparse layer whose neurons carry natural-language descriptions, grouped into semantic meaning, visual realism, and physical plausibility; filled boxes are the neurons activated by this image.</p>
+
+            <p>The vocabulary is built by <em>discover-then-curate</em>. Many sparse autoencoders and transcoders propose millions of candidate patterns, a large multimodal model describes what each candidate's top-activating samples have in common, and only candidates whose descriptions hold up are kept. The curation step matters, because raw sparse features include noisy and polysemantic ones. What survives is 5,309 patterns with 93.2% agreement between the descriptions and human judgment over more than 11,000 annotations.</p>
+
+            <img src="LanSE_Method.png" alt="The three-step LanSE pipeline">
+            <p class="caption"><strong>The discover-then-curate pipeline has three steps.</strong> Step 1 trains interpretability modules on embeddings from a frozen pretrained encoder to propose candidate patterns; Step 2 has an LMM describe each neuron's top-activating samples and either assign a category or discard the neuron; Step 3 distills visual-only and text-only encoders, so images can be analyzed without captions.</p>
+
+            <p>Matryoshka Transcoders add a way to aim the search. Instead of asking what patterns exist in general, we train a classifier on the property we care about, here physical plausibility, and analyze that classifier's representations with hierarchical sparse features. The intuition is that patterns related to a task are more prevalent in a model trained for that task. On this benchmark the approach outperformed standard sparse autoencoders, transcoders, and Matryoshka SAEs on both of our relevance metrics.</p>
+
+            <p>Some of the patterns that come out look like useful watermarks. Others are only candidates. Style is the clearest case.</p>
+
+            <img src="sdl_neurons_for_watermarks.png" alt="Style neurons discovered by sparse dictionary learning">
+            <p class="caption"><strong>Style neurons are candidate watermarks.</strong> Each row shows images that strongly activate one neuron, with its description: stylized illustration or digital art (top), an artistic aesthetic departing from photorealism (middle), and a painting-like style (bottom). Whether such a style counts as a watermark depends on context, because it can be an intentional choice.</p>
+
+            <p>Finally, the patterns can do work. On 3,410 human-annotated images, 2,522 with physical plausibility errors and 888 without, LanSE detected the errors with higher accuracy than the general-purpose multimodal models we tested.</p>
+
+            <img src="LanSE_performances.png" alt="Accuracy of LanSE and multimodal models at detecting physical plausibility errors">
+            <p class="caption"><strong>Mined patterns caught errors that general-purpose models missed.</strong> Accuracy at answering whether a generated image contains physical plausibility errors: LanSE 76.6% and GPT-4o 72.3%, against 27.7&ndash;34.5% for the five other models tested at the time (Claude-3-Haiku, Claude-3.5-Sonnet, Claude-3-Opus, Gemini-Pro-1.5, Qwen-2-7B). The task is detecting errors in generated images, which differs from telling real images from generated ones.</p>
+
+            <h2>7. What Makes a Good Watermark?</h2>
+
+            <p>Across these projects, I have found four properties that matter to the quality of watermarks.</p>
+
+            <p><strong>Discriminative.</strong> A watermark that fires on much genuine content manufactures false accusations. What counts is the precision of the watermark itself: among the content that activates it, what fraction truly carries the property. Even with a good method, few candidate features reach a high bar.</p>
+
+            <img src="neuron_relevance_threshold.png" alt="Distribution of feature relevance for a Matryoshka SAE">
+            <p class="caption"><strong>Few candidate features are clean enough to serve as watermarks.</strong> Distribution of feature relevance for a Matryoshka SAE, where relevance is the share of a feature's activating images that carry the target property; the dashed line marks the 95% threshold, and 9.9% of features fall in the top bin, while most sit between 60% and 90%.</p>
+
+            <p>This is why the curation and the threshold exist. Candidates are cheap, and watermarks are the ones that pass.</p>
+
+            <p><strong>Robust.</strong> A watermark should survive compression, resizing, screenshots, and re-encoding, and it should still hold on the next generation of generators. For emergent watermarks, this robustness needs to be tested rather than assumed.</p>
+
+            <p><strong>Articulable.</strong> A person should be able to describe the watermark in one sentence and check it by looking. This is what lets reaction and annotation use it, and it is what the 93.2% agreement in LanSE measures. Articulability has a ceiling set by language, though. In our <a href="../sdl_evaluation/blog_sdl_evaluation.html">NeurIPS 2026 position paper</a> on evaluating concept-based interpretability, we showed features that encode coherent, reproducible structure yet receive vague descriptions.</p>
+
+            <img src="hard_to_describe.png" alt="SDL features from natural image, fundus, chest X-ray and fMRI encoders with LMM-generated explanations">
+            <p class="caption"><strong>Some faithfully encoded patterns resist a one-line description.</strong> SDL features from natural-image, fundus, chest X-ray, and fMRI encoders, each with an LMM-generated explanation that ranges from specific (retinal blood vessels and optic nerve head) to vague (complicated edge signals).</p>
+
+            <p>A pattern like that may still help a detector. It cannot enter an SOP or be shown to a person who was rejected. So I would not equate &ldquo;cannot be described&rdquo; with &ldquo;is not a watermark,&rdquo; and I would not rely on articulable watermarks alone either.</p>
+
+            <p><strong>Actionable.</strong> A watermark should support a decision, a policy rule, or a labeling instruction. A watermark that nobody can act on is a curiosity.</p>
+
+            <p>One practical note applies to all four. A single watermark is fragile, so I would rather rely on several partly independent ones. LanSE itself is built from an ensemble of many interpretability modules, partly because the feature sets of individual sparse autoencoders are known to be unstable across runs.</p>
+
+            <h2>8. Closing</h2>
+
+            <p>Detection, reaction, and annotation look like separate engineering problems, and in practice they read from the same place: the watermarks we can find in content. If that is right, the central question is where good watermarks come from. Providers can plant them when they cooperate. When they do not, the representations of the models we already have may let us find watermarks that no one planted, and tools from mechanistic interpretability are one way to do that. Whether those watermarks are good enough is a question to settle through rigorous evaluation against the criteria above.</p>
+
+            <p class="closing-wish">In dealing with all this AI-generated content, may we still be able to say, “Glory to Mankind,” in this era of generative AI.</p>
+
+            <hr>
+        </article>
+    </div>
+
+    <footer>
+        <div style="text-align: center; padding: 40px 20px 30px;">
+            <p style="color: #666; font-size: 0.9em;">&copy; 2026 Yiming Tang. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
