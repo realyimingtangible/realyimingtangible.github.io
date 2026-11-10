@@ -1054,13 +1054,8 @@
                 <div class="tip-box">
                     <button class="tip-close" onclick="closeTip()" aria-label="Close">&times;</button>
                     <h3>Feed Desmond</h3>
-                    <p>Thank you for the kindness! Choose a way to feed Desmond. He will use the money to buy more features for himself~ </p>
-                    <div class="tip-tabs">
-                        <button class="tip-tab active" onclick="showTip(this, 'WeChat.png')">WeChat</button>
-                        <button class="tip-tab" onclick="showTip(this, 'alipay.jpg')">Alipay</button>
-                        <button class="tip-tab" onclick="showTip(this, 'paynow.jpg')">PayNow</button>
-                    </div>
-                    <img id="tipImg" src="WeChat.png" alt="Payment QR code">
+                    <p>Thank you for the kindness! Scan with WeChat Pay to feed Desmond. He will use the money to buy more features for himself~ </p>
+                    <img id="tipImg" src="WeChat.png" alt="WeChat Pay QR code">
                 </div>
             </div>
 
@@ -1073,11 +1068,6 @@
                 // Feed Desmond popup
                 function openTip() { document.getElementById('tipModal').classList.add('open'); }
                 function closeTip() { document.getElementById('tipModal').classList.remove('open'); }
-                function showTip(btn, src) {
-                    document.getElementById('tipImg').src = src;
-                    document.querySelectorAll('.tip-tab').forEach(t => t.classList.remove('active'));
-                    btn.classList.add('active');
-                }
                 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeTip(); });
 
                 function patCat() {
