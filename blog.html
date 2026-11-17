@@ -335,6 +335,77 @@
             border-bottom-color: #795e94;
         }
 
+        /* Blue featured card: philosophical essay, meaning-graph motifs */
+        .blog-card.featured-blue {
+            position: relative;
+            overflow: hidden;
+            background-color: #fff;
+            border: 1px solid rgba(63, 111, 163, 0.35);
+            border-top: 4px solid #3f6fa3;
+            box-shadow: 0 2px 10px rgba(40, 85, 140, 0.12);
+        }
+
+        .blog-card.featured-blue::before,
+        .blog-card.featured-blue::after {
+            content: '';
+            position: absolute;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .blog-card.featured-blue::before {
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22108%22%20height%3D%22108%22%20viewBox%3D%220%200%20108%20108%22%20fill%3D%22none%22%20stroke%3D%22%233f6fa3%22%20stroke-width%3D%221.3%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M30%2051Q43%2033%2054%2028M54%2028Q75%2030%2084%2049M30%2051Q37%2077%2056%2082M56%2082Q77%2073%2084%2049%22%2F%3E%3Ccircle%20cx%3D%2230%22%20cy%3D%2251%22%20r%3D%228%22%2F%3E%3Ccircle%20cx%3D%2254%22%20cy%3D%2228%22%20r%3D%226%22%2F%3E%3Ccircle%20cx%3D%2284%22%20cy%3D%2249%22%20r%3D%227%22%2F%3E%3Ccircle%20cx%3D%2256%22%20cy%3D%2282%22%20r%3D%225%22%2F%3E%3Cpath%20d%3D%22m47%2033%207-5-2%208M75%2042l9%207-9%201M50%2074l6%208-9-1%22%2F%3E%3C%2Fsvg%3E");
+            background-size: 108px 108px;
+            background-repeat: repeat;
+            opacity: 0.07;
+        }
+
+        .blog-card.featured-blue::after {
+            top: -70px;
+            right: -65px;
+            width: 270px;
+            height: 270px;
+            background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22240%22%20height%3D%22240%22%20viewBox%3D%220%200%20240%20240%22%20fill%3D%22none%22%20stroke%3D%22%233f6fa3%22%20stroke-width%3D%221.7%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%22120%22%20cy%3D%22120%22%20r%3D%22109%22%20stroke-dasharray%3D%222%2012%22%20opacity%3D%22.65%22%2F%3E%3Cpath%20d%3D%22M120%20120Q109%2089%20108%2052M120%20120Q155%2099%20185%2075M120%20120Q167%20137%20189%20176M120%20120Q96%20160%2077%20193M120%20120Q78%20118%2047%20100M108%2052Q90%2034%2065%2031M185%2075Q203%2062%20211%2041M189%20176Q200%20192%20216%20197M77%20193Q61%20205%2042%20208M47%20100Q32%2091%2025%2071%22%2F%3E%3Ccircle%20cx%3D%22120%22%20cy%3D%22120%22%20r%3D%2220%22%20stroke-width%3D%223%22%2F%3E%3Ccircle%20cx%3D%22108%22%20cy%3D%2252%22%20r%3D%2210%22%2F%3E%3Ccircle%20cx%3D%22185%22%20cy%3D%2275%22%20r%3D%2212%22%2F%3E%3Ccircle%20cx%3D%22189%22%20cy%3D%22176%22%20r%3D%229%22%2F%3E%3Ccircle%20cx%3D%2277%22%20cy%3D%22193%22%20r%3D%2210%22%2F%3E%3Ccircle%20cx%3D%2247%22%20cy%3D%22100%22%20r%3D%229%22%2F%3E%3Ccircle%20cx%3D%2265%22%20cy%3D%2231%22%20r%3D%225%22%2F%3E%3Ccircle%20cx%3D%22211%22%20cy%3D%2241%22%20r%3D%226%22%2F%3E%3Ccircle%20cx%3D%22216%22%20cy%3D%22197%22%20r%3D%225%22%2F%3E%3Ccircle%20cx%3D%2242%22%20cy%3D%22208%22%20r%3D%225%22%2F%3E%3Ccircle%20cx%3D%2225%22%20cy%3D%2271%22%20r%3D%225%22%2F%3E%3Cpath%20d%3D%22m105%2088%203-9%205%209M161%2096l10-3-4%209M168%20155l7%208-10-1M99%20157l-3%2010-5-8M76%20115l-10%203%205-8%22%2F%3E%3C%2Fsvg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.17;
+        }
+
+        .blog-card.featured-blue > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .blog-card.featured-blue:hover {
+            box-shadow: 0 6px 18px rgba(40, 85, 140, 0.24);
+        }
+
+        .blog-card.featured-blue .blog-date {
+            color: #3f6fa3;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .blog-card.featured-blue .blog-date::before {
+            content: '\2726\00a0';
+            color: #3f6fa3;
+        }
+
+        .blog-card.featured-blue a:hover .blog-title {
+            color: #315b88;
+        }
+
+        .blog-card.featured-blue .read-more {
+            color: #315b88;
+            border-bottom-color: #3f6fa3;
+        }
+
+        .blog-card.featured-blue .read-more:hover {
+            color: #254769;
+            border-bottom-color: #315b88;
+        }
+
         /* Walkthrough cards: faint grey motifs themed on each paper */
         .blog-card.motif {
             position: relative;
@@ -506,6 +577,18 @@
                     As AI-generated content becomes increasingly difficult to distinguish from human-created work, how can we identify and act on the traces it leaves behind? Drawing on research in LanSE, Matryoshka Transcoders, and ForensicZoom, alongside experience in industrial forgery detection, I explore watermarks as a shared foundation for content detection, policy decisions, and annotation.
                 </p>
                 <a href="blog/watermarks_crossroad/blog_watermarks.html" class="read-more">Read More</a>
+            </div>
+
+            <div class="blog-card featured-blue">
+                <div class="blog-date">2026/11/17</div>
+                <a href="blog/blog_world_view/blog_worldviews.html" style="text-decoration: none; color: inherit;">
+                    <h2 class="blog-title" style="cursor: pointer; transition: color 0.3s ease;">On Worldviews and Meaning</h2>
+                </a>
+                <p style="color: #666; font-size: 1.05em; margin: -10px 0 15px 0; font-style: italic; font-weight: 600;">A Tuṣita on Earth</p>
+                <p class="blog-excerpt">
+                    A personal essay on three possible worldviews, the limits of scientific inquiry, and the roots of what we find meaningful. From a mathematical graph of meaning to my encounters with Buddhism, I reflect on Tuṣita and the kind of life I hope to lead.
+                </p>
+                <a href="blog/blog_world_view/blog_worldviews.html" class="read-more">Read More</a>
             </div>
 
             <div class="blog-card motif motif-eval">
